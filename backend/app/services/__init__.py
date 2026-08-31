@@ -1,13 +1,34 @@
-"""Business Logic & Service Layer Foundations.
+"""Business Logic & Service Layer Package.
 
-This module provides service interfaces for:
-- Tourism Data Service (data querying, filtering, and repository access)
-- AI Assistant Service (Gemini/LLM integration and prompt workflows)
-- Map Service (geospatial calculations, boundaries, and routing)
-- 3D Service (model asset catalog and spatial coordinates)
-
-Team members responsible for these respective domains can implement and register their
-service classes in this directory.
+Exports service instances for place data, search, nearby proximity,
+routing intelligence, Google Maps handoff, AI assistant, recommendations, and itineraries.
 """
 
-__all__ = []
+from app.services.place_service import PlaceService, place_service
+from app.services.search_service import SearchService, search_service
+from app.services.nearby_service import NearbyService, nearby_service, haversine_distance_km
+from app.services.maps_service import MapsService, maps_service
+from app.services.routing_service import RoutingService, routing_service
+from app.services.ai_service import AIService, ai_service
+from app.services.recommendation_service import RecommendationService, recommendation_service
+from app.services.itinerary_service import ItineraryService, itinerary_service
+
+__all__ = [
+    "PlaceService",
+    "place_service",
+    "SearchService",
+    "search_service",
+    "NearbyService",
+    "nearby_service",
+    "haversine_distance_km",
+    "MapsService",
+    "maps_service",
+    "RoutingService",
+    "routing_service",
+    "AIService",
+    "ai_service",
+    "RecommendationService",
+    "recommendation_service",
+    "ItineraryService",
+    "itinerary_service",
+]
