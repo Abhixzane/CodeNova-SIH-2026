@@ -1,14 +1,22 @@
 """Main FastAPI Application Entrypoint.
 
 This module initializes the FastAPI app, configures CORS middleware for frontend communication,
-mounts core API routers, and defines the system health check endpoint.
+mounts core API routers, and defines the system health check and root info endpoints.
 """
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.models.common import HealthResponse
-from app.routers import places_router, search_router, states_router
+from app.routers import (
+    ai_router,
+    itinerary_router,
+    maps_router,
+    places_router,
+    routes_router,
+    search_router,
+    states_router,
+)
 
 
 def create_app() -> FastAPI:
@@ -70,6 +78,10 @@ def create_app() -> FastAPI:
     app.include_router(states_router, prefix=settings.API_PREFIX)
     app.include_router(places_router, prefix=settings.API_PREFIX)
     app.include_router(search_router, prefix=settings.API_PREFIX)
+    app.include_router(routes_router, prefix=settings.API_PREFIX)
+    app.include_router(maps_router, prefix=settings.API_PREFIX)
+    app.include_router(ai_router, prefix=settings.API_PREFIX)
+    app.include_router(itinerary_router, prefix=settings.API_PREFIX)
 
     return app
 

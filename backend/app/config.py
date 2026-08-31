@@ -32,5 +32,13 @@ class Settings:
         "*",  # Wildcard enabled for initial development and testing
     ]
 
+    # External Provider Configurations (Loaded safely via environment variables)
+    GOOGLE_MAPS_API_KEY: str = os.getenv("GOOGLE_MAPS_API_KEY", "")
+    AI_API_KEY: str = os.getenv("AI_API_KEY", "")
+
+    # Base path for local curated tourism datasets
+    BASE_DIR: str = str(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+    DATA_DIR: str = os.getenv("DATA_DIR", os.path.join(BASE_DIR, "data"))
+
 
 settings = Settings()

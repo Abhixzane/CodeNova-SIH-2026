@@ -1,6 +1,27 @@
 __pycache__/
 *.py[cod]
+*$py.class
 .pytest_cache/
+.coverage
+htmlcov/
 .venv/
 venv/
+ENV/
+env/
+
+# Environment variables & API credentials
 .env
+.env.*
+*.env
+*.key
+*.pem
+credentials.json
+credentials*.json
+service_account*.json
+
+# OS & Editor artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
