@@ -38,7 +38,13 @@
       "has_model": false,
       "available": false
     },
-    "tags": ["backwaters", "nature", "houseboat", "kerala", "relaxation"],
+    "tags": [
+      "backwaters",
+      "nature",
+      "houseboat",
+      "kerala",
+      "relaxation"
+    ],
     "features": {
       "map": true,
       "navigation": true,
