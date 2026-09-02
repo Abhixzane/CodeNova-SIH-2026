@@ -1,0 +1,10 @@
+{
+  "name": "CodeNova BharatYatra",
+  "description": "Intelligent Tourism Exploration Platform for India featuring curated destinations, heritage sites, multimodal routes, itineraries, and 3D experiences.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
