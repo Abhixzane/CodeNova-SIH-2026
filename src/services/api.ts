@@ -381,6 +381,10 @@ export const api = {
     });
   },
 
+  async saveTrip(trip: Omit<TripItem, 'id' | 'created_at'>): Promise<TripItem> {
+    return await this.createTrip(trip);
+  },
+
   async deleteTrip(tripId: string): Promise<void> {
     await request<void>(`/trips/${tripId}`, { method: 'DELETE' });
   },
