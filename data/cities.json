@@ -5,9 +5,19 @@
     "state": "Maharashtra",
     "state_id": "maharashtra",
     "lat": 18.9431,
-    "lng": 72.823,
-    "description": "The City of Dreams, Heritage & Hustle",
+    "lng": 72.8230,
+    "description": "The City of Dreams, UNESCO Terminus & Coastal Heritage",
     "places_count": 14
+  },
+  {
+    "id": "delhi",
+    "name": "New Delhi",
+    "state": "Delhi (NCT)",
+    "state_id": "delhi",
+    "lat": 28.6139,
+    "lng": 77.2090,
+    "description": "India's Historic Capital & Mughal Monuments",
+    "places_count": 8
   },
   {
     "id": "jaipur",
@@ -16,17 +26,17 @@
     "state_id": "rajasthan",
     "lat": 26.9124,
     "lng": 75.7873,
-    "description": "The Pink City & Regal Forts",
+    "description": "The Pink City, Hill Forts & Royal Observatories",
     "places_count": 8
   },
   {
-    "id": "delhi",
-    "name": "New Delhi",
-    "state": "Delhi (NCT)",
-    "state_id": "delhi",
-    "lat": 28.6139,
-    "lng": 77.209,
-    "description": "India's Capital & Mughal Architectural Ensembles",
+    "id": "agra",
+    "name": "Agra",
+    "state": "Uttar Pradesh",
+    "state_id": "uttar-pradesh",
+    "lat": 27.1767,
+    "lng": 78.0081,
+    "description": "City of the Taj Mahal, Agra Fort & Fatehpur Sikri",
     "places_count": 6
   },
   {
@@ -36,28 +46,188 @@
     "state_id": "kerala",
     "lat": 9.9312,
     "lng": 76.2673,
-    "description": "Queen of the Arabian Sea & Spice Port",
+    "description": "Queen of the Arabian Sea & Historic Fort Kochi",
     "places_count": 6
   },
   {
     "id": "panaji",
-    "name": "Panaji",
+    "name": "Panaji & Old Goa",
     "state": "Goa",
     "state_id": "goa",
     "lat": 15.4909,
     "lng": 73.8278,
-    "description": "Latin Quarters, Churches & Coastal Beauty",
+    "description": "Latin Quarters, Baroque Basilicas & Coastal Forts",
     "places_count": 5
   },
   {
-    "id": "agra",
-    "name": "Agra",
+    "id": "varanasi",
+    "name": "Varanasi",
     "state": "Uttar Pradesh",
     "state_id": "uttar-pradesh",
-    "lat": 27.1767,
-    "lng": 78.0081,
-    "description": "City of the Taj Mahal & Mughal Monuments",
+    "lat": 25.3176,
+    "lng": 82.9739,
+    "description": "Spiritual Capital on the Sacred Ganges & Sarnath",
+    "places_count": 6
+  },
+  {
+    "id": "hyderabad",
+    "name": "Hyderabad",
+    "state": "Telangana",
+    "state_id": "telangana",
+    "lat": 17.3850,
+    "lng": 78.4867,
+    "description": "City of Pearls, Charminar & Golconda Fort",
     "places_count": 5
+  },
+  {
+    "id": "kolkata",
+    "name": "Kolkata",
+    "state": "West Bengal",
+    "state_id": "west-bengal",
+    "lat": 22.5726,
+    "lng": 88.3639,
+    "description": "City of Joy, Victoria Memorial & Cultural Renaissance",
+    "places_count": 5
+  },
+  {
+    "id": "chennai",
+    "name": "Chennai & Mahabalipuram",
+    "state": "Tamil Nadu",
+    "state_id": "tamil-nadu",
+    "lat": 13.0827,
+    "lng": 80.2707,
+    "description": "Gateway to the South & Ancient Pallava Shore Temples",
+    "places_count": 6
+  },
+  {
+    "id": "bengaluru",
+    "name": "Bengaluru",
+    "state": "Karnataka",
+    "state_id": "karnataka",
+    "lat": 12.9716,
+    "lng": 77.5946,
+    "description": "Garden City, Tipu Sultan Heritage & Tech Capital",
+    "places_count": 5
+  },
+  {
+    "id": "amritsar",
+    "name": "Amritsar",
+    "state": "Punjab",
+    "state_id": "punjab",
+    "lat": 31.6340,
+    "lng": 74.8723,
+    "description": "Home of Sri Harmandir Sahib (The Golden Temple)",
+    "places_count": 4
+  },
+  {
+    "id": "jodhpur",
+    "name": "Jodhpur",
+    "state": "Rajasthan",
+    "state_id": "rajasthan",
+    "lat": 26.2389,
+    "lng": 73.0243,
+    "description": "The Blue City & Impregnable Mehrangarh Fort",
+    "places_count": 5
+  },
+  {
+    "id": "udaipur",
+    "name": "Udaipur",
+    "state": "Rajasthan",
+    "state_id": "rajasthan",
+    "lat": 24.5854,
+    "lng": 73.7125,
+    "description": "The City of Lakes & Sisodia Royal Palaces",
+    "places_count": 5
+  },
+  {
+    "id": "aurangabad",
+    "name": "Chhatrapati Sambhajinagar",
+    "state": "Maharashtra",
+    "state_id": "maharashtra",
+    "lat": 19.8762,
+    "lng": 75.3433,
+    "description": "Gateway to UNESCO Ajanta & Ellora Caves",
+    "places_count": 5
+  },
+  {
+    "id": "hampi",
+    "name": "Hampi",
+    "state": "Karnataka",
+    "state_id": "karnataka",
+    "lat": 15.3350,
+    "lng": 76.4600,
+    "description": "UNESCO World Heritage Ruins of Vijayanagara Empire",
+    "places_count": 5
+  },
+  {
+    "id": "madurai",
+    "name": "Madurai",
+    "state": "Tamil Nadu",
+    "state_id": "tamil-nadu",
+    "lat": 9.9252,
+    "lng": 78.1198,
+    "description": "Temple City of Meenakshi Sundareswarar",
+    "places_count": 4
+  },
+  {
+    "id": "bodh-gaya",
+    "name": "Bodh Gaya & Nalanda",
+    "state": "Bihar",
+    "state_id": "bihar",
+    "lat": 24.6960,
+    "lng": 84.9913,
+    "description": "Sacred Mahabodhi Temple & Ancient University Ruins",
+    "places_count": 4
+  },
+  {
+    "id": "khajuraho",
+    "name": "Khajuraho",
+    "state": "Madhya Pradesh",
+    "state_id": "madhya-pradesh",
+    "lat": 24.8318,
+    "lng": 79.9199,
+    "description": "UNESCO Medieval Chandela Temple Sculptures",
+    "places_count": 4
+  },
+  {
+    "id": "bhubaneswar",
+    "name": "Bhubaneswar & Konark",
+    "state": "Odisha",
+    "state_id": "odisha",
+    "lat": 20.2961,
+    "lng": 85.8245,
+    "description": "Temple City of India & UNESCO Sun Temple Konark",
+    "places_count": 5
+  },
+  {
+    "id": "srinagar",
+    "name": "Srinagar",
+    "state": "Jammu and Kashmir",
+    "state_id": "jammu-and-kashmir",
+    "lat": 34.0837,
+    "lng": 74.7973,
+    "description": "Dal Lake, Mughal Gardens & Himalayan Valleys",
+    "places_count": 5
+  },
+  {
+    "id": "leh",
+    "name": "Leh Ladakh",
+    "state": "Ladakh",
+    "state_id": "ladakh",
+    "lat": 34.1526,
+    "lng": 77.5771,
+    "description": "High Altitude Monasteries, Palaces & Mountain Passes",
+    "places_count": 4
+  },
+  {
+    "id": "port-blair",
+    "name": "Port Blair",
+    "state": "Andaman and Nicobar Islands",
+    "state_id": "andaman-and-nicobar",
+    "lat": 11.6234,
+    "lng": 92.7265,
+    "description": "Cellular Jail National Memorial & Island Coral Heritage",
+    "places_count": 4
   },
   {
     "id": "shimla",
@@ -66,7 +236,7 @@
     "state_id": "himachal-pradesh",
     "lat": 31.1048,
     "lng": 77.1734,
-    "description": "Queen of the Hills & Toy Train Heritage",
+    "description": "Queen of the Hills & Kalka-Shimla Toy Train",
     "places_count": 4
   }
 ]

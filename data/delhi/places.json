@@ -1,0 +1,71 @@
+[
+  {
+    "id": "qutub-minar",
+    "name": "Qutub Minar",
+    "state": "Delhi",
+    "city": "New Delhi",
+    "category": "heritage",
+    "summary": "The tallest brick minaret in the world, flanked by the ancient Iron Pillar and Alai Darwaza.",
+    "description": "Built in the early 13th century, Qutub Minar rises 72.5 meters. The complex features exquisitely carved sandstone balconies and historic inscriptions.",
+    "coordinates": {
+      "lat": 28.5245,
+      "lng": 77.1855
+    },
+    "rating": 4.6,
+    "thumbnail_url": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80",
+    "best_time_to_visit": "October to March",
+    "visiting_hours": "07:00 AM - 05:00 PM",
+    "entry_fee": {
+      "domestic": 40,
+      "international": 600,
+      "currency": "INR"
+    },
+    "tags": ["unesco", "architecture", "minaret", "delhi-sultanate"]
+  },
+  {
+    "id": "red-fort",
+    "name": "Red Fort",
+    "state": "Delhi",
+    "city": "Old Delhi",
+    "category": "heritage",
+    "summary": "Historic fortified palace complex that served as the primary residence of Mughal Emperors.",
+    "description": "Constructed in 1639 by Emperor Shah Jahan when he shifted his capital to Shahjahanabad. Famous for Diwan-i-Aam and Lahori Gate.",
+    "coordinates": {
+      "lat": 28.6562,
+      "lng": 77.2410
+    },
+    "rating": 4.5,
+    "thumbnail_url": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
+    "best_time_to_visit": "October to March",
+    "visiting_hours": "09:30 AM - 04:30 PM (Closed Mondays)",
+    "entry_fee": {
+      "domestic": 50,
+      "international": 550,
+      "currency": "INR"
+    },
+    "tags": ["mughal", "fort", "unesco", "heritage"]
+  },
+  {
+    "id": "humayuns-tomb",
+    "name": "Humayun's Tomb",
+    "state": "Delhi",
+    "city": "New Delhi",
+    "category": "heritage",
+    "summary": "Sublime garden tomb of Emperor Humayun that served as architectural inspiration for the Taj Mahal.",
+    "description": "Commissioned by Empress Bega Begum in 1558, it is the first garden-tomb on the Indian subcontinent.",
+    "coordinates": {
+      "lat": 28.5933,
+      "lng": 77.2507
+    },
+    "rating": 4.7,
+    "thumbnail_url": "https://images.unsplash.com/photo-1597044141245-3e28e18f26b5?auto=format&fit=crop&w=1200&q=80",
+    "best_time_to_visit": "October to March",
+    "visiting_hours": "06:00 AM - 06:00 PM",
+    "entry_fee": {
+      "domestic": 40,
+      "international": 600,
+      "currency": "INR"
+    },
+    "tags": ["unesco", "charbagh", "tomb", "persian-mughal"]
+  }
+]

@@ -1,4 +1,4 @@
-export type TransportMode = 'DRIVE' | 'TRANSIT' | 'WALK' | 'AUTO';
+export type TransportMode = 'DRIVE' | 'TRANSIT' | 'WALK' | 'AUTO' | 'BICYCLE';
 
 export interface RouteStep {
   instruction: string;
@@ -9,14 +9,19 @@ export interface RouteStep {
 
 export interface RouteOption {
   mode: TransportMode | string;
-  duration_mins: number;
+  duration_mins?: number;
+  duration_minutes?: number;
   distance_km: number;
   estimated_fare: number | null;
   fare_status: string;
   fare_note?: string;
   summary?: string;
+  provider?: string;
+  speed_tier?: string;
   line_info?: string;
   steps?: string[] | RouteStep[];
+  steps_summary?: string[];
+  polyline?: [number, number][];
 }
 
 export interface RouteAlternative {
@@ -29,19 +34,20 @@ export interface RouteAlternative {
 }
 
 export interface RouteResponse {
-  origin: string;
-  destination: string;
-  distance_km: number;
-  duration_mins: number;
-  transport_mode: TransportMode | string;
-  estimated_fare: number;
-  fare_currency: string;
-  route_summary: string;
-  steps: RouteStep[];
+  origin: any;
+  destination: any;
+  distance_km?: number;
+  duration_mins?: number;
+  transport_mode?: TransportMode | string;
+  estimated_fare?: number;
+  fare_currency?: string;
+  route_summary?: string;
+  steps?: RouteStep[];
   options?: RouteOption[];
   alternatives?: RouteAlternative[];
   google_maps_url?: string;
   traffic_level?: string;
+  polyline?: [number, number][];
 }
 
 export interface StateItem {
@@ -295,3 +301,63 @@ export interface NearbyPlacesResponse {
   total: number;
   results: PlaceSummary[];
 }
+
+export interface PlatformStats {
+  heritage_count: number;
+  destinations_count: number;
+  states_count: number;
+  cities_count: number;
+  mumbai_local_stations_count: number;
+  three_d_models_count: number;
+  transport_modes: string[];
+}
+
+export interface MumbaiLocalStation {
+  order: number;
+  code: string;
+  name: string;
+  km_from_start: number;
+  lat: number;
+  lng: number;
+  is_interchange: boolean;
+  interchanges: string[];
+  lines?: string[];
+}
+
+export interface MumbaiLocalRouteResult {
+  from: MumbaiLocalStation;
+  to: MumbaiLocalStation;
+  from_line: string;
+  to_line: string;
+  route_type: 'direct' | 'interchange';
+  interchange?: {
+    code: string;
+    name: string;
+    description: string;
+  } | null;
+  distance_km: number;
+  journey_time_minutes: number;
+  stops_count: number;
+  intermediate_stops: MumbaiLocalStation[];
+  fare: {
+    second_class: number;
+    first_class: number;
+    ac_local: number;
+    currency: string;
+    label: string;
+    source: string;
+  };
+}
+
+export interface HeritageSite extends PlaceSummary {
+  historical_significance?: string;
+  architectural_style?: string;
+  best_time_to_visit?: string;
+  timings?: string;
+  nearest_transport?: {
+    railway_station?: string;
+    metro_station?: string;
+    airport?: string;
+  };
+}
+

@@ -1,49 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PlaceSummary } from '../types';
 import { RouteCalculator } from '../components/destination/RouteCalculator';
-import { Compass, Route, MapPin, IndianRupee } from 'lucide-react';
+import { InteractiveMap } from '../components/map/InteractiveMap';
+import { Compass, Route as RouteIcon, MapPin, IndianRupee, Layers, Navigation } from 'lucide-react';
 
 interface RoutesPageProps {
   places: PlaceSummary[];
   onSelectPlace?: (placeId: string) => void;
+  onNavigateTab?: (tab: any) => void;
 }
 
-export const RoutesPage: React.FC<RoutesPageProps> = ({ places }) => {
-  const [selectedDestId, setSelectedDestId] = useState('marine-drive');
+export const RoutesPage: React.FC<RoutesPageProps> = ({ places, onSelectPlace, onNavigateTab }) => {
+  const [selectedDestId, setSelectedDestId] = useState('gateway-of-india');
+  const [activeView, setActiveView] = useState<'calculator' | 'map'>('calculator');
+  const [mapOrigin, setMapOrigin] = useState('csmt');
+  const [mapDest, setMapDest] = useState('gateway-of-india');
 
-  const selectedPlace = places.find((p) => p.id === selectedDestId) || places[0];
-  const lat = selectedPlace?.coordinates?.lat ?? 18.9431;
-  const lng = selectedPlace?.coordinates?.lng ?? 72.8230;
+  const selectedPlace =
+    places.find((p) => p.id === selectedDestId) ||
+    places.find((p) => p.id === 'gateway-of-india') ||
+    places[0];
+
+  const lat = selectedPlace?.coordinates?.lat ?? 18.922;
+  const lng = selectedPlace?.coordinates?.lng ?? 72.8347;
+
+  const handleViewOnMap = (origin: string, dest: string) => {
+    setMapOrigin(origin);
+    setMapDest(dest);
+    setActiveView('map');
+  };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-fadeIn">
-      <div className="space-y-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-terracotta/10 text-terracotta text-xs font-bold border border-emerald-500/20">
-          <Route className="w-3.5 h-3.5" />
-          <span>Multi-Modal Travel & Fare Studio</span>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
+        <div className="space-y-1">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
+            <RouteIcon className="w-3.5 h-3.5" />
+            <span>Multi-Modal Travel & Fare Studio</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Route Studio & Fare Estimator
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500 max-w-2xl">
+            Compare real road travel, suburban local trains, buses, and walking routes across Indian destinations with verified fares and live map polyline tracing.
+          </p>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-charcoal font-['Plus_Jakarta_Sans']">
-          Route Studio & Fare Estimator
-        </h1>
-        <p className="text-xs sm:text-sm text-charcoal-light max-w-2xl">
-          Compare road travel, suburban local trains, buses, and walking routes across Indian destinations with transparent fare status.
-        </p>
+
+        {/* View Toggle */}
+        <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-2xl border border-slate-200 self-start sm:self-auto">
+          <button
+            onClick={() => setActiveView('calculator')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+              activeView === 'calculator'
+                ? 'bg-white text-emerald-800 shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            Fare & Mode Studio
+          </button>
+          <button
+            onClick={() => setActiveView('map')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition ${
+              activeView === 'map'
+                ? 'bg-white text-emerald-800 shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <Navigation className="w-3.5 h-3.5" />
+            <span>Interactive Map Route</span>
+          </button>
+        </div>
       </div>
 
       {/* Destination Picker */}
-      <div className="heritage-border heritage-shadow bg-parchment-50 rounded-2xl p-4 border border-parchment-300 bg-parchment-50/90 space-y-2">
-        <label className="text-xs font-bold uppercase text-charcoal-light block">
-          Select Target Tourism Destination:
-        </label>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+      <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
+        <div className="flex items-center justify-between">
+          <label className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            Select Destination:
+          </label>
+          <span className="text-xs text-slate-500">
+            Showing <strong className="text-slate-800">{selectedPlace?.name || 'Selected'}</strong> ({selectedPlace?.city || 'India'})
+          </span>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
           {places.slice(0, 12).map((p) => (
             <button
               key={p.id}
-              onClick={() => setSelectedDestId(p.id)}
+              onClick={() => {
+                setSelectedDestId(p.id);
+                setMapDest(p.id);
+              }}
               className={`p-2.5 rounded-xl text-xs font-semibold text-left border transition-all truncate ${
                 selectedDestId === p.id
-                  ? 'bg-terracotta/15 text-terracotta border-sage shadow-sm'
-                  : 'bg-parchment-100/80 text-charcoal-light border-parchment-300 hover:bg-slate-800'
+                  ? 'bg-emerald-50 text-emerald-800 border-emerald-300 font-bold shadow-xs'
+                  : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
               }`}
             >
               📍 {p.name}
@@ -52,15 +103,28 @@ export const RoutesPage: React.FC<RoutesPageProps> = ({ places }) => {
         </div>
       </div>
 
-      {/* Route Calculator Component */}
-      {selectedPlace && (
-        <RouteCalculator
-          destinationId={selectedPlace.id}
-          destinationName={selectedPlace.name}
-          destinationLat={lat}
-          destinationLng={lng}
-          destinationCity={selectedPlace.city}
-        />
+      {/* View Content */}
+      {activeView === 'calculator' ? (
+        selectedPlace && (
+          <RouteCalculator
+            destinationId={selectedPlace.id}
+            destinationName={selectedPlace.name}
+            destinationLat={lat}
+            destinationLng={lng}
+            destinationCity={selectedPlace.city}
+            onViewOnMap={handleViewOnMap}
+          />
+        )
+      ) : (
+        <div className="space-y-4">
+          <InteractiveMap
+            onSelectPlace={(id) => onSelectPlace?.(id)}
+            selectedCity={selectedPlace?.city || 'Mumbai'}
+            initialOrigin={mapOrigin}
+            initialDestination={mapDest}
+            height="620px"
+          />
+        </div>
       )}
     </div>
   );

@@ -1,0 +1,71 @@
+[
+  {
+    "id": "ajanta-caves",
+    "name": "Ajanta Caves",
+    "state": "Maharashtra",
+    "city": "Aurangabad",
+    "category": "heritage",
+    "summary": "Rock-cut Buddhist cave monuments featuring world-famous ancient fresco paintings and sculptures.",
+    "description": "Dating from the 2nd century BCE to about 480 CE, the 30 rock-cut caves present masterpieces of Buddhist religious art.",
+    "coordinates": {
+      "lat": 20.5519,
+      "lng": 75.7033
+    },
+    "rating": 4.8,
+    "thumbnail_url": "https://images.unsplash.com/photo-1600100397608-f010e421e4a3?auto=format&fit=crop&w=1200&q=80",
+    "best_time_to_visit": "November to March",
+    "visiting_hours": "09:00 AM - 05:00 PM (Closed Mondays)",
+    "entry_fee": {
+      "domestic": 40,
+      "international": 600,
+      "currency": "INR"
+    },
+    "tags": ["unesco", "buddhist", "caves", "fresco", "ancient"]
+  },
+  {
+    "id": "ellora-caves",
+    "name": "Ellora Caves & Kailasa Temple",
+    "state": "Maharashtra",
+    "city": "Aurangabad",
+    "category": "heritage",
+    "summary": "Colossal multi-religious rock-hewn monolithic temple complex, featuring the famous Cave 16 Kailasa temple.",
+    "description": "Carved out of the Charanandri hills between the 6th and 10th century CE, featuring Hindu, Buddhist, and Jain sanctuaries.",
+    "coordinates": {
+      "lat": 20.0268,
+      "lng": 75.1792
+    },
+    "rating": 4.9,
+    "thumbnail_url": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80",
+    "best_time_to_visit": "October to March",
+    "visiting_hours": "06:00 AM - 06:00 PM (Closed Tuesdays)",
+    "entry_fee": {
+      "domestic": 40,
+      "international": 600,
+      "currency": "INR"
+    },
+    "tags": ["unesco", "monolith", "kailasa", "rashtrakuta", "temple"]
+  },
+  {
+    "id": "gateway-of-india",
+    "name": "Gateway of India",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "category": "heritage",
+    "summary": "Iconic arch-monument overlooking the Arabian Sea, built in Indo-Saracenic style.",
+    "description": "Erected to commemorate the landing of King George V and Queen Mary in 1911, completed in 1924.",
+    "coordinates": {
+      "lat": 18.9220,
+      "lng": 72.8347
+    },
+    "rating": 4.7,
+    "thumbnail_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    "best_time_to_visit": "October to March",
+    "visiting_hours": "Open 24 hours",
+    "entry_fee": {
+      "domestic": 0,
+      "international": 0,
+      "currency": "INR"
+    },
+    "tags": ["landmark", "indo-saracenic", "mumbai-harbour"]
+  }
+]

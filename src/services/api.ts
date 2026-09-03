@@ -16,6 +16,9 @@ import {
   CityWeather,
   RailwayStationInfo,
   NearbyPlacesResponse,
+  PlatformStats,
+  MumbaiLocalStation,
+  MumbaiLocalRouteResult,
 } from '../types';
 
 const API_BASE_URL = '/api';
@@ -156,6 +159,32 @@ export const api = {
 
   async getNearby(lat: number, lng: number, radiusKm: number = 10, limit: number = 6): Promise<any> {
     return this.getNearbyPlaces(lat, lng, radiusKm, limit);
+  },
+
+  // -------------------------------------------------------------
+  // Hotels & Accommodation
+  // -------------------------------------------------------------
+  async getNearbyHotels(lat?: number, lng?: number, city?: string): Promise<any[]> {
+    try {
+      const q = new URLSearchParams();
+      if (lat !== undefined && lng !== undefined) {
+        q.set('lat', String(lat));
+        q.set('lng', String(lng));
+      }
+      if (city) q.set('city', city);
+      const res = await request<{ total: number; results: any[] }>(`/hotels/nearby?${q.toString()}`);
+      return res.results || [];
+    } catch {
+      return [];
+    }
+  },
+
+  async getFareTariffs(): Promise<any> {
+    try {
+      return await request<any>('/fares/tariffs');
+    } catch {
+      return null;
+    }
   },
 
   // -------------------------------------------------------------
@@ -387,5 +416,97 @@ export const api = {
 
   async deleteTrip(tripId: string): Promise<void> {
     await request<void>(`/trips/${tripId}`, { method: 'DELETE' });
+  },
+
+  // -------------------------------------------------------------
+  // Platform Statistics
+  // -------------------------------------------------------------
+  async getStats(): Promise<PlatformStats> {
+    try {
+      return await request<PlatformStats>('/stats');
+    } catch {
+      return {
+        heritage_count: 45,
+        destinations_count: 78,
+        states_count: 36,
+        cities_count: 24,
+        mumbai_local_stations_count: 65,
+        three_d_models_count: 45,
+        transport_modes: ['Suburban Rail', 'Metro', 'Drive / Taxi', 'Walking', 'Bicycle'],
+      };
+    }
+  },
+
+  // -------------------------------------------------------------
+  // Heritage Experiences (42+ Curated UNESCO & National Sites)
+  // -------------------------------------------------------------
+  async getHeritage(params?: {
+    category?: string;
+    state?: string;
+    search?: string;
+    limit?: number;
+    offset?: number;
+  }): Promise<{ total: number; limit: number; offset: number; data: any[] }> {
+    const q = new URLSearchParams();
+    if (params?.category) q.set('category', params.category);
+    if (params?.state) q.set('state', params.state);
+    if (params?.search) q.set('search', params.search);
+    if (params?.limit) q.set('limit', String(params.limit));
+    if (params?.offset) q.set('offset', String(params.offset));
+
+    try {
+      return await request<{ total: number; limit: number; offset: number; data: any[] }>(`/heritage?${q.toString()}`);
+    } catch {
+      return { total: 0, limit: 50, offset: 0, data: [] };
+    }
+  },
+
+  async getHeritageById(id: string): Promise<any> {
+    return await request<any>(`/heritage/${id}`);
+  },
+
+  // -------------------------------------------------------------
+  // Mumbai Suburban Local Rail Module
+  // -------------------------------------------------------------
+  async getMumbaiLocalLines(): Promise<any> {
+    return await request<any>('/mumbai-local/lines');
+  },
+
+  async getMumbaiLocalStations(): Promise<MumbaiLocalStation[]> {
+    return await request<MumbaiLocalStation[]>('/mumbai-local/stations');
+  },
+
+  async getMumbaiLocalRoute(from: string, to: string): Promise<MumbaiLocalRouteResult> {
+    const q = new URLSearchParams({ from, to });
+    return await request<MumbaiLocalRouteResult>(`/mumbai-local/route?${q.toString()}`);
+  },
+
+  // -------------------------------------------------------------
+  // Distance Calculation
+  // -------------------------------------------------------------
+  async getDistance(params: {
+    from?: string;
+    to?: string;
+    lat1?: number;
+    lng1?: number;
+    lat2?: number;
+    lng2?: number;
+  }): Promise<{
+    origin: { name: string; lat: number; lng: number };
+    destination: { name: string; lat: number; lng: number };
+    aerial_distance_km: number;
+    estimated_road_distance_km: number;
+    drive_time_mins: number;
+    walking_time_mins: number;
+  }> {
+    const q = new URLSearchParams();
+    if (params.from) q.set('from', params.from);
+    if (params.to) q.set('to', params.to);
+    if (params.lat1 !== undefined) q.set('lat1', String(params.lat1));
+    if (params.lng1 !== undefined) q.set('lng1', String(params.lng1));
+    if (params.lat2 !== undefined) q.set('lat2', String(params.lat2));
+    if (params.lng2 !== undefined) q.set('lng2', String(params.lng2));
+
+    return await request<any>(`/distance?${q.toString()}`);
   },
 };

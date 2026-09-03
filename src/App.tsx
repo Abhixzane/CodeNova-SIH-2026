@@ -16,6 +16,8 @@ import { FavoritesPage } from './pages/FavoritesPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { DestinationDetailPage } from './pages/DestinationDetailPage';
 import { SearchPage } from './pages/SearchPage';
+import { HeritageSitesPage } from './pages/HeritageSitesPage';
+import { MumbaiLocalPage } from './pages/MumbaiLocalPage';
 import { PlaceSummary } from './types';
 import { api } from './services/api';
 import { Menu, Compass, Search } from 'lucide-react';
@@ -25,7 +27,7 @@ const AppContent: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedPlaceId, setSelectedPlaceId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string | null>(null);
-  const [selectedCity, setSelectedCity] = useState<string>('Mumbai');
+  const [selectedCity, setSelectedCity] = useState<string>('All India');
   const [places, setPlaces] = useState<PlaceSummary[]>([]);
 
   useEffect(() => {
@@ -70,7 +72,7 @@ const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-950 text-slate-100 selection:bg-orange-500 selection:text-white">
+    <div className="flex min-h-screen bg-slate-50 text-slate-900 selection:bg-emerald-500 selection:text-white font-sans">
       {/* Sidebar Navigation */}
       <Sidebar
         activeTab={activeTab}
@@ -82,27 +84,27 @@ const AppContent: React.FC = () => {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Mobile Header Bar */}
-        <header className="sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-slate-950/90 backdrop-blur-md border-b border-parchment-300 lg:hidden">
+        <header className="sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-white/95 backdrop-blur-md border-b border-slate-200 lg:hidden shadow-xs">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsSidebarOpen(true)}
-              className="p-2 rounded-xl bg-slate-900 border border-parchment-300 text-charcoal-light hover:text-charcoal"
+              className="p-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-600 hover:text-slate-900"
             >
               <Menu className="w-5 h-5" />
             </button>
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg bg-orange-500 flex items-center justify-center text-charcoal">
-                <Compass className="w-4 h-4 text-slate-950" />
+              <div className="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
+                <Compass className="w-4 h-4 text-white" />
               </div>
-              <span className="font-extrabold text-sm text-charcoal tracking-tight">
-                Bharat<span className="text-orange-500">Yatra</span>
+              <span className="font-extrabold text-sm text-slate-900 tracking-tight">
+                Yatra<span className="text-emerald-600">Verse</span>
               </span>
             </div>
           </div>
 
           <button
             onClick={() => handleSearch('')}
-            className="p-2 rounded-xl bg-slate-900 border border-parchment-300 text-charcoal-light hover:text-charcoal"
+            className="p-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-600 hover:text-slate-900"
           >
             <Search className="w-4 h-4" />
           </button>
@@ -136,6 +138,13 @@ const AppContent: React.FC = () => {
                 />
               )}
 
+              {activeTab === 'heritage' && (
+                <HeritageSitesPage
+                  onSelectPlace={handleSelectPlace}
+                  onNavigateTab={handleNavigateTab}
+                />
+              )}
+
               {activeTab === 'dashboard' && (
                 <CityHubPage
                   onSelectPlace={handleSelectPlace}
@@ -150,6 +159,16 @@ const AppContent: React.FC = () => {
                   onSelectPlace={handleSelectPlace}
                   selectedCity={selectedCity}
                   onSelectCity={setSelectedCity}
+                  onView3DPlace={(placeId) => {
+                    setActiveTab('3d');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                />
+              )}
+
+              {activeTab === 'mumbai-local' && (
+                <MumbaiLocalPage
+                  onNavigateTab={handleNavigateTab}
                 />
               )}
 
@@ -157,6 +176,7 @@ const AppContent: React.FC = () => {
                 <RoutesPage
                   places={places}
                   onSelectPlace={handleSelectPlace}
+                  onNavigateTab={handleNavigateTab}
                 />
               )}
 

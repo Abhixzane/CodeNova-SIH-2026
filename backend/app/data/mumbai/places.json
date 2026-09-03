@@ -1,0 +1,631 @@
+[
+  {
+    "id": "gateway-of-india",
+    "name": "Gateway of India",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "heritage",
+    "summary": "Iconic 20th-century arch monument overlooking the Arabian Sea in Apollo Bunder.",
+    "description": "The Gateway of India is an arch-monument built in the early 20th century in Mumbai. Erected to commemorate the landing of King George V and Queen Mary at Apollo Bunder on their visit to India in 1911, the structure is an Indo-Saracenic triumphal arch crafted from yellow basalt and reinforced concrete.",
+    "history": "Designed by Scottish architect George Wittet, construction was completed in 1924. It later served as the ceremonial departure point for the last British troops leaving India following independence in 1948.",
+    "culture": "A bustling gathering point for locals and international travelers, flanked by the historic Taj Mahal Palace Hotel. It is also the principal embarkation point for ferries to Elephanta Island.",
+    "coordinates": {
+      "lat": 18.9220,
+      "lng": 72.8347
+    },
+    "rating": 4.7,
+    "thumbnail_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f",
+    "best_time_to_visit": "October to March (early morning or sunset)",
+    "visiting_hours": "Open 24 Hours",
+    "entry_fee": {
+      "domestic": 0.0,
+      "international": 0.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "October to March (early morning or sunset)",
+      "visiting_hours": "Open 24 Hours",
+      "recommended_duration": "1 - 2 hours",
+      "tips": [
+        "Visit during early sunrise or sunset for ideal photography light.",
+        "Catch the Elephanta Caves ferry directly from Jetty No. 1.",
+        "Keep belongings secure in crowded waterfront zones."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f",
+      "https://images.unsplash.com/photo-1588714477688-cf28a50e94f7"
+    ],
+    "model_3d": {
+      "has_model": true,
+      "model_url": "/models/gateway-of-india.glb",
+      "available": true,
+      "type": "detailed_photogrammetry",
+      "asset": "/models/gateway-of-india.glb"
+    },
+    "tags": ["heritage", "monument", "coastal", "landmark", "mumbai", "british-era", "3d-available"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": true
+    }
+  },
+  {
+    "id": "marine-drive",
+    "name": "Marine Drive",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "coastal",
+    "summary": "Famous 3.6-kilometer seaside promenade known as the Queen's Necklace.",
+    "description": "Marine Drive is a 3.6-kilometre-long boulevard in South Mumbai, curving along the natural Arabian Sea bay. Lined with palm trees and classic Art Deco buildings, it is one of the world's most celebrated urban waterfront promenades.",
+    "history": "Constructed as part of the Backbay Reclamation scheme in the late 1920s and 1930s. The Art Deco buildings facing the sea form part of the UNESCO World Heritage Victorian Gothic and Art Deco Ensembles of Mumbai.",
+    "culture": "The heartbeat of Mumbai evening life, where residents and visitors gather on the promenade tetrapods to enjoy cool sea breezes, sunset vistas, and street snacks.",
+    "coordinates": {
+      "lat": 18.9431,
+      "lng": 72.8230
+    },
+    "rating": 4.8,
+    "thumbnail_url": "https://images.unsplash.com/photo-1567157577867-05ccb1388e66",
+    "best_time_to_visit": "October to March (5:00 PM - 9:00 PM)",
+    "visiting_hours": "Open 24 Hours",
+    "entry_fee": {
+      "domestic": 0.0,
+      "international": 0.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "October to March (5:00 PM - 9:00 PM)",
+      "visiting_hours": "Open 24 Hours",
+      "recommended_duration": "2 - 3 hours",
+      "tips": [
+        "Take a walking stroll from Nariman Point to Girgaon Chowpatty.",
+        "Observe the streetlights illuminating the bay like the Queen's Necklace at night."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1567157577867-05ccb1388e66"
+    ],
+    "model_3d": {
+      "has_model": false,
+      "available": false
+    },
+    "tags": ["coastal", "promenade", "sunset", "queens-necklace", "mumbai", "art-deco", "walking"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": false
+    }
+  },
+  {
+    "id": "csmt",
+    "name": "Chhatrapati Shivaji Maharaj Terminus",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "heritage",
+    "summary": "UNESCO World Heritage railway terminus exhibiting High Victorian Gothic Revival architecture.",
+    "description": "Chhatrapati Shivaji Maharaj Terminus (CSMT), formerly Victoria Terminus, is an outstanding example of Victorian Gothic Revival architecture in India, blended with themes deriving from Indian traditional architecture.",
+    "history": "Designed by British architect F. W. Stevens and opened in 1887 to mark Queen Victoria's Golden Jubilee. It was declared a UNESCO World Heritage Site in 2004.",
+    "culture": "The bustling nerve center of Mumbai's Suburban Railway network, accommodating over 3 million daily commuters with its towering dome, stone carvings, and gargoyles.",
+    "coordinates": {
+      "lat": 18.9400,
+      "lng": 72.8353
+    },
+    "rating": 4.7,
+    "thumbnail_url": "https://images.unsplash.com/photo-1566552881560-0be862a7c445",
+    "best_time_to_visit": "Year-round (illuminated beautifully after 7:00 PM)",
+    "visiting_hours": "Open 24 Hours (Heritage Gallery: 10:00 AM - 05:00 PM weekdays)",
+    "entry_fee": {
+      "domestic": 0.0,
+      "international": 0.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "Year-round (illuminated beautifully after 7:00 PM)",
+      "visiting_hours": "Open 24 Hours",
+      "recommended_duration": "1 hour",
+      "tips": [
+        "View the grand exterior facade illuminated in dynamic colors during evening hours.",
+        "Take a guided heritage tour of the central dome and station museum."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1566552881560-0be862a7c445"
+    ],
+    "model_3d": {
+      "has_model": false,
+      "available": false
+    },
+    "tags": ["heritage", "unesco", "railway", "architecture", "victorian-gothic", "mumbai"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": false
+    }
+  },
+  {
+    "id": "elephanta-caves",
+    "name": "Elephanta Caves",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "heritage",
+    "summary": "UNESCO World Heritage rock-cut cave temples dedicated to Lord Shiva on Elephanta Island.",
+    "description": "The Elephanta Caves are a collection of cave temples predominantly dedicated to the Hindu god Shiva, situated on Elephanta Island in Mumbai Harbour. They consist of five Hindu caves and a few Buddhist stupa mounds dating back to the 5th to 6th century CE.",
+    "history": "Carved between the 5th and 8th centuries under the Kalachuri and Rashtrakuta dynasties. Designated a UNESCO World Heritage Site in 1987, featuring the renowned 20-foot high Trimurti sculpture.",
+    "culture": "A serene historical contrast to urban Mumbai, accessible via an enjoyable 1-hour ferry cruise across Mumbai Harbour.",
+    "coordinates": {
+      "lat": 18.9633,
+      "lng": 72.9315
+    },
+    "rating": 4.6,
+    "thumbnail_url": "https://images.unsplash.com/photo-1600100397608-f010e42e5e8e",
+    "best_time_to_visit": "November to March",
+    "visiting_hours": "09:00 AM - 05:30 PM (Closed on Mondays)",
+    "entry_fee": {
+      "domestic": 40.0,
+      "international": 600.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "November to March",
+      "visiting_hours": "09:00 AM - 05:30 PM (Closed on Mondays)",
+      "recommended_duration": "4 - 5 hours (including ferry travel)",
+      "tips": [
+        "Ferries operate from Gateway of India between 9:00 AM and 2:00 PM.",
+        "Wear comfortable trekking shoes for the island stone stairway."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1600100397608-f010e42e5e8e"
+    ],
+    "model_3d": {
+      "has_model": false,
+      "available": false
+    },
+    "tags": ["heritage", "unesco", "caves", "ancient", "sculptures", "ferry-trip"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": false
+    }
+  },
+  {
+    "id": "kanheri-caves",
+    "name": "Kanheri Caves",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "heritage",
+    "summary": "Ancient rock-cut Buddhist monasteries nestled within the forests of Sanjay Gandhi National Park.",
+    "description": "Kanheri Caves are a group of over 100 rock-cut caves located deep inside Sanjay Gandhi National Park in Borivali. They illustrate the Buddhist art and architecture of Western India from the 1st century BCE to the 10th century CE.",
+    "history": "Served as a major monastic settlement and university on ancient trade routes linking Sopara, Kalyan, and coastal ports.",
+    "culture": "Renowned for ancient water harvesting channels, prayer halls (Chaityas), and colossal Buddha statues surrounded by lush teak forests.",
+    "coordinates": {
+      "lat": 19.2060,
+      "lng": 72.9064
+    },
+    "rating": 4.6,
+    "thumbnail_url": "https://images.unsplash.com/photo-1627894483216-2138af692e32",
+    "best_time_to_visit": "July to February (monsoon greenery is exceptional)",
+    "visiting_hours": "07:30 AM - 05:00 PM (Closed on Mondays)",
+    "entry_fee": {
+      "domestic": 25.0,
+      "international": 300.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "July to February",
+      "visiting_hours": "07:30 AM - 05:00 PM (Closed on Mondays)",
+      "recommended_duration": "3 hours",
+      "tips": [
+        "Rent a bicycle or take the internal electric bus from Sanjay Gandhi National Park gate.",
+        "Climb to the top ridge for panoramic forest and city views."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1627894483216-2138af692e32"
+    ],
+    "model_3d": {
+      "has_model": false,
+      "available": false
+    },
+    "tags": ["heritage", "buddhist", "caves", "nature", "trekking", "monastery"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": false
+    }
+  },
+  {
+    "id": "worli-sea-face",
+    "name": "Worli Sea Face",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "coastal",
+    "summary": "Scenic coastal promenade providing dramatic views of the Bandra-Worli Sea Link.",
+    "description": "Worli Sea Face is a prominent promenade in South-Central Mumbai overlooking the Arabian Sea, famous for spectacular crashing waves during the monsoon and uninterrupted vistas of the cable-stayed Bandra-Worli Sea Link.",
+    "history": "Developed along the western coast of the Worli island, near the 17th-century Worli Fort built by the British to guard Mahim Bay.",
+    "culture": "A peaceful walking spot favored by runners, photographers, and evening strollers looking for a tranquil sea view.",
+    "coordinates": {
+      "lat": 19.0118,
+      "lng": 72.8136
+    },
+    "rating": 4.6,
+    "thumbnail_url": "https://images.unsplash.com/photo-1595658658481-d53d3f999875",
+    "best_time_to_visit": "October to March (and monsoon for wave watching)",
+    "visiting_hours": "Open 24 Hours",
+    "entry_fee": {
+      "domestic": 0.0,
+      "international": 0.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "October to March",
+      "visiting_hours": "Open 24 Hours",
+      "recommended_duration": "1 - 2 hours",
+      "tips": [
+        "Great vantage point for photographing the Bandra-Worli Sea Link cable towers.",
+        "Take a short walk to explore historic Worli Koliwada fishing village."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1595658658481-d53d3f999875"
+    ],
+    "model_3d": {
+      "has_model": false,
+      "available": false
+    },
+    "tags": ["coastal", "promenade", "sea-link", "viewpoint", "walking", "mumbai"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": false
+    }
+  },
+  {
+    "id": "juhu-beach",
+    "name": "Juhu Beach",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "coastal",
+    "summary": "Lively suburban Arabian Sea beach renowned for street food and sunset views.",
+    "description": "Juhu Beach is one of Mumbai's most popular beaches, stretching along the upscale western suburb of Juhu. It is celebrated for its bustling food stalls serving authentic Mumbai street cuisine such as pav bhaji, bhel puri, and kulfi.",
+    "history": "Historically a coastal coconut grove village, Juhu evolved into Mumbai's prime residential beachfront haven in the 20th century.",
+    "culture": "A cultural epicenter where locals, Bollywood celebrities, and tourists mingle, especially lively during weekends and Ganesh Visarjan festivals.",
+    "coordinates": {
+      "lat": 19.0988,
+      "lng": 72.8264
+    },
+    "rating": 4.4,
+    "thumbnail_url": "https://images.unsplash.com/photo-1596401057633-54a8fe8ef647",
+    "best_time_to_visit": "October to March (late afternoon)",
+    "visiting_hours": "Open 24 Hours",
+    "entry_fee": {
+      "domestic": 0.0,
+      "international": 0.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "October to March",
+      "visiting_hours": "Open 24 Hours",
+      "recommended_duration": "2 hours",
+      "tips": [
+        "Sample street food at the designated food court near the main entrance.",
+        "Check tides before walking along the northern sands towards Versova."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1596401057633-54a8fe8ef647"
+    ],
+    "model_3d": {
+      "has_model": false,
+      "available": false
+    },
+    "tags": ["coastal", "beach", "street-food", "sunset", "mumbai", "family"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": false
+    }
+  },
+  {
+    "id": "sanjay-gandhi-national-park",
+    "name": "Sanjay Gandhi National Park",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "nature",
+    "summary": "Vast protected wilderness oasis within city limits, home to leopards, deer, and ancient caves.",
+    "description": "Sanjay Gandhi National Park (SGNP) is a protected forest reserve covering over 100 square kilometers in northern Mumbai. It is one of the world's few national parks surrounded by a metropolitan boundary.",
+    "history": "Originally protected in the pre-independence era as Krishnagiri National Park, it was expanded in 1981 to conserve biodiversity and regional watersheds.",
+    "culture": "Known as the green lungs of Mumbai, offering cycling tracks, tiger safari, toy train rides, boating, and access to Kanheri Caves.",
+    "coordinates": {
+      "lat": 19.2288,
+      "lng": 72.9182
+    },
+    "rating": 4.6,
+    "thumbnail_url": "https://images.unsplash.com/photo-1544735716-392fe2489ffa",
+    "best_time_to_visit": "July to March",
+    "visiting_hours": "07:30 AM - 05:30 PM (Closed on Mondays)",
+    "entry_fee": {
+      "domestic": 85.0,
+      "international": 200.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "July to March",
+      "visiting_hours": "07:30 AM - 05:30 PM (Closed on Mondays)",
+      "recommended_duration": "4 - 6 hours",
+      "tips": [
+        "Rent bicycles at the entrance to cycle 7 km up to Kanheri Caves.",
+        "Arrive early in the morning for bird watching and tranquil forest walks."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa"
+    ],
+    "model_3d": {
+      "has_model": false,
+      "available": false
+    },
+    "tags": ["nature", "national-park", "wildlife", "trekking", "forest", "cycling"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": false
+    }
+  },
+  {
+    "id": "csmvs-museum",
+    "name": "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "heritage",
+    "summary": "Premier museum of art, archaeology, and natural history housed in an Indo-Saracenic mansion.",
+    "description": "CSMVS (formerly the Prince of Wales Museum of Western India) is one of India's foremost art and history museums, established to commemorate the visit of the Prince of Wales in 1905. It features over 50,000 artifacts across ancient Indian sculpture, Mughal miniature paintings, European art, and decorative arts.",
+    "history": "Designed by George Wittet in the Indo-Saracenic style and set in expansive heritage palm gardens in the Kala Ghoda Arts District.",
+    "culture": "A vibrant cultural and educational institution recognized with a UNESCO Asia-Pacific Award for Cultural Heritage Conservation in 2022.",
+    "coordinates": {
+      "lat": 18.9268,
+      "lng": 72.8327
+    },
+    "rating": 4.7,
+    "thumbnail_url": "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3",
+    "best_time_to_visit": "Year-round",
+    "visiting_hours": "10:15 AM - 06:00 PM (Everyday)",
+    "entry_fee": {
+      "domestic": 150.0,
+      "international": 650.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "Year-round",
+      "visiting_hours": "10:15 AM - 06:00 PM",
+      "recommended_duration": "2 - 3 hours",
+      "tips": [
+        "Audio guides are available at the entrance in multiple international and Indian languages.",
+        "Explore the tranquil garden cafe and museum gift shop."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3"
+    ],
+    "model_3d": {
+      "has_model": false,
+      "available": false
+    },
+    "tags": ["heritage", "museum", "art", "sculpture", "history", "kala-ghoda"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": false
+    }
+  },
+  {
+    "id": "siddhivinayak-temple",
+    "name": "Siddhivinayak Temple",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "spiritual",
+    "summary": "Historic and revered Hindu temple dedicated to Lord Ganesha in Prabhadevi.",
+    "description": "Shree Siddhivinayak Ganapati Mandir is one of the most revered and affluent temples in Mumbai, dedicated to Lord Ganesha. The central sanctum features a small shrine with a gold-plated inner roof and a black stone deity of Ganesha with the trunk positioned to the right.",
+    "history": "Originally consecrated in 1801 by Laxman Vithu and Deubai Patil, the modern multi-storied temple complex was rebuilt in the late 20th century.",
+    "culture": "A primary spiritual landmark attracting thousands of devotees daily, especially on Tuesdays (Angarki Chaturthi).",
+    "coordinates": {
+      "lat": 19.0169,
+      "lng": 72.8304
+    },
+    "rating": 4.8,
+    "thumbnail_url": "https://images.unsplash.com/photo-1567157577867-05ccb1388e66",
+    "best_time_to_visit": "Year-round (early mornings for shorter queues)",
+    "visiting_hours": "05:30 AM - 09:50 PM",
+    "entry_fee": {
+      "domestic": 0.0,
+      "international": 0.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "Year-round",
+      "visiting_hours": "05:30 AM - 09:50 PM",
+      "recommended_duration": "1 - 2 hours",
+      "tips": [
+        "Dress modestly covering shoulders and knees.",
+        "VIP/Special darshan queues can be booked in advance online."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1567157577867-05ccb1388e66"
+    ],
+    "model_3d": {
+      "has_model": false,
+      "available": false
+    },
+    "tags": ["spiritual", "temple", "ganesha", "hindu", "culture", "mumbai"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": false
+    }
+  },
+  {
+    "id": "haji-ali-dargah",
+    "name": "Haji Ali Dargah",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "spiritual",
+    "summary": "15th-century Indo-Islamic mosque and tomb situated on an islet off the coast of Worli.",
+    "description": "Haji Ali Dargah is a revered mosque and tomb built in 1431 in memory of a wealthy Muslim merchant, Pir Haji Ali Shah Bukhari, who gave up all his worldly possessions before making a pilgrimage to Mecca. Located 500 meters into the Arabian Sea, it is linked to the mainland by a narrow causeway accessible only during low tide.",
+    "history": "Erected in the 15th century and constructed from white marble in the Indo-Islamic architectural style with slender minarets.",
+    "culture": "A symbol of Mumbai's secular ethos, visited by people of all religious faiths and backgrounds.",
+    "coordinates": {
+      "lat": 18.9827,
+      "lng": 72.8089
+    },
+    "rating": 4.6,
+    "thumbnail_url": "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3",
+    "best_time_to_visit": "October to March (during low tide)",
+    "visiting_hours": "06:00 AM - 10:00 PM",
+    "entry_fee": {
+      "domestic": 0.0,
+      "international": 0.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "October to March",
+      "visiting_hours": "06:00 AM - 10:00 PM",
+      "recommended_duration": "1 - 2 hours",
+      "tips": [
+        "Check tide schedules before visiting, as high tide submerges the pathway.",
+        "Sample fresh fruit creams at the nearby historic Haji Ali Juice Centre."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3"
+    ],
+    "model_3d": {
+      "has_model": false,
+      "available": false
+    },
+    "tags": ["spiritual", "mosque", "heritage", "islet", "islamic-architecture", "mumbai"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": false
+    }
+  },
+  {
+    "id": "bandra-fort",
+    "name": "Bandra Fort",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "heritage",
+    "summary": "17th-century Portuguese watchtower fort overlooking Mahim Bay and the Bandra-Worli Sea Link.",
+    "description": "Bandra Fort, officially Castella de Aguada (Fort of the Waterpoint), is a historic Portuguese watchtower fortress erected in 1640 at Land's End in Bandra. It commands sweeping coastal views over Mahim Bay to the south and the Arabian Sea to the west.",
+    "history": "Built by the Portuguese as a strategic lookout point along the sea route, later held by the Marathas and the British East India Company.",
+    "culture": "A picturesque coastal park and heritage amphitheater frequented by photographers, couples, and walkers enjoying sunset breezes.",
+    "coordinates": {
+      "lat": 19.0416,
+      "lng": 72.8188
+    },
+    "rating": 4.5,
+    "thumbnail_url": "https://images.unsplash.com/photo-1595658658481-d53d3f999875",
+    "best_time_to_visit": "October to March (4:30 PM - 6:30 PM)",
+    "visiting_hours": "06:00 AM - 06:30 PM",
+    "entry_fee": {
+      "domestic": 0.0,
+      "international": 0.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "October to March",
+      "visiting_hours": "06:00 AM - 06:30 PM",
+      "recommended_duration": "1 - 2 hours",
+      "tips": [
+        "Stroll along Bandstand promenade nearby to see landmark residences and seaside gardens.",
+        "Superb sunset angle directly underneath the Bandra-Worli Sea Link."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1595658658481-d53d3f999875"
+    ],
+    "model_3d": {
+      "has_model": false,
+      "available": false
+    },
+    "tags": ["heritage", "fort", "portuguese", "sea-view", "bandra", "sunset"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": false
+    }
+  },
+  {
+    "id": "colaba-causeway",
+    "name": "Colaba Causeway",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "country": "India",
+    "category": "cultural",
+    "summary": "Vibrant commercial and cultural boulevard famous for street markets, vintage cafes, and colonial charm.",
+    "description": "Colaba Causeway (officially Shahid Bhagat Singh Road) is a bustling commercial thoroughfare in South Mumbai connecting Colaba and the Old Woman's Island. It is renowned for its eclectic street shopping, handicraft stalls, heritage boutiques, and vintage establishments like Cafe Mondegar and Leopold Cafe.",
+    "history": "Constructed by the British East India Company in 1838 to bridge the tidal waters between the islands of Colaba and Bombay.",
+    "culture": "A sensory feast of street markets, antique curios, vintage brassware, and cosmopolitan dining just minutes from the Gateway of India.",
+    "coordinates": {
+      "lat": 18.9189,
+      "lng": 72.8298
+    },
+    "rating": 4.5,
+    "thumbnail_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f",
+    "best_time_to_visit": "October to March (11:00 AM - 9:00 PM)",
+    "visiting_hours": "10:00 AM - 10:00 PM",
+    "entry_fee": {
+      "domestic": 0.0,
+      "international": 0.0,
+      "currency": "INR"
+    },
+    "visiting_info": {
+      "best_time_to_visit": "October to March",
+      "visiting_hours": "10:00 AM - 10:00 PM",
+      "recommended_duration": "2 - 3 hours",
+      "tips": [
+        "Polite bargaining is customary at street stalls.",
+        "Take a break at historic Leopold Cafe or Cafe Mondegar."
+      ]
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f"
+    ],
+    "model_3d": {
+      "has_model": false,
+      "available": false
+    },
+    "tags": ["cultural", "shopping", "street-market", "cafe", "colaba", "heritage"],
+    "features": {
+      "map": true,
+      "navigation": true,
+      "ai": true,
+      "3d": false
+    }
+  }
+]

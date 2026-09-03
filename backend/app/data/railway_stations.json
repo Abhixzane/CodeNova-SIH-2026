@@ -1,0 +1,238 @@
+[
+  {
+    "id": "csmt",
+    "name": "Chhatrapati Shivaji Maharaj Terminus",
+    "code": "CSMT",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "lat": 18.94,
+    "lng": 72.8353,
+    "lines": [
+      "Central Line",
+      "Harbour Line",
+      "Express Hub"
+    ],
+    "is_junction": true
+  },
+  {
+    "id": "churchgate",
+    "name": "Churchgate Railway Station",
+    "code": "CCG",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "lat": 18.9322,
+    "lng": 72.8264,
+    "lines": [
+      "Western Line Terminal"
+    ],
+    "is_junction": false
+  },
+  {
+    "id": "marine-lines",
+    "name": "Marine Lines Railway Station",
+    "code": "MEL",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "lat": 18.9438,
+    "lng": 72.8242,
+    "lines": [
+      "Western Line"
+    ],
+    "is_junction": false
+  },
+  {
+    "id": "charni-road",
+    "name": "Charni Road Railway Station",
+    "code": "CYR",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "lat": 18.9517,
+    "lng": 72.8188,
+    "lines": [
+      "Western Line"
+    ],
+    "is_junction": false
+  },
+  {
+    "id": "mumbai-central",
+    "name": "Mumbai Central",
+    "code": "MMCT",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "lat": 18.9696,
+    "lng": 72.8194,
+    "lines": [
+      "Western Line",
+      "National Express"
+    ],
+    "is_junction": true
+  },
+  {
+    "id": "dadar",
+    "name": "Dadar Junction",
+    "code": "DDR",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "lat": 19.0178,
+    "lng": 72.8478,
+    "lines": [
+      "Western Line",
+      "Central Line Interchange"
+    ],
+    "is_junction": true
+  },
+  {
+    "id": "bandra",
+    "name": "Bandra Terminus",
+    "code": "BDTS",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "lat": 19.0544,
+    "lng": 72.8406,
+    "lines": [
+      "Western Line",
+      "Express"
+    ],
+    "is_junction": true
+  },
+  {
+    "id": "andheri",
+    "name": "Andheri Railway Station & Metro Hub",
+    "code": "ADH",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "lat": 19.1197,
+    "lng": 72.8464,
+    "lines": [
+      "Western Line",
+      "Harbour Line",
+      "Metro Line 1"
+    ],
+    "is_junction": true
+  },
+  {
+    "id": "borivali",
+    "name": "Borivali Railway Station",
+    "code": "BVI",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "lat": 19.2291,
+    "lng": 72.8573,
+    "lines": [
+      "Western Line Fast Hub"
+    ],
+    "is_junction": true
+  },
+  {
+    "id": "thane",
+    "name": "Thane Junction",
+    "code": "TNA",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "lat": 19.186,
+    "lng": 72.9759,
+    "lines": [
+      "Central Line",
+      "Trans-Harbour Line"
+    ],
+    "is_junction": true
+  },
+  {
+    "id": "new-delhi",
+    "name": "New Delhi Railway Station",
+    "code": "NDLS",
+    "city": "New Delhi",
+    "state": "Delhi (NCT)",
+    "lat": 28.643,
+    "lng": 77.2195,
+    "lines": [
+      "Northern Railway Hub",
+      "Yellow Metro Line",
+      "Airport Express"
+    ],
+    "is_junction": true
+  },
+  {
+    "id": "old-delhi",
+    "name": "Old Delhi Railway Station",
+    "code": "DLI",
+    "city": "New Delhi",
+    "state": "Delhi (NCT)",
+    "lat": 28.6619,
+    "lng": 77.228,
+    "lines": [
+      "Northern Railway",
+      "Yellow Metro Line"
+    ],
+    "is_junction": true
+  },
+  {
+    "id": "hazrat-nizamuddin",
+    "name": "Hazrat Nizamuddin Railway Station",
+    "code": "NZM",
+    "city": "New Delhi",
+    "state": "Delhi (NCT)",
+    "lat": 28.5888,
+    "lng": 77.2534,
+    "lines": [
+      "Northern Railway",
+      "Pink Metro Line"
+    ],
+    "is_junction": true
+  },
+  {
+    "id": "jaipur-jn",
+    "name": "Jaipur Junction",
+    "code": "JP",
+    "city": "Jaipur",
+    "state": "Rajasthan",
+    "lat": 26.9196,
+    "lng": 75.7878,
+    "lines": [
+      "North Western Railway Hub",
+      "Jaipur Metro Pink Line"
+    ],
+    "is_junction": true
+  },
+  {
+    "id": "gandhinagar-jpr",
+    "name": "Gandhinagar Jaipur",
+    "code": "GADJ",
+    "city": "Jaipur",
+    "state": "Rajasthan",
+    "lat": 26.8794,
+    "lng": 75.8037,
+    "lines": [
+      "North Western Railway"
+    ],
+    "is_junction": false
+  },
+  {
+    "id": "agra-cantt",
+    "name": "Agra Cantonment",
+    "code": "AGC",
+    "city": "Agra",
+    "state": "Uttar Pradesh",
+    "lat": 27.1578,
+    "lng": 77.9904,
+    "lines": [
+      "Gatimaan Express Hub",
+      "North Central Railway"
+    ],
+    "is_junction": true
+  },
+  {
+    "id": "ernakulam-jn",
+    "name": "Ernakulam Junction (South)",
+    "code": "ERS",
+    "city": "Kochi",
+    "state": "Kerala",
+    "lat": 9.9675,
+    "lng": 76.289,
+    "lines": [
+      "Southern Railway",
+      "Kochi Metro"
+    ],
+    "is_junction": true
+  }
+]

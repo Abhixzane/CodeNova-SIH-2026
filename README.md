@@ -21,12 +21,66 @@ The project is structured across six core collaborative domains:
 
 ```
 CodeNova-SIH-2026/
-├── frontend/     # React web application and user interface
-├── backend/      # FastAPI server, API routers, and business logic
-├── ai/           # AI models, prompt templates, and recommendation logic
-├── data/         # Tourism datasets, state metadata, and seed files
-├── docs/         # System architecture, API specifications, and guidelines
-└── tests/        # Unit, integration, and end-to-end test suites
+├── frontend/             # React 18 SPA (Tailwind CSS, Leaflet, Three.js)
+│   ├── src/              # Components, pages, contexts, services, types
+│   ├── public/           # Static icons and assets
+│   ├── package.json      # Frontend npm dependencies
+│   ├── package-lock.json # Lockfile
+│   ├── vite.config.ts    # Vite bundler configuration
+│   ├── tsconfig.json     # TypeScript compiler options
+│   ├── tailwind.config.js
+│   └── index.html        # Entry HTML
+├── backend/              # Python FastAPI asynchronous backend service
+│   ├── app/
+│   │   ├── main.py       # FastAPI application gateway & CORS
+│   │   ├── config.py     # Environment settings & Pydantic config
+│   │   ├── db/           # SQLAlchemy session and base models
+│   │   ├── models/       # ORM entities (Place, State, Itinerary, User)
+│   │   ├── schemas/      # Pydantic schemas (API contract)
+│   │   ├── routers/      # Endpoints for states, places, routes, itinerary, AI
+│   │   ├── services/     # Business logic for tourism, routing, AI, itinerary
+│   │   └── data/         # Seed datasets for backend service
+│   ├── requirements.txt  # Python requirements
+│   └── README.md
+├── ai/                   # AI & Gemini LLM subsystem
+│   ├── services/         # Gemini agent orchestrator
+│   ├── prompts/          # System prompts and heritage explainer templates
+│   ├── tools/            # Function-calling declarations (places, fares, railway)
+│   ├── models/           # Data contracts for LLM payloads
+│   ├── memory/           # Sliding-window conversational context buffer
+│   └── README.md
+├── data/                 # Comprehensive Indian tourism datasets
+│   ├── cities.json
+│   ├── states.json
+│   ├── india_tourism.json
+│   ├── railway_stations.json
+│   ├── heritage/         # Architectural & monument metadata
+│   ├── mumbai/           # Mumbai landmarks & coordinates
+│   ├── delhi/            # Delhi monuments & heritage sites
+│   ├── rajasthan/        # Jaipur, Udaipur & desert forts
+│   ├── maharashtra/      # Ajanta, Ellora & Western Ghats
+│   └── kerala/           # Backwaters, hill stations & temples
+├── docs/                 # Architectural & team documentation
+│   ├── architecture/     # System design & tier breakdown
+│   ├── roadmap/          # SIH 2026 milestone checklists
+│   ├── api/              # RESTful API specifications & contract
+│   ├── datasets/         # Data dictionaries & schemas
+│   ├── team/             # 6-member domain ownership & PR workflow
+│   ├── deployment/       # Containerization & Cloud Run guides
+│   ├── api-contract.md   # Baseline REST endpoint contract
+│   ├── architecture.md   # System architecture diagram
+│   ├── development-guide.md # Git branching model & rules
+│   └── README.md         # Central documentation index
+├── scripts/              # Automation and development utilities
+│   ├── data_import/      # Dataset parsing & validation scripts
+│   ├── database/         # Database migration & seeding utilities
+│   └── development/      # Local server launch scripts
+└── tests/                # Automated test suites
+    ├── backend/          # Pytest API endpoint and service tests
+    ├── ai/               # Unit tests for prompt construction and memory
+    ├── integration/      # Multimodal route and itinerary pipeline tests
+    ├── frontend/         # TypeScript tests for fare and distance math
+    └── README.md
 ```
 
 ---

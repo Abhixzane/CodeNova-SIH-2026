@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { RotateCw, Eye, Sparkles, Maximize2 } from 'lucide-react';
+import { RotateCw, Eye, Sparkles, Maximize2, Compass } from 'lucide-react';
 
 interface GatewayOfIndia3DProps {
   placeName?: string;
@@ -26,10 +26,10 @@ export const GatewayOfIndia3D: React.FC<GatewayOfIndia3DProps> = ({
     const width = currentMount.clientWidth || 600;
     const height = currentMount.clientHeight || 400;
 
-    // Scene
+    // Scene with clean architectural gallery backdrop
     const scene = new THREE.Scene();
     sceneRef.current = scene;
-    scene.background = new THREE.Color(0x0a0f1d);
+    scene.background = new THREE.Color(0xf5f3ee);
 
     // Camera
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
@@ -43,30 +43,35 @@ export const GatewayOfIndia3D: React.FC<GatewayOfIndia3DProps> = ({
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     currentMount.appendChild(renderer.domElement);
 
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0xffeedd, 0.8);
+    // Lights - Warm architectural studio lighting
+    const ambientLight = new THREE.AmbientLight(0xfff7ed, 1.2);
     scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffaa66, 1.8);
-    dirLight.position.set(10, 15, 10);
-    dirLight.castShadow = true;
-    scene.add(dirLight);
+    const sunLight = new THREE.DirectionalLight(0xffedd5, 1.5);
+    sunLight.position.set(10, 18, 12);
+    sunLight.castShadow = true;
+    scene.add(sunLight);
 
-    const blueRimLight = new THREE.DirectionalLight(0x38bdf8, 1.2);
-    blueRimLight.position.set(-10, 10, -10);
-    scene.add(blueRimLight);
+    const fillLight = new THREE.DirectionalLight(0xe0f2fe, 0.8);
+    fillLight.position.set(-10, 8, -10);
+    scene.add(fillLight);
+
+    // Grid Floor
+    const gridHelper = new THREE.GridHelper(24, 24, 0xd6d3d1, 0xe7e5e4);
+    gridHelper.position.y = -2.01;
+    scene.add(gridHelper);
 
     // Monument Group
     const monumentGroup = new THREE.Group();
     materialsRef.current = [];
 
-    const stoneColor = 0xd97706;
-    const trimColor = 0xb45309;
+    const stoneColor = 0xd97706; // Rich yellow basalt
+    const trimColor = 0xb45309;  // Dark stone trim
 
     const createMat = (color: number) => {
       const mat = new THREE.MeshStandardMaterial({
         color,
-        roughness: 0.4,
+        roughness: 0.35,
         metalness: 0.1,
         wireframe,
       });
@@ -120,12 +125,40 @@ export const GatewayOfIndia3D: React.FC<GatewayOfIndia3DProps> = ({
 
     scene.add(monumentGroup);
 
+    // Interactive mouse drag rotation
+    let isDragging = false;
+    let previousMousePosition = { x: 0, y: 0 };
+
+    const onMouseDown = (e: MouseEvent) => {
+      isDragging = true;
+      previousMousePosition = { x: e.clientX, y: e.clientY };
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+      const deltaMove = {
+        x: e.clientX - previousMousePosition.x,
+        y: e.clientY - previousMousePosition.y,
+      };
+      monumentGroup.rotation.y += deltaMove.x * 0.008;
+      monumentGroup.rotation.x += deltaMove.y * 0.005;
+      previousMousePosition = { x: e.clientX, y: e.clientY };
+    };
+
+    const onMouseUp = () => {
+      isDragging = false;
+    };
+
+    currentMount.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+
     // Animation loop
     let reqId: number;
     const animate = () => {
       reqId = requestAnimationFrame(animate);
-      if (isRotating) {
-        monumentGroup.rotation.y += 0.008;
+      if (isRotating && !isDragging) {
+        monumentGroup.rotation.y += 0.006;
       }
       renderer.render(scene, camera);
     };
@@ -144,6 +177,9 @@ export const GatewayOfIndia3D: React.FC<GatewayOfIndia3DProps> = ({
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      currentMount.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
       cancelAnimationFrame(reqId);
       if (currentMount.contains(renderer.domElement)) {
         currentMount.removeChild(renderer.domElement);
@@ -159,45 +195,50 @@ export const GatewayOfIndia3D: React.FC<GatewayOfIndia3DProps> = ({
   }, [wireframe]);
 
   return (
-    <div className="relative rounded-2xl overflow-hidden bg-slate-950 border border-parchment-300">
+    <div className="relative rounded-2xl overflow-hidden bg-stone-100 border border-stone-200 shadow-xs">
       <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
-        <span className="px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-parchment-300 text-xs font-semibold text-charcoal flex items-center gap-1.5">
-          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-          {placeName} (3D Simulation)
+        <span className="px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-stone-200 text-xs font-bold text-stone-800 shadow-xs flex items-center gap-1.5">
+          <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+          <span>{placeName}</span>
+          <span className="text-[11px] text-stone-500 font-normal">(3D WebGL Simulation)</span>
         </span>
       </div>
 
       <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
         <button
           onClick={() => setIsRotating((prev) => !prev)}
-          className={`p-2 rounded-xl border text-xs font-medium transition-all ${
+          className={`px-3 py-1.5 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 shadow-xs ${
             isRotating
-              ? 'bg-orange-500 text-charcoal border-orange-400'
-              : 'bg-slate-900/80 text-charcoal-light border-parchment-300 hover:text-charcoal'
+              ? 'bg-emerald-600 text-white border-emerald-600'
+              : 'bg-white/90 text-stone-700 border-stone-200 hover:bg-white'
           }`}
           title="Toggle Auto Rotation"
         >
-          <RotateCw className={`w-4 h-4 ${isRotating ? 'animate-spin' : ''}`} />
+          <RotateCw className={`w-3.5 h-3.5 ${isRotating ? 'animate-spin' : ''}`} />
+          <span>{isRotating ? 'Rotating' : 'Paused'}</span>
         </button>
 
         <button
           onClick={() => setWireframe((prev) => !prev)}
-          className={`px-3 py-2 rounded-xl border text-xs font-medium transition-all ${
+          className={`px-3 py-1.5 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 shadow-xs ${
             wireframe
-              ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40'
-              : 'bg-slate-900/80 text-charcoal-light border-parchment-300 hover:text-charcoal'
+              ? 'bg-amber-100 text-amber-900 border-amber-300'
+              : 'bg-white/90 text-stone-700 border-stone-200 hover:bg-white'
           }`}
         >
-          <Eye className="w-3.5 h-3.5 inline mr-1" />
-          {wireframe ? 'Solid' : 'Wireframe'}
+          <Eye className="w-3.5 h-3.5" />
+          <span>{wireframe ? 'Solid' : 'Wireframe'}</span>
         </button>
       </div>
 
-      <div ref={mountRef} className="w-full h-80 sm:h-96" />
+      <div ref={mountRef} className="w-full h-80 sm:h-96 cursor-grab active:cursor-grabbing" />
 
-      <div className="p-3 bg-slate-900/60 border-t border-slate-800/80 flex items-center justify-between text-xs text-charcoal-light">
-        <span>Interactive WebGL 3D Architectural Model</span>
-        <span className="text-[11px] text-amber-400 font-mono">Shader: PBR MeshStandard</span>
+      <div className="p-3.5 bg-white border-t border-stone-200 flex items-center justify-between text-xs text-stone-600">
+        <span className="flex items-center gap-1.5">
+          <Compass className="w-3.5 h-3.5 text-stone-400" />
+          <span>Click & drag to rotate monument perspective freely</span>
+        </span>
+        <span className="text-[11px] font-semibold text-emerald-700">Renderer: Three.js PBR</span>
       </div>
     </div>
   );

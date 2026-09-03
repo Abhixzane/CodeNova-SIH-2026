@@ -43,28 +43,28 @@ export const Heritage3DPage: React.FC = () => {
   const current = monuments.find((m) => m.name === selectedMonument) || monuments[0];
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto px-4 py-6 animate-fadeIn">
+    <div className="space-y-6 max-w-6xl mx-auto px-4 py-6 animate-fadeIn">
       <div className="space-y-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-semibold">
-          <Box className="w-3.5 h-3.5" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-900 border border-amber-200 text-xs font-semibold">
+          <Box className="w-3.5 h-3.5 text-amber-600" />
           <span>WebGL 3D Architectural Simulation</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-charcoal">3D Heritage Explorer</h1>
-        <p className="text-xs sm:text-sm text-charcoal-light max-w-2xl leading-relaxed">
+        <h1 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight">3D Heritage Explorer</h1>
+        <p className="text-xs sm:text-sm text-stone-600 max-w-2xl leading-relaxed">
           Interactive real-time three-dimensional models of historical Indian structures. Rotate, toggle wireframes, and inspect volumetric proportions.
         </p>
       </div>
 
       {/* Monument selector tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1">
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
         {monuments.map((m) => (
           <button
             key={m.name}
             onClick={() => setSelectedMonument(m.name)}
-            className={`px-4 py-2.5 rounded-2xl text-xs font-semibold whitespace-nowrap transition flex items-center gap-2 ${
+            className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition flex items-center gap-2 ${
               selectedMonument === m.name
-                ? 'bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/20 border border-amber-400'
-                : 'bg-slate-900 text-charcoal-light hover:text-charcoal border border-parchment-300'
+                ? 'bg-emerald-600 text-white font-bold shadow-xs border border-emerald-600'
+                : 'bg-white text-stone-700 hover:bg-stone-50 hover:text-stone-900 border border-stone-200'
             }`}
           >
             <Compass className="w-3.5 h-3.5" />
@@ -77,30 +77,30 @@ export const Heritage3DPage: React.FC = () => {
       <GatewayOfIndia3D placeName={current.name} />
 
       {/* Architectural Dossier */}
-      <div className="rounded-3xl bg-slate-900/60 border border-parchment-300 p-6 space-y-4">
-        <div className="flex items-center gap-2 text-sm font-bold text-charcoal">
-          <Info className="w-4 h-4 text-orange-400" />
+      <div className="rounded-2xl bg-white border border-stone-200 p-6 space-y-4 shadow-xs">
+        <div className="flex items-center gap-2 text-sm font-bold text-stone-900">
+          <Info className="w-4 h-4 text-emerald-600" />
           <span>Architectural Breakdown: {current.name}</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-          <div className="p-3.5 rounded-xl bg-slate-950 border border-parchment-300 space-y-1">
-            <span className="text-slate-500 font-semibold block uppercase text-[10px]">Era & Style</span>
-            <span className="font-bold text-charcoal">{current.era}</span>
+          <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200 space-y-1">
+            <span className="text-stone-500 font-semibold block uppercase text-[10px]">Era & Style</span>
+            <span className="font-bold text-stone-900">{current.era}</span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-950 border border-parchment-300 space-y-1">
-            <span className="text-slate-500 font-semibold block uppercase text-[10px]">Master Architect</span>
-            <span className="font-bold text-charcoal">{current.architect}</span>
+          <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200 space-y-1">
+            <span className="text-stone-500 font-semibold block uppercase text-[10px]">Master Architect</span>
+            <span className="font-bold text-stone-900">{current.architect}</span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-950 border border-parchment-300 space-y-1">
-            <span className="text-slate-500 font-semibold block uppercase text-[10px]">Materiality</span>
-            <span className="font-bold text-charcoal">{current.material}</span>
+          <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200 space-y-1">
+            <span className="text-stone-500 font-semibold block uppercase text-[10px]">Materiality</span>
+            <span className="font-bold text-stone-900">{current.material}</span>
           </div>
         </div>
 
-        <p className="text-xs text-charcoal-light leading-relaxed pt-2 border-t border-slate-800">
+        <p className="text-xs text-stone-600 leading-relaxed pt-2 border-t border-stone-100">
           {current.description}
         </p>
       </div>

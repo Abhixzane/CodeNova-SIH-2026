@@ -38,6 +38,22 @@ export default {
         gold: {
           DEFAULT: '#d4af37',
           muted: '#bda04a'
+        },
+        saffron: {
+          DEFAULT: '#e66a1f',
+          light: '#f97316',
+          dark: '#c2410c',
+          50: '#fff7ed',
+          100: '#ffedd5',
+          200: '#fed7aa',
+          500: '#f97316',
+          600: '#ea580c',
+        },
+        navy: {
+          DEFAULT: '#0f172a',
+          light: '#1e293b',
+          dark: '#020617',
+          muted: '#334155',
         }
       },
       fontFamily: {
