@@ -63,7 +63,7 @@ export const MumbaiDashboard: React.FC<MumbaiDashboardProps> = ({
   }, [selectedCity]);
 
   const categories = [
-    { id: 'heritage', label: 'Heritage', count: '42 Places', icon: Landmark, color: 'text-amber-400 bg-amber-500/10' },
+    { id: 'heritage', label: 'Heritage', count: '45 Places', icon: Landmark, color: 'text-amber-400 bg-amber-500/10' },
     { id: 'historic', label: 'Historic', count: '36 Places', icon: Building, color: 'text-rose-400 bg-rose-500/10' },
     { id: 'beaches', label: 'Beaches', count: '18 Places', icon: Palmtree, color: 'text-cyan-400 bg-cyan-500/10' },
     { id: 'temples', label: 'Temples', count: '29 Places', icon: Sparkles, color: 'text-purple-400 bg-purple-500/10' },

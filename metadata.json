@@ -1,6 +1,6 @@
 {
   "name": "YatraVerse",
-  "description": "Discover India. Experience Heritage. Navigate Smarter. Smart India Hackathon 2026 tourism platform featuring 42 heritage sites, 28 states & 8 UTs, Mumbai suburban rail, geospatial routing, and AI assistance.",
+  "description": "Discover India. Experience Heritage. Navigate Smarter. Smart India Hackathon 2026 tourism platform featuring 45 heritage sites, 28 states & 8 UTs, Mumbai suburban rail, geospatial routing, and AI assistance.",
   "requestFramePermissions": [
     "geolocation"
   ],

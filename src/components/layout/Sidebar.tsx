@@ -16,13 +16,21 @@ import {
   ChevronRight,
   Landmark,
   Train,
-  Sparkles
+  Sparkles,
+  Utensils,
+  ShieldAlert,
+  Activity,
+  Flag
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 export type NavTab = 
   | 'home'
   | 'heritage'
+  | 'culture-artisans'
+  | 'facilities-accessibility'
+  | 'intelligence'
+  | 'reports'
   | 'dashboard'
   | 'map'
   | 'mumbai-local'
@@ -57,7 +65,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
     badgeColor?: string;
   }> = [
     { id: 'home', label: 'Explore & Overview', icon: Compass },
-    { id: 'heritage', label: '42 Heritage Sites', icon: Landmark, badge: 'UNESCO', badgeColor: 'bg-amber-100 text-amber-800 border-amber-200' },
+    { id: 'heritage', label: 'Heritage Sites (45)', icon: Landmark, badge: '45 Sites', badgeColor: 'bg-amber-100 text-amber-800 border-amber-200' },
+    { id: 'culture-artisans', label: 'Culture & Master Crafts', icon: Utensils, badge: 'GI Tag', badgeColor: 'bg-orange-100 text-orange-800 border-orange-200' },
+    { id: 'facilities-accessibility', label: 'Facilities & Access', icon: ShieldAlert, badge: 'Audited', badgeColor: 'bg-blue-100 text-blue-800 border-blue-200' },
+    { id: 'intelligence', label: 'Tourism Intelligence', icon: Activity, badge: 'Analytics', badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200' },
+    { id: 'reports', label: 'Citizen Condition Reports', icon: Flag, badge: 'Civic', badgeColor: 'bg-rose-100 text-rose-800 border-rose-200' },
     { id: 'dashboard', label: 'States & Hubs', icon: Layers, badge: '36 States/UTs', badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200' },
     { id: 'map', label: 'Interactive Map', icon: MapIcon },
     { id: 'mumbai-local', label: 'Mumbai Suburban Rail', icon: Train, badge: 'Lifeline', badgeColor: 'bg-sky-100 text-sky-800 border-sky-200' },

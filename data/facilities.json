@@ -1,0 +1,93 @@
+[
+  {
+    "id": "fac-01-agra-taj-info",
+    "name": "Taj Mahal Official Visitor Facilitation Centre",
+    "type": "TOURIST_INFO",
+    "city": "Agra",
+    "lat": 27.1738,
+    "lng": 78.0465,
+    "address": "East Gate Parking Complex, Shilpgram, Agra",
+    "is_accessible": true,
+    "is_24x7": false,
+    "contact": "1800-180-5145 (UP Tourism Toll-Free)",
+    "description": "Authorized ASI information desks, cloakrooms, electronic battery vehicle boarding, clean restrooms, and multilingual audio guide rentals."
+  },
+  {
+    "id": "fac-02-agra-shilpgram-parking",
+    "name": "Shilpgram Dedicated Multi-Level EV Parking",
+    "type": "PARKING",
+    "city": "Agra",
+    "lat": 27.1698,
+    "lng": 78.0489,
+    "address": "Shilpgram Road, Tajganj, Agra",
+    "is_accessible": true,
+    "is_24x7": true,
+    "contact": "0562-2230047",
+    "description": "Eco-zone authorized parking lot with EV charging, shuttle connection to Taj East Gate, and CCTV surveillance."
+  },
+  {
+    "id": "fac-03-mumbai-gateway-police",
+    "name": "Tourist Police Kiosk & Colaba Medical Aid",
+    "type": "POLICE",
+    "city": "Mumbai",
+    "lat": 18.9224,
+    "lng": 72.8344,
+    "address": "Apollo Bunder Pier, Opposite Taj Hotel, Colaba, Mumbai",
+    "is_accessible": true,
+    "is_24x7": true,
+    "contact": "112 / 022-22852885",
+    "description": "24/7 tourist assistance outpost, emergency first aid, lost-and-found registry, and ferry security."
+  },
+  {
+    "id": "fac-04-mumbai-csmt-toilet",
+    "name": "CSMT Swachh Bharat Accessible Sanitation Lounge",
+    "type": "TOILET",
+    "city": "Mumbai",
+    "lat": 18.9405,
+    "lng": 72.8359,
+    "address": "Platform 1 Concourse, Chhatrapati Shivaji Maharaj Terminus",
+    "is_accessible": true,
+    "is_24x7": true,
+    "contact": "Station Superintendent Office",
+    "description": "Wheelchair accessible high-hygiene restrooms with ramp entrance, grab bars, baby diaper changing facility, and water dispensing ATM."
+  },
+  {
+    "id": "fac-05-delhi-redfort-info",
+    "name": "Red Fort Delhi Tourism Facilitation Hub",
+    "type": "TOURIST_INFO",
+    "city": "New Delhi",
+    "lat": 28.6562,
+    "lng": 77.2410,
+    "address": "Lahori Gate Entrance, Netaji Subhash Marg, Chandni Chowk",
+    "is_accessible": true,
+    "is_24x7": false,
+    "contact": "011-23277705",
+    "description": "Monument entry ticketing kiosks, verified ASI book store, locker deposit, and golf-cart accessibility assistance for senior citizens."
+  },
+  {
+    "id": "fac-06-jaipur-amer-medical",
+    "name": "Amer Fort Emergency First Aid & Tourist Clinic",
+    "type": "MEDICAL",
+    "city": "Jaipur",
+    "lat": 26.9855,
+    "lng": 75.8507,
+    "address": "Jaleb Chowk First Aid Enclave, Amer Fort, Jaipur",
+    "is_accessible": true,
+    "is_24x7": false,
+    "contact": "108 (State Emergency) / 0141-2530264",
+    "description": "Paramedic personnel, heat exhaustion recovery units, emergency stretcher services, and automated external defibrillator (AED)."
+  },
+  {
+    "id": "fac-07-varanasi-dashashwamedh-police",
+    "name": "Dashashwamedh Ghat Water Police & Safety Command",
+    "type": "POLICE",
+    "city": "Varanasi",
+    "lat": 25.3078,
+    "lng": 83.0104,
+    "address": "Dashashwamedh Ghat Main Steps, Varanasi",
+    "is_accessible": false,
+    "is_24x7": true,
+    "contact": "112 / 0542-2400100",
+    "description": "River safety rescue personnel, life buoy station, crowd management command centre, and lost children reunification post."
+  }
+]

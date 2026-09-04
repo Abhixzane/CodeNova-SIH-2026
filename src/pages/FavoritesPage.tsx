@@ -105,7 +105,7 @@ export const FavoritesPage: React.FC<FavoritesPageProps> = ({
               onClick={() => onNavigateTab('heritage')}
               className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition shadow-sm mt-2"
             >
-              Explore 42+ Heritage Sites
+              Explore 45 Heritage Sites
             </button>
           )}
         </div>

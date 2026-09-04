@@ -18,6 +18,10 @@ import { DestinationDetailPage } from './pages/DestinationDetailPage';
 import { SearchPage } from './pages/SearchPage';
 import { HeritageSitesPage } from './pages/HeritageSitesPage';
 import { MumbaiLocalPage } from './pages/MumbaiLocalPage';
+import { CultureCraftPage } from './pages/CultureCraftPage';
+import { FacilitiesAccessibilityPage } from './pages/FacilitiesAccessibilityPage';
+import { DestinationIntelligencePage } from './pages/DestinationIntelligencePage';
+import { HeritageReportingPage } from './pages/HeritageReportingPage';
 import { PlaceSummary } from './types';
 import { api } from './services/api';
 import { Menu, Compass, Search } from 'lucide-react';
@@ -143,6 +147,25 @@ const AppContent: React.FC = () => {
                   onSelectPlace={handleSelectPlace}
                   onNavigateTab={handleNavigateTab}
                 />
+              )}
+
+              {activeTab === 'culture-artisans' && (
+                <CultureCraftPage
+                  onSelectPlace={handleSelectPlace}
+                  selectedCity={selectedCity !== 'All India' ? selectedCity : ''}
+                />
+              )}
+
+              {activeTab === 'facilities-accessibility' && (
+                <FacilitiesAccessibilityPage />
+              )}
+
+              {activeTab === 'intelligence' && (
+                <DestinationIntelligencePage />
+              )}
+
+              {activeTab === 'reports' && (
+                <HeritageReportingPage />
               )}
 
               {activeTab === 'dashboard' && (

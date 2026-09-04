@@ -99,7 +99,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
             className="px-3.5 py-2 rounded-lg bg-amber-50 hover:bg-amber-100 border border-amber-200 text-xs font-semibold text-amber-900 flex items-center gap-1.5 transition"
           >
             <Landmark className="w-3.5 h-3.5 text-amber-600" />
-            <span>42 Heritage Sites</span>
+            <span>45 Heritage Sites</span>
           </button>
 
           <button

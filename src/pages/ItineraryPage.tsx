@@ -70,6 +70,55 @@ export const ItineraryPage: React.FC<ItineraryPageProps> = ({
     }
   };
 
+  const recalculateStops = (updatedStops: ItineraryStop[]) => {
+    let totalVisit = 0;
+    let totalTravel = 0;
+    let totalCost = 0;
+
+    const reindexed = updatedStops.map((s, idx) => {
+      const visitMins = s.recommended_duration_minutes || s.visit_minutes || 60;
+      totalVisit += visitMins;
+
+      let travelMins = s.travel_time_from_previous_minutes;
+      let dist = s.distance_from_previous_km;
+      let mode = s.travel_mode_from_previous;
+
+      if (idx === 0) {
+        travelMins = undefined;
+        dist = undefined;
+        mode = undefined;
+      } else if (!travelMins) {
+        travelMins = 20;
+        dist = 3.5;
+        mode = budget === 'budget' ? 'Metro' : 'Transit / Cab';
+      }
+
+      if (travelMins) totalTravel += travelMins;
+      const legCost = idx === 0 ? 0 : (budget === 'budget' ? 20 : budget === 'luxury' ? 320 : 75);
+      totalCost += legCost;
+
+      return {
+        ...s,
+        order: idx + 1,
+        travel_time_from_previous_minutes: travelMins,
+        distance_from_previous_km: dist,
+        travel_mode_from_previous: mode,
+      };
+    });
+
+    setStops(reindexed);
+    if (itinerary) {
+      setItinerary({
+        ...itinerary,
+        stops: reindexed,
+        total_places: reindexed.length,
+        estimated_total_visiting_minutes: totalVisit,
+        estimated_total_travel_minutes: totalTravel,
+        estimated_total_cost: totalCost,
+      });
+    }
+  };
+
   const handleMoveStop = (index: number, direction: 'up' | 'down') => {
     const newStops = [...stops];
     const targetIdx = direction === 'up' ? index - 1 : index + 1;
@@ -77,11 +126,12 @@ export const ItineraryPage: React.FC<ItineraryPageProps> = ({
     const temp = newStops[index];
     newStops[index] = newStops[targetIdx];
     newStops[targetIdx] = temp;
-    setStops(newStops);
+    recalculateStops(newStops);
   };
 
   const handleRemoveStop = (index: number) => {
-    setStops(stops.filter((_, idx) => idx !== index));
+    const filtered = stops.filter((_, idx) => idx !== index);
+    recalculateStops(filtered);
   };
 
   const handleSave = async () => {

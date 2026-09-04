@@ -172,6 +172,15 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   }, []);
 
   // 3. Pan map when selectedCity changes
+  useEffect(() => {
+    if (!mapInstanceRef.current || !selectedCity) return;
+    const key = selectedCity.toLowerCase().replace(/\s+/g, '-');
+    const cfg = cityCoordinates[key] || cityCoordinates['all-india'];
+    if (cfg) {
+      mapInstanceRef.current.flyTo([cfg.lat, cfg.lng], cfg.zoom, { duration: 1.2 });
+    }
+  }, [selectedCity]);
+
   const handleCityJump = (cityKey: string) => {
     const key = cityKey.toLowerCase().replace(/\s+/g, '-');
     const cfg = cityCoordinates[key] || cityCoordinates['all-india'];

@@ -19,6 +19,15 @@ import {
   PlatformStats,
   MumbaiLocalStation,
   MumbaiLocalRouteResult,
+  CulturalItem,
+  ArtisanProfile,
+  LocalProvider,
+  AccessibilityRecord,
+  InfrastructureFacility,
+  DestinationHealthResponse,
+  HeritageConditionReport,
+  HeritageCluster,
+  CommuterNetwork,
 } from '../types';
 
 const API_BASE_URL = '/api';
@@ -508,5 +517,188 @@ export const api = {
     if (params.lng2 !== undefined) q.set('lng2', String(params.lng2));
 
     return await request<any>(`/distance?${q.toString()}`);
+  },
+
+  // -------------------------------------------------------------
+  // Culture & Living Heritage
+  // -------------------------------------------------------------
+  async getCulture(params?: { city?: string; category?: string }): Promise<CulturalItem[]> {
+    const q = new URLSearchParams();
+    if (params?.city) q.set('city', params.city);
+    if (params?.category) q.set('category', params.category);
+    try {
+      return await request<CulturalItem[]>(`/culture?${q.toString()}`);
+    } catch {
+      return [];
+    }
+  },
+
+  // -------------------------------------------------------------
+  // Artisans & GI Craft Traditions
+  // -------------------------------------------------------------
+  async getArtisans(params?: { city?: string; gi_only?: boolean }): Promise<ArtisanProfile[]> {
+    const q = new URLSearchParams();
+    if (params?.city) q.set('city', params.city);
+    if (params?.gi_only) q.set('gi_only', 'true');
+    try {
+      return await request<ArtisanProfile[]>(`/artisans?${q.toString()}`);
+    } catch {
+      return [];
+    }
+  },
+
+  // -------------------------------------------------------------
+  // Verified Local Providers & Homestays
+  // -------------------------------------------------------------
+  async getProviders(params?: {
+    city?: string;
+    category?: string;
+    verification_status?: string;
+  }): Promise<LocalProvider[]> {
+    const q = new URLSearchParams();
+    if (params?.city) q.set('city', params.city);
+    if (params?.category) q.set('category', params.category);
+    if (params?.verification_status) q.set('verification_status', params.verification_status);
+    try {
+      return await request<LocalProvider[]>(`/providers?${q.toString()}`);
+    } catch {
+      return [];
+    }
+  },
+
+  // -------------------------------------------------------------
+  // Infrastructure Facilities & Nearby Lookup
+  // -------------------------------------------------------------
+  async getFacilities(params?: {
+    city?: string;
+    type?: string;
+    accessible?: boolean;
+  }): Promise<InfrastructureFacility[]> {
+    const q = new URLSearchParams();
+    if (params?.city) q.set('city', params.city);
+    if (params?.type) q.set('type', params.type);
+    if (params?.accessible) q.set('accessible', 'true');
+    try {
+      return await request<InfrastructureFacility[]>(`/facilities?${q.toString()}`);
+    } catch {
+      return [];
+    }
+  },
+
+  async getNearbyFacilities(lat: number, lng: number, radiusKm: number = 5): Promise<InfrastructureFacility[]> {
+    const q = new URLSearchParams({ lat: String(lat), lng: String(lng), radius_km: String(radiusKm) });
+    try {
+      return await request<InfrastructureFacility[]>(`/facilities/nearby?${q.toString()}`);
+    } catch {
+      return [];
+    }
+  },
+
+  // -------------------------------------------------------------
+  // Barrier-Free Accessibility Audits
+  // -------------------------------------------------------------
+  async getAccessibility(params?: {
+    place_id?: string;
+    city?: string;
+    wheelchair?: string;
+  }): Promise<AccessibilityRecord[]> {
+    const q = new URLSearchParams();
+    if (params?.place_id) q.set('place_id', params.place_id);
+    if (params?.city) q.set('city', params.city);
+    if (params?.wheelchair) q.set('wheelchair', params.wheelchair);
+    try {
+      return await request<AccessibilityRecord[]>(`/accessibility?${q.toString()}`);
+    } catch {
+      return [];
+    }
+  },
+
+  // -------------------------------------------------------------
+  // Heritage Clusters & Pan-India Commuter Networks
+  // -------------------------------------------------------------
+  async getClusters(params?: { city?: string }): Promise<HeritageCluster[]> {
+    const q = new URLSearchParams();
+    if (params?.city) q.set('city', params.city);
+    try {
+      return await request<HeritageCluster[]>(`/clusters?${q.toString()}`);
+    } catch {
+      return [];
+    }
+  },
+
+  async getSuburbanNetworks(params?: { city?: string }): Promise<CommuterNetwork[]> {
+    const q = new URLSearchParams();
+    if (params?.city) q.set('city', params.city);
+    try {
+      return await request<CommuterNetwork[]>(`/suburban-networks?${q.toString()}`);
+    } catch {
+      return [];
+    }
+  },
+
+  // -------------------------------------------------------------
+  // Destination Health & Tourism Gap Map
+  // -------------------------------------------------------------
+  async getDestinationHealth(params?: { city?: string }): Promise<DestinationHealthResponse> {
+    const q = new URLSearchParams();
+    if (params?.city) q.set('city', params.city);
+    try {
+      return await request<DestinationHealthResponse>(`/destination-health?${q.toString()}`);
+    } catch {
+      return {
+        provenance_disclaimer: 'MODELLED / ANALYTICAL ESTIMATE FOR DEMO',
+        provenance_badge: 'MODELLED',
+        cities: [],
+        gap_map_zones: [],
+      };
+    }
+  },
+
+  // -------------------------------------------------------------
+  // Heritage Condition Citizen Reporting Workflow
+  // -------------------------------------------------------------
+  async getReports(params?: {
+    site_id?: string;
+    city?: string;
+    status?: string;
+  }): Promise<HeritageConditionReport[]> {
+    const q = new URLSearchParams();
+    if (params?.site_id) q.set('site_id', params.site_id);
+    if (params?.city) q.set('city', params.city);
+    if (params?.status) q.set('status', params.status);
+    try {
+      return await request<HeritageConditionReport[]>(`/reports?${q.toString()}`);
+    } catch {
+      return [];
+    }
+  },
+
+  async createReport(data: {
+    site_id: string;
+    site_name: string;
+    city: string;
+    reported_by?: string;
+    user_role?: string;
+    issue_category: string;
+    severity: string;
+    description: string;
+    image_url?: string;
+  }): Promise<HeritageConditionReport> {
+    return await request<HeritageConditionReport>('/reports', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  async updateReportStatus(
+    id: string,
+    status: string,
+    note?: string,
+    actor?: string
+  ): Promise<HeritageConditionReport> {
+    return await request<HeritageConditionReport>(`/reports/${id}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status, note, actor }),
+    });
   },
 };

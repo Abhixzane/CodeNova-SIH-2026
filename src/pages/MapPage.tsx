@@ -26,13 +26,13 @@ export const MapPage: React.FC<MapPageProps> = ({
           </div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Interactive Heritage & Transit Map</h1>
           <p className="text-xs text-slate-500">
-            India-wide geospatial network spanning 42+ UNESCO/ASI heritage sites, suburban railway hubs, and multi-modal routing.
+            India-wide geospatial network spanning 45 UNESCO/ASI heritage sites, suburban railway hubs, and multi-modal routing.
           </p>
         </div>
 
         <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 bg-slate-50 p-2.5 rounded-2xl border border-slate-200">
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-orange-500 inline-block" /> 42+ Heritage
+            <span className="w-2.5 h-2.5 rounded-full bg-orange-500 inline-block" /> 45 Heritage Sites
           </span>
           <span className="text-slate-300">•</span>
           <span className="flex items-center gap-1">

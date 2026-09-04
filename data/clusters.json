@@ -1,0 +1,67 @@
+[
+  {
+    "id": "cluster-agra-golden",
+    "name": "Agra Mughal Imperial Triangle Cluster",
+    "city": "Agra",
+    "state": "Uttar Pradesh",
+    "description": "UNESCO World Heritage precinct connecting the Taj Mahal, the imperial red sandstone citadel of Agra Fort, the garden tomb of Itmad-ud-Daulah, and the sunset viewpoint at Mehtab Bagh across the Yamuna River.",
+    "sites_count": 4,
+    "recommended_duration_hours": 8,
+    "transit_tip": "Battery-operated e-rickshaws connect the Taj East Gate to Shilpgram; pre-paid autos available for Agra Fort transfer (3.5 km).",
+    "sites": [
+      { "id": "taj-mahal", "name": "Taj Mahal", "lat": 27.1751, "lng": 78.0421, "thumbnail_url": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&auto=format&fit=crop&q=80" },
+      { "id": "agra-fort", "name": "Agra Fort", "lat": 27.1795, "lng": 78.0211, "thumbnail_url": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&auto=format&fit=crop&q=80" },
+      { "id": "fatehpur-sikri", "name": "Fatehpur Sikri", "lat": 27.0945, "lng": 77.6679, "thumbnail_url": "https://images.unsplash.com/photo-1600100397608-f010e422a59e?w=800&auto=format&fit=crop&q=80" },
+      { "id": "mehtab-bagh", "name": "Mehtab Bagh Moonlight Garden", "lat": 27.1799, "lng": 78.0423, "thumbnail_url": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&auto=format&fit=crop&q=80" }
+    ]
+  },
+  {
+    "id": "cluster-mumbai-victorian",
+    "name": "South Mumbai Victorian Gothic & Art Deco Ensembles",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "description": "UNESCO World Heritage Site inscribed in 2018 comprising the 19th-century Victorian Neo-Gothic public buildings along the Oval Maidan and 20th-century nautical Art Deco edifices lining Marine Drive.",
+    "sites_count": 5,
+    "recommended_duration_hours": 6,
+    "transit_tip": "Highly walkable circuit; Churchgate and CSMT railway stations are within 10-15 mins walking distance.",
+    "sites": [
+      { "id": "gateway-of-india", "name": "Gateway of India", "lat": 18.9220, "lng": 72.8347, "thumbnail_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&auto=format&fit=crop&q=80" },
+      { "id": "chhatrapati-shivaji-terminus", "name": "Chhatrapati Shivaji Maharaj Terminus", "lat": 18.9400, "lng": 72.8353, "thumbnail_url": "https://images.unsplash.com/photo-1566552881560-0be862a7c445?w=800&auto=format&fit=crop&q=80" },
+      { "id": "marine-drive", "name": "Marine Drive & Queen's Necklace", "lat": 18.9438, "lng": 72.8232, "thumbnail_url": "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=800&auto=format&fit=crop&q=80" },
+      { "id": "elephanta-caves", "name": "Elephanta Island Caves", "lat": 18.9633, "lng": 72.9315, "thumbnail_url": "https://images.unsplash.com/photo-1600100397608-f010e422a59e?w=800&auto=format&fit=crop&q=80" },
+      { "id": "kanheri-caves", "name": "Kanheri Rock-Cut Caves", "lat": 19.2061, "lng": 72.9066, "thumbnail_url": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&auto=format&fit=crop&q=80" }
+    ]
+  },
+  {
+    "id": "cluster-delhi-monuments",
+    "name": "Delhi Imperial Heritage & Sultanate Circuit",
+    "city": "New Delhi",
+    "state": "Delhi (NCT)",
+    "description": "Spans 800 years of dynastic architecture: the early 13th-century victory tower of Qutb Minar, the 16th-century garden tomb of Humayun, and the grand 17th-century Mughal fortress Lal Qila.",
+    "sites_count": 4,
+    "recommended_duration_hours": 7,
+    "transit_tip": "Interconnected by Delhi Metro Yellow Line and Violet Line; Lal Quila and Qutab Minar metro stations provide rapid access.",
+    "sites": [
+      { "id": "red-fort", "name": "Red Fort (Lal Qila)", "lat": 28.6562, "lng": 77.2410, "thumbnail_url": "https://images.unsplash.com/photo-1585136917192-e7f22501a1c7?w=800&auto=format&fit=crop&q=80" },
+      { "id": "qutb-minar", "name": "Qutb Minar Complex", "lat": 28.5244, "lng": 77.1855, "thumbnail_url": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&auto=format&fit=crop&q=80" },
+      { "id": "humayuns-tomb", "name": "Humayun's Tomb", "lat": 28.5933, "lng": 77.2507, "thumbnail_url": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&auto=format&fit=crop&q=80" },
+      { "id": "india-gate", "name": "Kartavya Path & India Gate", "lat": 28.6129, "lng": 77.2295, "thumbnail_url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&auto=format&fit=crop&q=80" }
+    ]
+  },
+  {
+    "id": "cluster-jaipur-royal",
+    "name": "Jaipur UNESCO Pink City & Royal Observatories",
+    "city": "Jaipur",
+    "state": "Rajasthan",
+    "description": "Planned royal city grid of Maharaja Sawai Jai Singh II featuring Hawa Mahal, the City Palace museum, the UNESCO astronomical instruments of Jantar Mantar, and hilltop Amer Fort.",
+    "sites_count": 4,
+    "recommended_duration_hours": 8,
+    "transit_tip": "Walking between Hawa Mahal and Jantar Mantar takes under 5 minutes; Amer Fort is reachable via AC low-floor RTDC city bus or auto (11 km).",
+    "sites": [
+      { "id": "amer-fort", "name": "Amer Fort & Palace", "lat": 26.9855, "lng": 75.8513, "thumbnail_url": "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&auto=format&fit=crop&q=80" },
+      { "id": "hawa-mahal", "name": "Hawa Mahal (Palace of Winds)", "lat": 26.9239, "lng": 75.8267, "thumbnail_url": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&auto=format&fit=crop&q=80" },
+      { "id": "jantar-mantar-jaipur", "name": "Jantar Mantar Astronomical Observatory", "lat": 26.9248, "lng": 75.8246, "thumbnail_url": "https://images.unsplash.com/photo-1600100397608-f010e422a59e?w=800&auto=format&fit=crop&q=80" },
+      { "id": "city-palace-jaipur", "name": "City Palace of Jaipur", "lat": 26.9258, "lng": 75.8236, "thumbnail_url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&auto=format&fit=crop&q=80" }
+    ]
+  }
+]

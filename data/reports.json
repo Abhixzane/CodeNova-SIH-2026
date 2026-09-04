@@ -1,0 +1,113 @@
+[
+  {
+    "id": "rep-2026-001",
+    "site_id": "taj-mahal",
+    "site_name": "Taj Mahal",
+    "city": "Agra",
+    "reported_by": "Rohan Sharma (Citizen Explorer)",
+    "user_role": "TRAVELLER",
+    "issue_category": "ACCESSIBILITY_BARRIER",
+    "severity": "HIGH",
+    "description": "The temporary wooden ramp leading to the East Gate shoe-cover distribution station is weathered and unstable for electric wheelchair users. Needs non-slip rubber grip and structural stabilization.",
+    "status": "IN_PROGRESS",
+    "image_url": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&auto=format&fit=crop&q=80",
+    "timeline": [
+      {
+        "status": "SUBMITTED",
+        "timestamp": "2026-03-01T09:14:00Z",
+        "note": "Citizen condition report logged via YatraVerse Portal with geo-tag at East Gate.",
+        "actor": "Rohan Sharma"
+      },
+      {
+        "status": "UNDER_REVIEW",
+        "timestamp": "2026-03-01T11:30:00Z",
+        "note": "Report audited and verified by UP Tourism Grievance Cell.",
+        "actor": "Officer Amit Kumar (UP Tourism)"
+      },
+      {
+        "status": "ASSIGNED",
+        "timestamp": "2026-03-01T15:20:00Z",
+        "note": "Assigned to Archaeological Survey of India (ASI) Agra Circle Conservation Team.",
+        "actor": "Superintending Archaeologist"
+      },
+      {
+        "status": "IN_PROGRESS",
+        "timestamp": "2026-03-02T10:00:00Z",
+        "note": "Replacement modular high-traction ramp procured; installation underway during non-visiting hours.",
+        "actor": "ASI Site Engineer"
+      }
+    ],
+    "created_at": "2026-03-01T09:14:00Z",
+    "updated_at": "2026-03-02T10:00:00Z"
+  },
+  {
+    "id": "rep-2026-002",
+    "site_id": "gateway-of-india",
+    "site_name": "Gateway of India",
+    "city": "Mumbai",
+    "reported_by": "Priya Deshmukh (Heritage Enthusiast)",
+    "user_role": "TRAVELLER",
+    "issue_category": "FACILITY_BREAKDOWN",
+    "severity": "MEDIUM",
+    "description": "Two drinking water taps on the eastern promenade water station are leaking and require valve replacement. Water pooling creates slip hazard near the ferry jetty queue.",
+    "status": "RESOLVED",
+    "image_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&auto=format&fit=crop&q=80",
+    "timeline": [
+      {
+        "status": "SUBMITTED",
+        "timestamp": "2026-02-24T14:22:00Z",
+        "note": "Citizen report logged with photo attachment.",
+        "actor": "Priya Deshmukh"
+      },
+      {
+        "status": "UNDER_REVIEW",
+        "timestamp": "2026-02-24T16:00:00Z",
+        "note": "BMC A-Ward water maintenance wing notified.",
+        "actor": "BMC Municipal Helpdesk"
+      },
+      {
+        "status": "ASSIGNED",
+        "timestamp": "2026-02-25T09:30:00Z",
+        "note": "Assigned to Colaba Maintenance Field Squad.",
+        "actor": "Junior Engineer (Water)"
+      },
+      {
+        "status": "RESOLVED",
+        "timestamp": "2026-02-25T17:45:00Z",
+        "note": "Heavy-duty push valves installed and drainage grates unclogged. Inspected and verified clean.",
+        "actor": "BMC Field Inspector"
+      }
+    ],
+    "created_at": "2026-02-24T14:22:00Z",
+    "updated_at": "2026-02-25T17:45:00Z"
+  },
+  {
+    "id": "rep-2026-003",
+    "site_id": "red-fort",
+    "site_name": "Red Fort (Lal Qila)",
+    "city": "New Delhi",
+    "reported_by": "Vikram Sethi (Licensed Guide)",
+    "user_role": "PROVIDER",
+    "issue_category": "MISSING_SIGNAGE",
+    "severity": "LOW",
+    "description": "Interpretive history signage panel near Diwan-i-Khas pavilion has sun fading on English and Braille text. Several foreign and visually impaired travelers inquired about monument context.",
+    "status": "UNDER_REVIEW",
+    "image_url": "https://images.unsplash.com/photo-1585136917192-e7f22501a1c7?w=800&auto=format&fit=crop&q=80",
+    "timeline": [
+      {
+        "status": "SUBMITTED",
+        "timestamp": "2026-03-03T11:05:00Z",
+        "note": "Guide report submitted highlighting Braille legibility issue.",
+        "actor": "Vikram Sethi"
+      },
+      {
+        "status": "UNDER_REVIEW",
+        "timestamp": "2026-03-03T14:30:00Z",
+        "note": "Logged by Delhi Circle ASI Signage Standardization Cell for replacement printing.",
+        "actor": "Curatorial Assistant (ASI)"
+      }
+    ],
+    "created_at": "2026-03-03T11:05:00Z",
+    "updated_at": "2026-03-03T14:30:00Z"
+  }
+]

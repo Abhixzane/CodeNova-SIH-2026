@@ -60,14 +60,46 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
     fetchHeritage();
   }, []);
 
-  const categories = [
-    { id: 'All', label: 'All Heritage (45)' },
-    { id: 'Forts & Palaces', label: 'Forts & Palaces' },
-    { id: 'Temples & Sacred', label: 'Temples & Sacred' },
-    { id: 'Caves & Rock-Cut', label: 'Rock-Cut Caves' },
-    { id: 'Architectural & Colonial', label: 'Colonial & Monuments' },
-    { id: 'Natural & Ghats', label: 'Ghats & Natural' },
-  ];
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {
+      All: heritageSites.length,
+      'Forts & Palaces': 0,
+      'Temples & Sacred': 0,
+      'Caves & Rock-Cut': 0,
+      'Architectural & Colonial': 0,
+      'Natural & Ghats': 0,
+    };
+
+    heritageSites.forEach((site) => {
+      const siteCat = (site.category || '').toLowerCase();
+      const siteTags = (site.tags || []).map((t: string) => t.toLowerCase());
+
+      if (siteCat.includes('fort') || siteCat.includes('palace') || siteTags.includes('fort') || siteTags.includes('palace')) {
+        counts['Forts & Palaces']++;
+      } else if (siteCat.includes('temple') || siteCat.includes('sacred') || siteTags.includes('temple') || siteTags.includes('religious')) {
+        counts['Temples & Sacred']++;
+      } else if (siteCat.includes('cave') || siteTags.includes('cave') || siteTags.includes('rock-cut')) {
+        counts['Caves & Rock-Cut']++;
+      } else if (siteCat.includes('colonial') || siteCat.includes('monument') || siteCat.includes('architecture') || siteTags.includes('colonial')) {
+        counts['Architectural & Colonial']++;
+      } else if (siteCat.includes('ghat') || siteCat.includes('nature') || siteTags.includes('ghat') || siteTags.includes('lake')) {
+        counts['Natural & Ghats']++;
+      } else {
+        counts['Architectural & Colonial']++;
+      }
+    });
+
+    return counts;
+  }, [heritageSites]);
+
+  const categories = useMemo(() => [
+    { id: 'All', label: `All Heritage (${categoryCounts['All'] || heritageSites.length || 45})` },
+    { id: 'Forts & Palaces', label: `Forts & Palaces (${categoryCounts['Forts & Palaces'] || 0})` },
+    { id: 'Temples & Sacred', label: `Temples & Sacred (${categoryCounts['Temples & Sacred'] || 0})` },
+    { id: 'Caves & Rock-Cut', label: `Rock-Cut Caves (${categoryCounts['Caves & Rock-Cut'] || 0})` },
+    { id: 'Architectural & Colonial', label: `Colonial & Monuments (${categoryCounts['Architectural & Colonial'] || 0})` },
+    { id: 'Natural & Ghats', label: `Ghats & Natural (${categoryCounts['Natural & Ghats'] || 0})` },
+  ], [categoryCounts, heritageSites.length]);
 
   const statesList = useMemo(() => {
     const set = new Set<string>();
@@ -89,11 +121,14 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
         site.historical_significance?.toLowerCase().includes(q) ||
         site.architectural_style?.toLowerCase().includes(q);
 
-      const matchesState = selectedState === 'All' || site.state === selectedState;
+      const matchesState =
+        selectedState === 'All' ||
+        site.state === selectedState ||
+        site.state_id === selectedState ||
+        (site.state || '').toLowerCase().includes(selectedState.toLowerCase());
 
       let matchesCategory = true;
       if (selectedCategory !== 'All') {
-        const catLower = selectedCategory.toLowerCase();
         const siteCat = (site.category || '').toLowerCase();
         const siteTags = (site.tags || []).map((t: string) => t.toLowerCase());
 
@@ -127,7 +162,7 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
             <span>Ministry of Tourism & UNESCO Verified Experiences</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
-            42 Pan-India Heritage Destinations
+            {heritageSites.length || 45} Pan-India Heritage Destinations
           </h1>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
             Discover India's living antiquity across 36 States and Union Territories. Inspect detailed architectural movements, verified visiting hours, domestic & foreign entry fees, nearest transit corridors, and interactive 3D virtual reconstructions.
@@ -135,7 +170,7 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
           <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-300 font-medium">
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-              <span>42 Verified Monuments</span>
+              <span>{heritageSites.length || 45} Verified Monuments</span>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-amber-400"></span>

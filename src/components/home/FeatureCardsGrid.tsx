@@ -10,11 +10,11 @@ export const FeatureCardsGrid: React.FC<FeatureCardsGridProps> = ({ onNavigateTa
   const cards = [
     {
       tab: 'heritage' as NavTab,
-      title: '42 Heritage Sites Database',
+      title: '45 Heritage Sites Database',
       desc: 'Explore India’s UNESCO monuments with verified architectural style, entry fees, and transit.',
       icon: Landmark,
       color: 'text-amber-600',
-      badge: '42 Verified Sites',
+      badge: '45 Verified Sites',
       badgeClass: 'bg-amber-50 text-amber-800 border-amber-200',
     },
     {

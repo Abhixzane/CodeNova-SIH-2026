@@ -1,0 +1,132 @@
+[
+  {
+    "id": "net-mumbai-suburban",
+    "city": "Mumbai",
+    "network_name": "Mumbai Suburban Railway",
+    "operator": "Central & Western Railways",
+    "type": "SUBURBAN_RAIL",
+    "daily_ridership": "7.5+ Million Passengers",
+    "lines_count": 4,
+    "stations_count": 140,
+    "fare_structure": "Distance slab: ₹5 - ₹35 (Second Class), ₹50 - ₹165 (First Class), ₹65 - ₹220 (AC Local)",
+    "description": "The quintessential lifeline of the Mumbai Metropolitan Region, spanning over 400 route kilometers across Western, Central, Harbour, and Trans-Harbour corridors.",
+    "lines": [
+      {
+        "name": "Western Line",
+        "color": "#ef4444",
+        "key_stations": ["Churchgate", "Marine Lines", "Mumbai Central", "Dadar", "Bandra", "Andheri", "Borivali", "Virar"]
+      },
+      {
+        "name": "Central Main Line",
+        "color": "#3b82f6",
+        "key_stations": ["CSMT", "Byculla", "Dadar", "Kurla", "Ghatkopar", "Thane", "Kalyan", "Karjat/Kasara"]
+      },
+      {
+        "name": "Harbour Line",
+        "color": "#10b981",
+        "key_stations": ["CSMT", "Vadala Road", "Kurla", "Vashi", "Nerul", "Panvel"]
+      }
+    ]
+  },
+  {
+    "id": "net-kolkata-suburban",
+    "city": "Kolkata",
+    "network_name": "Kolkata Suburban Railway & Circular Rail",
+    "operator": "Eastern & South Eastern Railways",
+    "type": "SUBURBAN_RAIL",
+    "daily_ridership": "3.1+ Million Passengers",
+    "lines_count": 5,
+    "stations_count": 270,
+    "fare_structure": "Zonal slab: ₹5 - ₹25 (Ordinary), ₹45 - ₹120 (First Class)",
+    "description": "One of India's largest and oldest suburban networks terminating at iconic Howrah and Sealdah terminals, including the scenic Hooghly riverside Circular Railway.",
+    "lines": [
+      {
+        "name": "Howrah South Eastern & Main",
+        "color": "#8b5cf6",
+        "key_stations": ["Howrah Terminal", "Santragachi", "Bally", "Serampore", "Bandel Junction"]
+      },
+      {
+        "name": "Sealdah North & South",
+        "color": "#f59e0b",
+        "key_stations": ["Sealdah", "Dum Dum Junction", "Barrackpore", "Ballygunge", "Sonarpur Junction"]
+      },
+      {
+        "name": "Circular Railway",
+        "color": "#06b6d4",
+        "key_stations": ["BBD Bag", "Prinsep Ghat", "Eden Gardens", "Kolkata Station", "Majerhat"]
+      }
+    ]
+  },
+  {
+    "id": "net-chennai-suburban",
+    "city": "Chennai",
+    "network_name": "Chennai Suburban Railway & MRTS",
+    "operator": "Southern Railway",
+    "type": "SUBURBAN_RAIL",
+    "daily_ridership": "1.2+ Million Passengers",
+    "lines_count": 4,
+    "stations_count": 135,
+    "fare_structure": "Slab: ₹5 - ₹20 (General Second Class)",
+    "description": "Connecting Chennai Central (Moore Market Complex) and Chennai Beach with Tambaram, Chengalpattu, Arakkonam, and elevated MRTS along the Buckingham Canal.",
+    "lines": [
+      {
+        "name": "South Line (Beach - Tambaram)",
+        "color": "#059669",
+        "key_stations": ["Chennai Beach", "Chennai Fort", "Park", "Guindy", "Tambaram", "Chengalpattu"]
+      },
+      {
+        "name": "West Line (Central - Arakkonam)",
+        "color": "#dc2626",
+        "key_stations": ["Moore Market / Central", "Basin Bridge", "Perambur", "Avadi", "Tiruvallur", "Arakkonam"]
+      },
+      {
+        "name": "MRTS Elevated Line",
+        "color": "#2563eb",
+        "key_stations": ["Chennai Beach", "Thirumayilai (Mylapore)", "Kasturba Nagar", "Tiruvanmiyur", "Velachery"]
+      }
+    ]
+  },
+  {
+    "id": "net-delhi-ncr-rrts",
+    "city": "New Delhi",
+    "network_name": "Delhi-NCR EMU Ring Rail & Namo Bharat RRTS",
+    "operator": "Northern Railway & NCRTC",
+    "type": "RRTS",
+    "daily_ridership": "800,000+ Commuters",
+    "lines_count": 2,
+    "stations_count": 42,
+    "fare_structure": "Ring Rail: ₹5 - ₹15; Namo Bharat RRTS: ₹20 - ₹110",
+    "description": "High-speed regional transit connecting national capital territory with satellite cities of Ghaziabad, Modinagar, and Meerut at 160 km/h design speeds.",
+    "lines": [
+      {
+        "name": "Delhi-Meerut Namo Bharat RRTS",
+        "color": "#7c3aed",
+        "key_stations": ["Sarai Kale Khan", "Anand Vihar", "Sahibabad", "Ghaziabad", "Duhai Depot", "Meerut South"]
+      },
+      {
+        "name": "Delhi Ring Railway EMU",
+        "color": "#0284c7",
+        "key_stations": ["Hazrat Nizamuddin", "Lajpat Nagar", "Sewa Nagar", "Chanakyapuri", "Tilak Bridge", "New Delhi"]
+      }
+    ]
+  },
+  {
+    "id": "net-hyderabad-mmts",
+    "city": "Hyderabad",
+    "network_name": "Hyderabad Multi-Modal Transport System (MMTS)",
+    "operator": "South Central Railway",
+    "type": "SUBURBAN_RAIL",
+    "daily_ridership": "150,000+ Commuters",
+    "lines_count": 3,
+    "stations_count": 44,
+    "fare_structure": "Flat / slab: ₹5 - ₹15 (Second Class)",
+    "description": "Suburban transit linking old city heritage hubs (Falaknuma, Charminar) with Secunderabad Junction and HITEC City tech corridor.",
+    "lines": [
+      {
+        "name": "Falaknuma - Secunderabad - Lingampalli",
+        "color": "#ea580c",
+        "key_stations": ["Falaknuma", "Dabirpura", "Kacheguda", "Vidyanagar", "Secunderabad", "Begumpet", "HITEC City", "Lingampalli"]
+      }
+    ]
+  }
+]

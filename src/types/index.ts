@@ -231,6 +231,7 @@ export interface UserProfile {
   id: string;
   name: string;
   email: string;
+  role?: UserRole;
   home_city?: string;
   travel_style?: string;
   interests?: string[];
@@ -359,5 +360,221 @@ export interface HeritageSite extends PlaceSummary {
     metro_station?: string;
     airport?: string;
   };
+}
+
+export type ProvenanceBadge =
+  | 'OFFICIAL'
+  | 'VERIFIED_SECONDARY'
+  | 'COMMUNITY'
+  | 'UNVERIFIED'
+  | 'ESTIMATED'
+  | 'MODELLED'
+  | 'SIMULATED DEMO DATA';
+
+export type VerificationStatus =
+  | 'VERIFIED'
+  | 'PARTIALLY_VERIFIED'
+  | 'COMMUNITY_LISTED'
+  | 'UNVERIFIED';
+
+export type UserRole = 'TRAVELLER' | 'PROVIDER' | 'GOVERNMENT' | 'ADMIN';
+
+export interface CulturalItem {
+  id: string;
+  name: string;
+  category: string;
+  city: string;
+  state: string;
+  region: string;
+  description: string;
+  cultural_significance: string;
+  provenance: ProvenanceBadge;
+  thumbnail_url: string;
+  best_locations: string[];
+  tags: string[];
+}
+
+export interface ArtisanProfile {
+  id: string;
+  artisan_name: string;
+  craft_tradition: string;
+  gi_tag_status: boolean;
+  city: string;
+  state: string;
+  region: string;
+  story: string;
+  workshop_location: string;
+  visiting_allowed: boolean;
+  demonstration_available: boolean;
+  experience_duration: string;
+  price_range: string;
+  verification_status: VerificationStatus;
+  provenance: ProvenanceBadge;
+  thumbnail_url: string;
+  products: string[];
+}
+
+export interface LocalProvider {
+  id: string;
+  name: string;
+  category: 'ACCOMMODATION' | 'GUIDE' | 'ARTISAN' | 'WORKSHOP' | 'FOOD' | 'TRANSPORT';
+  city: string;
+  state: string;
+  verification_status: VerificationStatus;
+  provenance: ProvenanceBadge;
+  rating: number;
+  reviews_count: number;
+  contact: {
+    phone?: string;
+    email?: string;
+    booking_url?: string;
+    address?: string;
+  };
+  pricing: string;
+  description: string;
+  languages: string[];
+  thumbnail_url: string;
+  specialties: string[];
+}
+
+export interface AccessibilityRecord {
+  place_id: string;
+  place_name: string;
+  city: string;
+  state: string;
+  wheelchair_access: 'YES' | 'NO' | 'PARTIAL' | 'UNKNOWN';
+  ramp_available: boolean;
+  accessible_toilet: boolean;
+  elevator_available: boolean;
+  dedicated_parking: boolean;
+  tactile_paving_or_braille: boolean;
+  audio_guide_available: boolean;
+  seating_resting_points: boolean;
+  flat_terrain_percentage: number;
+  accessibility_notes: string;
+  provenance: ProvenanceBadge;
+}
+
+export interface InfrastructureFacility {
+  id: string;
+  name: string;
+  type: 'TOILET' | 'PARKING' | 'MEDICAL' | 'POLICE' | 'TOURIST_INFO' | 'WATER_ATM';
+  city: string;
+  lat: number;
+  lng: number;
+  address: string;
+  is_accessible: boolean;
+  is_24x7: boolean;
+  contact: string;
+  description?: string;
+  distance_km?: number;
+}
+
+export interface DestinationHealthCity {
+  city_id: string;
+  city_name: string;
+  state: string;
+  visitor_load_index: number;
+  transport_load_index: number;
+  heritage_risk_index: number;
+  accessibility_score: number;
+  sanitation_readiness: number;
+  infrastructure_gap_score: number;
+  local_business_participation: number;
+  peak_season_warning: string;
+  critical_gaps: string[];
+  recommendations: string[];
+}
+
+export interface TourismGapZone {
+  id: string;
+  zone_name: string;
+  city: string;
+  footfall_density: 'HIGH' | 'VERY_HIGH' | 'MODERATE';
+  transit_connectivity_gap: 'HIGH' | 'MODERATE' | 'LOW';
+  sanitation_gap: 'CRITICAL' | 'MODERATE' | 'SUFFICIENT';
+  parking_shortage: boolean;
+  first_aid_gap: boolean;
+  recommended_action: string;
+}
+
+export interface DestinationHealthResponse {
+  provenance_disclaimer: string;
+  provenance_badge: ProvenanceBadge;
+  cities: DestinationHealthCity[];
+  gap_map_zones: TourismGapZone[];
+}
+
+export interface HeritageConditionReportTimeline {
+  status: string;
+  timestamp: string;
+  note: string;
+  actor: string;
+}
+
+export interface HeritageConditionReport {
+  id: string;
+  site_id: string;
+  site_name: string;
+  city: string;
+  reported_by: string;
+  user_role: UserRole;
+  issue_category:
+    | 'STRUCTURAL_DAMAGE'
+    | 'WASTE_LITTER'
+    | 'MISSING_SIGNAGE'
+    | 'ACCESSIBILITY_BARRIER'
+    | 'LIGHTING_SAFETY'
+    | 'FACILITY_BREAKDOWN';
+  severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+  description: string;
+  status:
+    | 'SUBMITTED'
+    | 'UNDER_REVIEW'
+    | 'VERIFIED'
+    | 'ASSIGNED'
+    | 'IN_PROGRESS'
+    | 'RESOLVED'
+    | 'REJECTED';
+  timeline: HeritageConditionReportTimeline[];
+  created_at: string;
+  updated_at: string;
+  image_url?: string;
+}
+
+export interface HeritageCluster {
+  id: string;
+  name: string;
+  city: string;
+  state: string;
+  description: string;
+  sites_count: number;
+  recommended_duration_hours: number;
+  transit_tip: string;
+  sites: Array<{
+    id: string;
+    name: string;
+    lat: number;
+    lng: number;
+    thumbnail_url?: string;
+  }>;
+}
+
+export interface CommuterNetwork {
+  id: string;
+  city: string;
+  network_name: string;
+  operator: string;
+  type: 'SUBURBAN_RAIL' | 'METRO' | 'RRTS' | 'FERRY';
+  daily_ridership: string;
+  lines_count: number;
+  stations_count: number;
+  fare_structure: string;
+  description: string;
+  lines: Array<{
+    name: string;
+    color: string;
+    key_stations: string[];
+  }>;
 }
 

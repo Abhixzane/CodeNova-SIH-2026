@@ -1,0 +1,134 @@
+[
+  {
+    "id": "prov-01-mumbai-walks",
+    "name": "Khaki Tours Heritage Walks",
+    "category": "GUIDE",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "verification_status": "VERIFIED",
+    "provenance": "VERIFIED_SECONDARY",
+    "rating": 4.9,
+    "reviews_count": 420,
+    "contact": {
+      "phone": "+91 88281 00111",
+      "email": "explore@khakitours.com",
+      "booking_url": "https://khakitours.com",
+      "address": "Fort Heritage Precinct, South Mumbai"
+    },
+    "pricing": "₹750 - ₹1,500 / person",
+    "description": "Certified architectural historians and local storytellers leading curated walking tours through colonial South Mumbai, Victorian Gothic precincts, and Parsi enclaves.",
+    "languages": ["English", "Hindi", "Marathi"],
+    "thumbnail_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&auto=format&fit=crop&q=80",
+    "specialties": ["Art Deco Architecture", "Colonial History", "Hidden Fountains", "Fort Heritage"]
+  },
+  {
+    "id": "prov-02-agra-heritage-walks",
+    "name": "Agra Braj Darshan Certified Heritage Guides",
+    "category": "GUIDE",
+    "city": "Agra",
+    "state": "Uttar Pradesh",
+    "verification_status": "VERIFIED",
+    "provenance": "OFFICIAL",
+    "rating": 4.8,
+    "reviews_count": 560,
+    "contact": {
+      "phone": "+91 94122 55678",
+      "email": "guides@agrabrajtours.gov.in",
+      "booking_url": "https://uptourism.gov.in",
+      "address": "Near Taj East Gate Facilitation Centre, Agra"
+    },
+    "pricing": "₹1,000 - ₹2,200 / group (up to 5)",
+    "description": "Ministry of Tourism certified regional level guides specializing in Mughal history, Taj Mahal acoustics, and hidden heritage alleys of old Tajganj.",
+    "languages": ["English", "Hindi", "French", "German", "Spanish"],
+    "thumbnail_url": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&auto=format&fit=crop&q=80",
+    "specialties": ["Taj Mahal Architecture", "Fatehpur Sikri Excursions", "ASI Conservation History"]
+  },
+  {
+    "id": "prov-03-jaipur-haveli",
+    "name": "Alsisar Haveli Heritage Stay",
+    "category": "ACCOMMODATION",
+    "city": "Jaipur",
+    "state": "Rajasthan",
+    "verification_status": "VERIFIED",
+    "provenance": "OFFICIAL",
+    "rating": 4.7,
+    "reviews_count": 890,
+    "contact": {
+      "phone": "+91 141 236 8290",
+      "email": "alsisar@alsisar.com",
+      "booking_url": "https://alsisarhaveli.com",
+      "address": "Sansar Chandra Road, Bani Park, Jaipur"
+    },
+    "pricing": "₹5,500 - ₹12,000 / night",
+    "description": "Authentic Rajput noble townhouse restored with delicate fresco arches, courtyards, swimming pool, and traditional Rajasthani sitar evening performances.",
+    "languages": ["English", "Hindi", "Marwari"],
+    "thumbnail_url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&auto=format&fit=crop&q=80",
+    "specialties": ["Heritage Haveli", "Traditional Dining", "Cultural Concerts", "Central Location"]
+  },
+  {
+    "id": "prov-04-varanasi-boatmen",
+    "name": "Ganga Nao Heritage Boatmen Cooperative",
+    "category": "TRANSPORT",
+    "city": "Varanasi",
+    "state": "Uttar Pradesh",
+    "verification_status": "VERIFIED",
+    "provenance": "COMMUNITY",
+    "rating": 4.8,
+    "reviews_count": 1120,
+    "contact": {
+      "phone": "+91 98390 12344",
+      "email": "gangaboats@varanasi.org",
+      "booking_url": "https://uptourism.gov.in/varanasi-boats",
+      "address": "Assi Ghat & Dashashwamedh Ghat Steps, Varanasi"
+    },
+    "pricing": "₹400 - ₹1,200 / hour (electric & row boats)",
+    "description": "Licensed local boatmen community operating battery-powered eco boats and traditional wooden rowboats for sacred dawn and Ganga Aarti sunset crossings.",
+    "languages": ["Hindi", "Bhojpuri", "English"],
+    "thumbnail_url": "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=800&auto=format&fit=crop&q=80",
+    "specialties": ["Eco Electric Boats", "Sunrise River Views", "Ganga Aarti Special", "Life Jackets Certified"]
+  },
+  {
+    "id": "prov-05-delhi-food-walks",
+    "name": "Delhi Food Heritage Expeditions",
+    "category": "FOOD",
+    "city": "New Delhi",
+    "state": "Delhi (NCT)",
+    "verification_status": "VERIFIED",
+    "provenance": "VERIFIED_SECONDARY",
+    "rating": 4.9,
+    "reviews_count": 730,
+    "contact": {
+      "phone": "+91 98114 55432",
+      "email": "tours@delhifoodwalks.com",
+      "booking_url": "https://delhifoodwalks.com",
+      "address": "Jama Masjid Gate 3, Old Delhi"
+    },
+    "pricing": "₹1,200 - ₹2,500 / person",
+    "description": "Safe, hygienic street food culinary trail tracing 350-year-old family-run stalls across Old Delhi's spice markets, sweet shops, and kabab houses.",
+    "languages": ["English", "Hindi", "Urdu"],
+    "thumbnail_url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&auto=format&fit=crop&q=80",
+    "specialties": ["Hygiene Certified", "Culinary Storytelling", "Vegetarian & Non-Veg Options"]
+  },
+  {
+    "id": "prov-06-kochi-homestay",
+    "name": "Fort Kochi Dutch Malabar Homestay",
+    "category": "ACCOMMODATION",
+    "city": "Kochi",
+    "state": "Kerala",
+    "verification_status": "VERIFIED",
+    "provenance": "OFFICIAL",
+    "rating": 4.8,
+    "reviews_count": 310,
+    "contact": {
+      "phone": "+91 484 221 4455",
+      "email": "stay@dutchmalabar.com",
+      "booking_url": "https://keralatourism.org/homestays",
+      "address": "Princess Street, Fort Kochi, Ernakulam"
+    },
+    "pricing": "₹2,800 - ₹5,500 / night",
+    "description": "Kerala Tourism 'Diamond Category' accredited heritage bungalow stay, 5 minutes walk from Chinese Fishing Nets and St. Francis Church.",
+    "languages": ["English", "Malayalam", "Hindi"],
+    "thumbnail_url": "https://images.unsplash.com/photo-1588099768531-a72d4a198538?w=800&auto=format&fit=crop&q=80",
+    "specialties": ["Eco Tourism", "Traditional Kerala Breakfast", "Bicycle Rental", "Free Wi-Fi"]
+  }
+]

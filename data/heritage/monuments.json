@@ -51,7 +51,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India (ASI)",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Architectural & Colonial",
+    "tags": [
+      "monument",
+      "unesco",
+      "mughal",
+      "marble",
+      "mausoleum"
+    ],
+    "summary": "Commissioned by Mughal Emperor Shah Jahan to house the tomb of his favorite consort Mumtaz Mahal. Universally admired as an eternal symbol of devotion and the jewel of Muslim art in India.",
+    "state_id": "uttar-pradesh",
+    "city_id": "agra"
   },
   {
     "id": "gateway-of-india",
@@ -106,7 +117,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Maharashtra Tourism Development Corporation (MTDC)",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Architectural & Colonial",
+    "tags": [
+      "monument",
+      "colonial",
+      "indo-saracenic",
+      "mumbai",
+      "harbor"
+    ],
+    "summary": "Erected to commemorate the landing of King George V and Queen Mary in 1911. Later served as the ceremonial exit point of the last British troops (First Battalion of Somerset Light Infantry) in 1948.",
+    "state_id": "maharashtra",
+    "city_id": "mumbai"
   },
   {
     "id": "csmt",
@@ -159,7 +181,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Indian Railways Heritage Directorate & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Architectural & Colonial",
+    "tags": [
+      "monument",
+      "colonial",
+      "unesco",
+      "victorian gothic",
+      "railway"
+    ],
+    "summary": "Originally named Victoria Terminus, headquarters of Central Railway. Outstanding example of Victorian Gothic Revival architecture blended with traditional Indian domes and gargoyles.",
+    "state_id": "maharashtra",
+    "city_id": "mumbai"
   },
   {
     "id": "elephanta-caves",
@@ -210,7 +243,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India (ASI) & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Caves & Rock-Cut",
+    "tags": [
+      "cave",
+      "rock-cut",
+      "unesco",
+      "shiva",
+      "island"
+    ],
+    "summary": "A network of sculpted cave temples predominantly dedicated to Lord Shiva, featuring the world-famous 20-foot monolithic Sadashiva (Trimurti) sculpture.",
+    "state_id": "maharashtra",
+    "city_id": "mumbai"
   },
   {
     "id": "ajanta-caves",
@@ -261,7 +305,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India (ASI) & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Caves & Rock-Cut",
+    "tags": [
+      "cave",
+      "rock-cut",
+      "unesco",
+      "buddhist",
+      "frescoes"
+    ],
+    "summary": "30 rock-cut Buddhist cave monuments containing masterpiece frescoes illustrating Jataka tales and Buddha's life, discovered by British officer John Smith in 1819.",
+    "state_id": "maharashtra",
+    "city_id": "aurangabad"
   },
   {
     "id": "ellora-caves",
@@ -312,7 +367,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India (ASI) & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Caves & Rock-Cut",
+    "tags": [
+      "cave",
+      "rock-cut",
+      "unesco",
+      "kailasa",
+      "monolith"
+    ],
+    "summary": "Cave 16 (Kailasa Temple) is the largest monolithic rock excavation in the world, carved from top to bottom with over 200,000 tonnes of basalt removed without modern machinery.",
+    "state_id": "maharashtra",
+    "city_id": "aurangabad"
   },
   {
     "id": "hawa-mahal",
@@ -365,7 +431,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Rajasthan Department of Archaeology & Museums",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Architectural & Colonial",
+    "tags": [
+      "monument",
+      "architecture",
+      "jharokha",
+      "pink city",
+      "wind palace"
+    ],
+    "summary": "Five-story pyramidal monument with 953 intricately carved jharokhas (small casements) constructed so royal ladies could observe daily street festivals unobserved.",
+    "state_id": "rajasthan",
+    "city_id": "jaipur"
   },
   {
     "id": "amber-fort",
@@ -417,7 +494,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "fort",
+      "palace",
+      "unesco",
+      "rajput",
+      "amer"
+    ],
+    "summary": "Perched on Cheel ka Teela over Maota Lake, famous for its grand courtyards, Sheesh Mahal (Mirror Palace), and subterranean fortified defense passages.",
+    "state_id": "rajasthan",
+    "city_id": "jaipur"
   },
   {
     "id": "city-palace-jaipur",
@@ -468,7 +556,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Maharaja Sawai Man Singh II Museum Trust",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "palace",
+      "royal",
+      "museum",
+      "courtyard",
+      "textiles"
+    ],
+    "summary": "The ceremonial and administrative seat of the Maharaja of Jaipur, featuring the Chandra Mahal, Mubarak Mahal, and the world's largest sterling silver vessels.",
+    "state_id": "rajasthan",
+    "city_id": "jaipur"
   },
   {
     "id": "jantar-mantar-jaipur",
@@ -519,7 +618,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Architectural & Colonial",
+    "tags": [
+      "monument",
+      "observatory",
+      "unesco",
+      "astronomy",
+      "sundial"
+    ],
+    "summary": "A collection of 19 monumental architectural astronomical instruments, including the Vrihat Samrat Yantra—the world's largest stone sundial measuring time to an accuracy of two seconds.",
+    "state_id": "rajasthan",
+    "city_id": "jaipur"
   },
   {
     "id": "qutub-minar",
@@ -571,7 +681,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India (ASI) & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Architectural & Colonial",
+    "tags": [
+      "monument",
+      "minaret",
+      "unesco",
+      "iron pillar",
+      "sultanate"
+    ],
+    "summary": "A 72.5-meter tapering victory tower marking the advent of Muslim rule in North India, alongside the famous rust-resistant 4th-century Iron Pillar of Chandragupta II.",
+    "state_id": "delhi",
+    "city_id": "delhi"
   },
   {
     "id": "red-fort",
@@ -623,7 +744,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India (ASI) & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "fort",
+      "mughal",
+      "unesco",
+      "lal qila",
+      "independence"
+    ],
+    "summary": "Seat of the Mughal Empire for nearly 200 years until 1857. Annual site where the Prime Minister of India unfurls the national tricolor on Independence Day.",
+    "state_id": "delhi",
+    "city_id": "delhi"
   },
   {
     "id": "humayuns-tomb",
@@ -674,7 +806,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & Aga Khan Trust for Culture",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Architectural & Colonial",
+    "tags": [
+      "monument",
+      "tomb",
+      "unesco",
+      "mughal",
+      "charbagh"
+    ],
+    "summary": "The first garden-tomb on the Indian subcontinent, serving as the architectural precursor and blueprint inspiration for the Taj Mahal.",
+    "state_id": "delhi",
+    "city_id": "delhi"
   },
   {
     "id": "india-gate",
@@ -725,7 +868,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Ministry of Defence & Delhi Tourism",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Architectural & Colonial",
+    "tags": [
+      "monument",
+      "war memorial",
+      "lutyens",
+      "national",
+      "kartavya path"
+    ],
+    "summary": "A 42-meter memorial arch honoring 84,000 soldiers of the British Indian Army who died in World War I and the Third Anglo-Afghan War, featuring the Amar Jawan Jyoti and adjacent National War Memorial.",
+    "state_id": "delhi",
+    "city_id": "delhi"
   },
   {
     "id": "fatehpur-sikri",
@@ -776,7 +930,19 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "fort",
+      "palace",
+      "unesco",
+      "mughal",
+      "buland darwaza",
+      "city"
+    ],
+    "summary": "Built by Akbar to honor Sufi Saint Sheikh Salim Chishti, featuring the monumental Buland Darwaza (Gate of Magnificence, 54m high), Panch Mahal, and Diwan-i-Khas.",
+    "state_id": "uttar-pradesh",
+    "city_id": "agra"
   },
   {
     "id": "agra-fort",
@@ -827,7 +993,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "fort",
+      "palace",
+      "unesco",
+      "mughal",
+      "red sandstone"
+    ],
+    "summary": "The primary royal residence of Mughal emperors until 1638. Houses Jahangiri Mahal, Khas Mahal, and the Musamman Burj balcony where Shah Jahan was imprisoned by Aurangzeb with a distant view of Taj Mah",
+    "state_id": "uttar-pradesh",
+    "city_id": "agra"
   },
   {
     "id": "sun-temple-konark",
@@ -878,7 +1055,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "temple",
+      "sacred",
+      "unesco",
+      "black pagoda",
+      "chariot"
+    ],
+    "summary": "Conceived as a colossal cosmic chariot of Surya, the Sun God, with 24 intricately carved stone wheels acting as sundials and drawn by seven spirited horses.",
+    "state_id": "odisha",
+    "city_id": "konark"
   },
   {
     "id": "khajuraho-monuments",
@@ -929,7 +1117,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "temple",
+      "sacred",
+      "unesco",
+      "chandela",
+      "sculptures"
+    ],
+    "summary": "Renowned for the Kandariya Mahadeva Temple with 870 statues celebrating the four Purusharthas (Dharma, Artha, Kama, Moksha). Only 25 of the original 85 temples survive.",
+    "state_id": "madhya-pradesh",
+    "city_id": "khajuraho"
   },
   {
     "id": "sanchi-stupa",
@@ -980,7 +1179,19 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "sacred",
+      "buddhist",
+      "stupa",
+      "unesco",
+      "ashoka",
+      "torana"
+    ],
+    "summary": "One of the oldest stone structures in India built over the relics of the Buddha. The four ornate Torana gateways depict the Jataka tales without depicting the Buddha in human form.",
+    "state_id": "madhya-pradesh",
+    "city_id": "sanchi"
   },
   {
     "id": "mahabodhi-temple",
@@ -1032,7 +1243,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Bodhgaya Temple Management Committee (BTMC) & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "temple",
+      "sacred",
+      "unesco",
+      "buddhist",
+      "bodhi tree"
+    ],
+    "summary": "The holiest pilgrimage site in Buddhism, marking the sacred location where Siddhartha Gautama attained supreme enlightenment under the Bodhi Tree (Ficus religiosa) around 589 BCE.",
+    "state_id": "bihar",
+    "city_id": "bodh-gaya"
   },
   {
     "id": "hampi-monuments",
@@ -1084,7 +1306,19 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "temple",
+      "sacred",
+      "unesco",
+      "vijayanagara",
+      "virupaksha",
+      "ruins"
+    ],
+    "summary": "Capital of the opulent Vijayanagara Empire, one of the largest and wealthiest cities in the 16th-century world. Features the iconic Stone Chariot at Vittala Temple and the musical pillars.",
+    "state_id": "karnataka",
+    "city_id": "hampi"
   },
   {
     "id": "pattadakal-monuments",
@@ -1135,7 +1369,19 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "temple",
+      "sacred",
+      "unesco",
+      "chalukya",
+      "dravidian",
+      "nagara"
+    ],
+    "summary": "The ceremonial coronation site (Pattada-Kisuvolal) of the Chalukya kings, containing 10 major temples including the grand Virupaksha Temple commissioned by Queen Lokamahadevi.",
+    "state_id": "karnataka",
+    "city_id": "pattadakal"
   },
   {
     "id": "brihadisvara-temple",
@@ -1186,7 +1432,19 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "temple",
+      "sacred",
+      "unesco",
+      "chola",
+      "granite",
+      "thanjavur"
+    ],
+    "summary": "A tribute to Shiva, featuring a 66-meter Vimana (temple tower) capped with an 80-tonne monolithic granite Kumbam carved and raised via an inclined earthen ramp.",
+    "state_id": "tamil-nadu",
+    "city_id": "thanjavur"
   },
   {
     "id": "shore-temple-mahabalipuram",
@@ -1238,7 +1496,19 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "temple",
+      "sacred",
+      "unesco",
+      "pallava",
+      "coastal",
+      "relief"
+    ],
+    "summary": "One of the oldest structural stone temples of Southern India, standing on the Bay of Bengal shoreline, alongside the monumental 'Descent of the Ganges' open-air rock relief and Pancha Rathas.",
+    "state_id": "tamil-nadu",
+    "city_id": "chennai"
   },
   {
     "id": "meenakshi-amman-temple",
@@ -1289,7 +1559,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Tamil Nadu Hindu Religious & Charitable Endowments",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "temple",
+      "sacred",
+      "gopuram",
+      "madurai",
+      "draviadian"
+    ],
+    "summary": "A sacred urban temple city covering 14 acres with 14 magnificent gopurams (gateway towers), the tallest reaching 52 meters, and the celebrated Hall of Thousand Pillars.",
+    "state_id": "tamil-nadu",
+    "city_id": "madurai"
   },
   {
     "id": "fort-kochi-heritage",
@@ -1340,7 +1621,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Kerala Tourism Department & Archaeological Survey of India",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "palace",
+      "colonial",
+      "portuguese",
+      "dutch",
+      "kerala"
+    ],
+    "summary": "Site of Fort Emmanuel (first European fort in India), St. Francis Church (original burial site of Vasco da Gama), Mattancherry Palace with Ramayana murals, and 500-year-old Chinese Fishing Nets.",
+    "state_id": "kerala",
+    "city_id": "kochi"
   },
   {
     "id": "bekal-fort",
@@ -1391,7 +1683,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & Kerala Tourism",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "fort",
+      "coastal",
+      "citadel",
+      "sea",
+      "kerala"
+    ],
+    "summary": "Largest and best-preserved fort in Kerala, jutting dramatically into the Arabian Sea with fortified bastions, observation towers, and underground water reservoirs.",
+    "state_id": "kerala",
+    "city_id": "kasaragod"
   },
   {
     "id": "padmanabhapuram-palace",
@@ -1442,7 +1745,17 @@
     "has_360": true,
     "has_video": true,
     "source": "Government of Kerala Archaeology Department",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "palace",
+      "wooden",
+      "travancore",
+      "heritage"
+    ],
+    "summary": "Magnificent wooden palace complex enclosed within a 4-km granite fort, showcasing the King's Council Chamber, Navarathri Mandapam, and 18th-century clock tower.",
+    "state_id": "tamil-nadu",
+    "city_id": "thuckalay"
   },
   {
     "id": "basilica-of-bom-jesus",
@@ -1493,7 +1806,19 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "sacred",
+      "church",
+      "unesco",
+      "baroque",
+      "goa",
+      "st francis"
+    ],
+    "summary": "Houses the sacred mortal remains of St. Francis Xavier in a silver casket inside an Italian marble mausoleum crafted by Giovanni Battista Foggini.",
+    "state_id": "goa",
+    "city_id": "panaji"
   },
   {
     "id": "fort-aguada",
@@ -1545,7 +1870,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & Goa Heritage Action Group",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "fort",
+      "lighthouse",
+      "coastal",
+      "portuguese",
+      "goa"
+    ],
+    "summary": "A formidable fortress guarding the mouth of the Mandovi River against Dutch and Maratha fleets. 'Aguada' means water, as ships replenished freshwater from its 2.3-million-gallon cistern.",
+    "state_id": "goa",
+    "city_id": "panaji"
   },
   {
     "id": "golconda-fort",
@@ -1597,7 +1933,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "fort",
+      "citadel",
+      "acoustic",
+      "diamond",
+      "qutb shahi"
+    ],
+    "summary": "Legendary capital and vault of the Golconda diamond trade that produced the Koh-i-Noor, Hope, and Daria-i-Noor diamonds. Famous for acoustic engineering where a clap at the Fateh Darwaza echoes at the",
+    "state_id": "telangana",
+    "city_id": "hyderabad"
   },
   {
     "id": "charminar",
@@ -1649,7 +1996,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "sacred",
+      "monument",
+      "mosque",
+      "hyderabad",
+      "qutb shahi"
+    ],
+    "summary": "Built by Muhammad Quli Qutb Shah to commemorate the eradication of plague and foundation of Hyderabad city. Features four 56-meter-high grand minarets with double balconies.",
+    "state_id": "telangana",
+    "city_id": "hyderabad"
   },
   {
     "id": "victoria-memorial-kolkata",
@@ -1701,7 +2059,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Victoria Memorial Trust & Ministry of Culture",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Architectural & Colonial",
+    "tags": [
+      "monument",
+      "colonial",
+      "museum",
+      "marble",
+      "kolkata"
+    ],
+    "summary": "Grand marble monument dedicated to Queen Victoria, surrounded by 64 acres of landscaped gardens, housing 25 galleries of rare historical paintings, weapons, and manuscripts.",
+    "state_id": "west-bengal",
+    "city_id": "kolkata"
   },
   {
     "id": "nalanda-university-ruins",
@@ -1752,7 +2121,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Architectural & Colonial",
+    "tags": [
+      "monument",
+      "ancient",
+      "university",
+      "unesco",
+      "ruins"
+    ],
+    "summary": "The world's earliest residential international university, housing 10,000 students and 2,000 teachers from across China, Korea, Tibet, and Central Asia until its sack in 1193 CE.",
+    "state_id": "bihar",
+    "city_id": "bodh-gaya"
   },
   {
     "id": "rani-ki-vav",
@@ -1803,7 +2183,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Caves & Rock-Cut",
+    "tags": [
+      "rock-cut",
+      "stepwell",
+      "unesco",
+      "sculpture",
+      "subterranean"
+    ],
+    "summary": "Designed as an inverted subterranean temple sanctifying water, descending seven terraces decorated with over 500 principal sculptures and 1,000 minor religious figurines.",
+    "state_id": "gujarat",
+    "city_id": "patan"
   },
   {
     "id": "champaner-pavagadh",
@@ -1853,7 +2244,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "sacred",
+      "temple",
+      "unesco",
+      "archaeological",
+      "gujarat"
+    ],
+    "summary": "A complete un-excavated archaeological city containing 114 monuments, grand mosques (Jami Masjid), palaces, and the Kalika Mata hill temple.",
+    "state_id": "gujarat",
+    "city_id": "panchmahal"
   },
   {
     "id": "golden-temple-amritsar",
@@ -1904,7 +2306,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Shiromani Gurdwara Parbandhak Committee (SGPC)",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Temples & Sacred",
+    "tags": [
+      "sacred",
+      "temple",
+      "gurudwara",
+      "harmandir sahib",
+      "amritsar"
+    ],
+    "summary": "The holiest Gurdwara of Sikhism built in the center of the Amrit Sarovar pool. Operates the world's largest free community kitchen (Guru ka Langar) feeding 100,000 people daily regardless of religion,",
+    "state_id": "punjab",
+    "city_id": "amritsar"
   },
   {
     "id": "mehrangarh-fort",
@@ -1955,7 +2368,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Mehrangarh Museum Trust",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "fort",
+      "citadel",
+      "jodhpur",
+      "sun",
+      "museum"
+    ],
+    "summary": "Rising 410 feet above the Blue City of Jodhpur, with seven fortified gates (Jaipol, Fatehpol). Preserves cannonball scars from 18th-century battles with Jaipur armies.",
+    "state_id": "rajasthan",
+    "city_id": "jodhpur"
   },
   {
     "id": "jaisalmer-fort",
@@ -2007,7 +2431,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "fort",
+      "golden",
+      "sonar qila",
+      "unesco",
+      "living fort"
+    ],
+    "summary": "A UNESCO World Heritage hill fort and one of the world's very few surviving 'living forts' where a quarter of the city's population still resides inside ancient stone ramparts.",
+    "state_id": "rajasthan",
+    "city_id": "jaisalmer"
   },
   {
     "id": "chittorgarh-fort",
@@ -2059,7 +2494,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & UNESCO",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Forts & Palaces",
+    "tags": [
+      "fort",
+      "citadel",
+      "rajput",
+      "unesco",
+      "vijay stambha"
+    ],
+    "summary": "Largest fort in India, spanning 700 acres over a 180-meter hill. The immortal stage of historic sieges by Alauddin Khalji and Akbar, remembered for the legendary bravery of Maharana Pratap and Rani Pa",
+    "state_id": "rajasthan",
+    "city_id": "chittorgarh"
   },
   {
     "id": "cellular-jail-port-blair",
@@ -2110,7 +2556,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Andaman & Nicobar Administration & Ministry of Culture",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Architectural & Colonial",
+    "tags": [
+      "monument",
+      "memorial",
+      "freedom",
+      "andaman",
+      "kala pani"
+    ],
+    "summary": "Colonial prison built to exile political dissidents of the Indian Independence Movement, including Veer Savarkar and Batukeshwar Dutt. Three of the original seven wings survive.",
+    "state_id": "andaman-and-nicobar",
+    "city_id": "port-blair"
   },
   {
     "id": "kanheri-caves",
@@ -2161,7 +2618,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & Maharashtra Forest Dept",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Caves & Rock-Cut",
+    "tags": [
+      "cave",
+      "rock-cut",
+      "buddhist",
+      "viharas",
+      "national park"
+    ],
+    "summary": "A massive complex of 109 rock-cut Buddhist caves nestled deep in Sanjay Gandhi National Park, featuring massive 7-meter standing Buddha statues and a Sophisticated 2,000-year-old rainwater harvesting ",
+    "state_id": "maharashtra",
+    "city_id": "mumbai"
   },
   {
     "id": "jantar-mantar-delhi",
@@ -2212,7 +2680,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Architectural & Colonial",
+    "tags": [
+      "monument",
+      "observatory",
+      "astronomy",
+      "yantras",
+      "delhi"
+    ],
+    "summary": "The first of five astronomical observatories built by Jai Singh II, featuring 13 architectural astronomy instruments including the Samrat Yantra, Jayaprakash, and Misra Yantra.",
+    "state_id": "delhi",
+    "city_id": "delhi"
   },
   {
     "id": "agrasen-ki-baoli",
@@ -2263,7 +2742,18 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Caves & Rock-Cut",
+    "tags": [
+      "rock-cut",
+      "stepwell",
+      "baoli",
+      "historic",
+      "delhi"
+    ],
+    "summary": "A 60-meter-long by 15-meter-wide stepwell consisting of 108 stone steps, one of Delhi's best-preserved subterranean water structures.",
+    "state_id": "delhi",
+    "city_id": "delhi"
   },
   {
     "id": "lodhi-gardens",
@@ -2314,6 +2804,17 @@
     "has_360": true,
     "has_video": true,
     "source": "Archaeological Survey of India & NDMC",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "category": "Natural & Ghats",
+    "tags": [
+      "nature",
+      "gardens",
+      "heritage park",
+      "tombs",
+      "delhi"
+    ],
+    "summary": "Sprawling 90-acre heritage park containing the Tomb of Sikandar Lodi, Shisha Gumbad, Bara Gumbad, and the Athpula (eight-piered bridge built during Akbar's reign).",
+    "state_id": "delhi",
+    "city_id": "delhi"
   }
 ]

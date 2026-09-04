@@ -1,0 +1,190 @@
+{
+  "provenance_disclaimer": "MODELLED / ANALYTICAL ESTIMATE BASED ON HISTORICAL VISITOR RECORDS, TRANSIT FREQUENCY AND FIELD RECONNAISSANCE. FOR GOVERNMENT DECISION-SUPPORT DEMO ONLY.",
+  "provenance_badge": "MODELLED",
+  "cities": [
+    {
+      "city_id": "agra",
+      "city_name": "Agra",
+      "state": "Uttar Pradesh",
+      "visitor_load_index": 92,
+      "transport_load_index": 78,
+      "heritage_risk_index": 68,
+      "accessibility_score": 74,
+      "sanitation_readiness": 65,
+      "infrastructure_gap_score": 62,
+      "local_business_participation": 88,
+      "peak_season_warning": "High pressure expected during November - February; Taj Mahal West gate queue delays likely between 9:30 AM - 1:00 PM.",
+      "critical_gaps": [
+        "Heavy EV charging congestion at Shilpgram tourist hub during weekend peak",
+        "Sanitation pressure along Tajganj East pedestrian walkway",
+        "Signage deficit on alternate heritage route from Mehtab Bagh to Itmad-ud-Daulah"
+      ],
+      "recommendations": [
+        "Deploy staggered time-slot entry for peak weekend hours",
+        "Expand battery shuttle fleet frequency by 35% between 10 AM and 3 PM",
+        "Incentivize afternoon visits to Fatehpur Sikri and Agra Fort with combo ticketing"
+      ]
+    },
+    {
+      "city_id": "mumbai",
+      "city_name": "Mumbai",
+      "state": "Maharashtra",
+      "visitor_load_index": 85,
+      "transport_load_index": 94,
+      "heritage_risk_index": 52,
+      "accessibility_score": 82,
+      "sanitation_readiness": 78,
+      "infrastructure_gap_score": 48,
+      "local_business_participation": 95,
+      "peak_season_warning": "Suburban rail peak hours (8:30-10:30 AM & 6-8:30 PM) create severe transit transfer bottlenecks at Dadar and CSMT.",
+      "critical_gaps": [
+        "Boarding step accessibility gap on Elephanta ferry jetty at Gateway of India",
+        "Pedestrian crowd overflow along Colaba Causeway weekend evenings",
+        "Restroom shortage along Marine Drive promenade southern stretch"
+      ],
+      "recommendations": [
+        "Install floating ramp pontoon at Apollo Bunder jetty for barrier-free boat access",
+        "Activate pedestrian priority zoning on Rampart Row during weekend art walks",
+        "Introduce contactless heritage shuttle loop between CSMT, Fort, and Gateway"
+      ]
+    },
+    {
+      "city_id": "delhi",
+      "city_name": "New Delhi",
+      "state": "Delhi (NCT)",
+      "visitor_load_index": 88,
+      "transport_load_index": 82,
+      "heritage_risk_index": 58,
+      "accessibility_score": 85,
+      "sanitation_readiness": 81,
+      "infrastructure_gap_score": 45,
+      "local_business_participation": 91,
+      "peak_season_warning": "Winter smog episodes in December/January impact outdoor morning monument visibility; ideal visiting window 11:30 AM - 4:30 PM.",
+      "critical_gaps": [
+        "Pedestrian crossing friction between Red Fort and Jama Masjid via Netaji Subhash Marg",
+        "Luggage storage and cloakroom bottlenecks at Qutb Minar entry pavilion",
+        "Last-mile electric shuttle gap between Humayun's Tomb and JLN Stadium metro"
+      ],
+      "recommendations": [
+        "Grade-separated pedestrian skywalk or underpass connecting Chandni Chowk and Red Fort",
+        "Digital cloakroom QR pre-booking via official ASI portal integration",
+        "Dedicated heritage feeder bus loop connecting Central Vista, Qutb, and Lodhi Gardens"
+      ]
+    },
+    {
+      "city_id": "jaipur",
+      "city_name": "Jaipur",
+      "state": "Rajasthan",
+      "visitor_load_index": 84,
+      "transport_load_index": 72,
+      "heritage_risk_index": 60,
+      "accessibility_score": 68,
+      "sanitation_readiness": 70,
+      "infrastructure_gap_score": 58,
+      "local_business_participation": 93,
+      "peak_season_warning": "Elephant ride queue delays at Amer Fort between 8:00 AM - 10:30 AM during Diwali and New Year holiday surges.",
+      "critical_gaps": [
+        "Narrow hill road traffic jam on Amer - Jaigarh single carriage corridor",
+        "Thermal comfort shelter shortage at Jantar Mantar open astronomical plinths",
+        "Multilingual audio guide equipment availability during peak international tour arrivals"
+      ],
+      "recommendations": [
+        "One-way loop regulation for tourist coaches visiting Amer and Nahargarh forts",
+        "Provide solar-protective shaded waiting canopies and misting zones at Jantar Mantar",
+        "Incentivize local artisan workshops in Sanganer and Kot Jewar for off-peak dispersal"
+      ]
+    },
+    {
+      "city_id": "varanasi",
+      "city_name": "Varanasi",
+      "state": "Uttar Pradesh",
+      "visitor_load_index": 96,
+      "transport_load_index": 89,
+      "heritage_risk_index": 76,
+      "accessibility_score": 45,
+      "sanitation_readiness": 62,
+      "infrastructure_gap_score": 75,
+      "local_business_participation": 94,
+      "peak_season_warning": "Dev Deepawali, Kartik Purnima and Shivratri witness peak crowd densities exceeding 400,000 pilgrims on riverfront ghats.",
+      "critical_gaps": [
+        "Step-heavy terrain lacking ramps for wheelchair travelers descending to ghats",
+        "Boat traffic congestion and diesel emission monitoring at Dashashwamedh during evening aarti",
+        "Signage clarity inside dense labyrinth of old Vishwanath and Godowlia lanes"
+      ],
+      "recommendations": [
+        "Install vertical platform lifts or inclined funiculars at Godowlia and Assi points of descent",
+        "Mandate 100% conversion of tourist boats to clean CNG and electric propulsion",
+        "Deploy NFC/QR multilingual digital beacons throughout the heritage lane network"
+      ]
+    },
+    {
+      "city_id": "kolkata",
+      "city_name": "Kolkata",
+      "state": "West Bengal",
+      "visitor_load_index": 79,
+      "transport_load_index": 86,
+      "heritage_risk_index": 54,
+      "accessibility_score": 76,
+      "sanitation_readiness": 74,
+      "infrastructure_gap_score": 52,
+      "local_business_participation": 89,
+      "peak_season_warning": "Durga Puja week (Ashwin month) transforms city into world's largest open-air art gallery with dense pedestrian crowds.",
+      "critical_gaps": [
+        "Signage and historical marker decay on British and European heritage colonial warehouses",
+        "Interchange wayfinding from Howrah Railway Station to Hooghly Ferry Ghats",
+        "Dedicated tour bus parking near Victoria Memorial and Indian Museum"
+      ],
+      "recommendations": [
+        "Heritage Blue Plaque scheme for colonial Dalhousie Square / BBD Bag circuit",
+        "Direct skywalk connection from Howrah Station concourse to ferry launch platforms",
+        "Night heritage tram tour integration with Victoria Memorial illumination"
+      ]
+    }
+  ],
+  "gap_map_zones": [
+    {
+      "id": "gap-01-tajganj",
+      "zone_name": "Tajganj East Heritage Buffer Zone",
+      "city": "Agra",
+      "footfall_density": "VERY_HIGH",
+      "transit_connectivity_gap": "MODERATE",
+      "sanitation_gap": "CRITICAL",
+      "parking_shortage": true,
+      "first_aid_gap": false,
+      "recommended_action": "Construct 3 additional accessible sanitation lounges and deploy 10 roving electric first-aid buggies."
+    },
+    {
+      "id": "gap-02-varanasi-godowlia",
+      "zone_name": "Godowlia to Dashashwamedh Corridor",
+      "city": "Varanasi",
+      "footfall_density": "VERY_HIGH",
+      "transit_connectivity_gap": "HIGH",
+      "sanitation_gap": "CRITICAL",
+      "parking_shortage": true,
+      "first_aid_gap": true,
+      "recommended_action": "Establish pedestrian-only dynamic time-slots with designated emergency medical evacuation corridors."
+    },
+    {
+      "id": "gap-03-mumbai-colaba",
+      "zone_name": "Apollo Bunder & Gateway Waterfront",
+      "city": "Mumbai",
+      "footfall_density": "HIGH",
+      "transit_connectivity_gap": "LOW",
+      "sanitation_gap": "MODERATE",
+      "parking_shortage": true,
+      "first_aid_gap": false,
+      "recommended_action": "Create dedicated barrier-free boarding pontoon for harbor ferries and increase evening security patrol."
+    },
+    {
+      "id": "gap-04-amer-jaipur",
+      "zone_name": "Amer Fort Hill Approach & Maota Lake",
+      "city": "Jaipur",
+      "footfall_density": "HIGH",
+      "transit_connectivity_gap": "MODERATE",
+      "sanitation_gap": "MODERATE",
+      "parking_shortage": true,
+      "first_aid_gap": false,
+      "recommended_action": "Deploy one-way traffic circulation and install shaded resting pavilions along cobblestone pedestrian climb."
+    }
+  ]
+}

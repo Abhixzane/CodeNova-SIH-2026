@@ -77,7 +77,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <Landmark className="w-3.5 h-3.5 text-amber-500" />
           </div>
           <div className="mt-2">
-            <span className="text-xl font-black text-slate-900">{stats?.heritage_count || 42}</span>
+            <span className="text-xl font-black text-slate-900">{stats?.heritage_count || 45}</span>
             <span className="text-[10px] text-slate-500 block">UNESCO World Heritage</span>
           </div>
         </div>

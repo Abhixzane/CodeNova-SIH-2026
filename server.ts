@@ -82,6 +82,15 @@ const railwayStationsData: RailwayStation[] = [];
 let mumbaiLocalNetwork: any = null;
 let hotelsData: any[] = [];
 let faresConfig: any = null;
+let cultureData: any[] = [];
+let artisansData: any[] = [];
+let providersData: any[] = [];
+let facilitiesData: any[] = [];
+let accessibilityData: any[] = [];
+let clustersData: any[] = [];
+let suburbanNetworksData: any[] = [];
+let destinationHealthData: any = null;
+let reportsData: any[] = [];
 
 // In-Memory User Data
 const usersStore: Map<string, any> = new Map();
@@ -157,7 +166,14 @@ function loadData() {
       heritageData.push(...rawHeritage);
       for (const item of rawHeritage) {
         if (item && item.id) {
-          placesData.set(item.id.toLowerCase(), item);
+          const normItem = {
+            ...item,
+            category: item.category || 'Architectural & Colonial',
+            summary: item.summary || item.historical_significance?.slice(0, 200) || '',
+            tags: item.tags || ['heritage', 'unesco'],
+            features: item.features || { map: true, navigation: true, ai: true, '3d': Boolean(item.model_3d?.available || item.model_3d?.has_model) },
+          };
+          placesData.set(item.id.toLowerCase(), normItem);
         }
       }
     }
@@ -170,31 +186,92 @@ function loadData() {
         for (const p of raw.places) {
           const id = (p.id || '').toLowerCase();
           if (id && !placesData.has(id)) {
+            const cityObj = citiesData.find((c: any) => c.id === p.city_id);
+            const stateObj = statesData.find((s: any) => s.id === p.state_id);
+            const resolvedCity = p.city || (cityObj ? cityObj.name : p.city_id ? p.city_id.charAt(0).toUpperCase() + p.city_id.slice(1) : '');
+            const resolvedState = p.state || (stateObj ? stateObj.name : p.state_id ? p.state_id.charAt(0).toUpperCase() + p.state_id.slice(1) : '');
+
             placesData.set(id, {
               id: p.id,
               name: p.name,
-              state: p.state || '',
-              city: p.city || '',
+              state: resolvedState,
+              state_id: p.state_id || stateObj?.id || '',
+              city: resolvedCity,
+              city_id: p.city_id || cityObj?.id || '',
               country: 'India',
               category: p.category || 'heritage',
-              summary: p.summary || p.description || '',
+              summary: p.summary || p.short_description || p.description || '',
               description: p.description || '',
               coordinates: {
                 lat: p.coordinates?.lat || p.latitude || 18.922,
                 lng: p.coordinates?.lng || p.longitude || 72.8347,
               },
-              rating: p.rating || 4.5,
-              thumbnail_url: p.thumbnail_url || p.hero_image_url || '',
-              images: p.images || (p.thumbnail_url ? [p.thumbnail_url] : []),
+              rating: p.rating || 4.7,
+              thumbnail_url: p.thumbnail_url || p.hero_image_url || (p.image_urls && p.image_urls[0]) || '',
+              images: p.images || p.image_urls || (p.thumbnail_url ? [p.thumbnail_url] : []),
               tags: p.tags || ['heritage', 'tourism'],
-              features: p.features || { map: true, navigation: true, ai: true, '3d': false },
+              features: p.features || { map: true, navigation: true, ai: true, '3d': Boolean(p.three_d_model_url) },
             });
           }
         }
       }
     }
 
-    console.log(`[Server] Loaded ${statesData.length} states, ${citiesData.length} cities, ${placesData.size} places, ${railwayStationsData.length} stations.`);
+    // Load culture & cuisine
+    const culturePath = path.join(dataDir, 'culture.json');
+    if (fs.existsSync(culturePath)) {
+      cultureData = JSON.parse(fs.readFileSync(culturePath, 'utf-8'));
+    }
+
+    // Load artisans
+    const artisansPath = path.join(dataDir, 'artisans.json');
+    if (fs.existsSync(artisansPath)) {
+      artisansData = JSON.parse(fs.readFileSync(artisansPath, 'utf-8'));
+    }
+
+    // Load providers
+    const providersPath = path.join(dataDir, 'providers.json');
+    if (fs.existsSync(providersPath)) {
+      providersData = JSON.parse(fs.readFileSync(providersPath, 'utf-8'));
+    }
+
+    // Load facilities
+    const facilitiesPath = path.join(dataDir, 'facilities.json');
+    if (fs.existsSync(facilitiesPath)) {
+      facilitiesData = JSON.parse(fs.readFileSync(facilitiesPath, 'utf-8'));
+    }
+
+    // Load accessibility
+    const accessibilityPath = path.join(dataDir, 'accessibility.json');
+    if (fs.existsSync(accessibilityPath)) {
+      accessibilityData = JSON.parse(fs.readFileSync(accessibilityPath, 'utf-8'));
+    }
+
+    // Load clusters
+    const clustersPath = path.join(dataDir, 'clusters.json');
+    if (fs.existsSync(clustersPath)) {
+      clustersData = JSON.parse(fs.readFileSync(clustersPath, 'utf-8'));
+    }
+
+    // Load suburban networks
+    const suburbanPath = path.join(dataDir, 'suburban_networks.json');
+    if (fs.existsSync(suburbanPath)) {
+      suburbanNetworksData = JSON.parse(fs.readFileSync(suburbanPath, 'utf-8'));
+    }
+
+    // Load destination health & gap map
+    const healthPath = path.join(dataDir, 'destination_health.json');
+    if (fs.existsSync(healthPath)) {
+      destinationHealthData = JSON.parse(fs.readFileSync(healthPath, 'utf-8'));
+    }
+
+    // Load heritage condition reports
+    const reportsPath = path.join(dataDir, 'reports.json');
+    if (fs.existsSync(reportsPath)) {
+      reportsData = JSON.parse(fs.readFileSync(reportsPath, 'utf-8'));
+    }
+
+    console.log(`[Server] Loaded ${statesData.length} states, ${citiesData.length} cities, ${placesData.size} places, ${railwayStationsData.length} stations, ${cultureData.length} cultural items, ${artisansData.length} artisans, ${providersData.length} providers.`);
   } catch (err) {
     console.error('[Server] Error loading datasets:', err);
   }
@@ -262,14 +339,26 @@ app.get('/api/heritage', (req, res) => {
   let results = [...heritageData];
 
   if (category && (category as string).toLowerCase() !== 'all') {
-    results = results.filter(
-      (h) => h.category?.toLowerCase() === (category as string).toLowerCase()
-    );
+    const catQuery = (category as string).toLowerCase().trim();
+    results = results.filter((h) => {
+      const hCat = (h.category || '').toLowerCase();
+      const hTags = (h.tags || []).map((t: string) => t.toLowerCase());
+      return (
+        hCat === catQuery ||
+        hCat.includes(catQuery) ||
+        catQuery.includes(hCat) ||
+        hTags.some((t: string) => t.includes(catQuery) || catQuery.includes(t))
+      );
+    });
   }
 
   if (state && (state as string).toLowerCase() !== 'all') {
     const s = (state as string).toLowerCase().trim();
-    results = results.filter((h) => h.state?.toLowerCase().includes(s));
+    results = results.filter((h) =>
+      h.state?.toLowerCase().includes(s) ||
+      (h as any).state_id?.toLowerCase() === s ||
+      s.includes(h.state?.toLowerCase() || '')
+    );
   }
 
   if (search) {
@@ -279,7 +368,8 @@ app.get('/api/heritage', (req, res) => {
         h.name.toLowerCase().includes(q) ||
         h.city?.toLowerCase().includes(q) ||
         h.state?.toLowerCase().includes(q) ||
-        h.summary?.toLowerCase().includes(q)
+        h.summary?.toLowerCase().includes(q) ||
+        h.historical_significance?.toLowerCase().includes(q)
     );
   }
 
@@ -297,7 +387,7 @@ app.get('/api/heritage', (req, res) => {
 app.get('/api/heritage/:id', (req, res) => {
   const id = req.params.id.toLowerCase().trim();
   const found = heritageData.find(
-    (h) => h.id.toLowerCase() === id || h.name.toLowerCase() === id
+    (h) => h.id.toLowerCase() === id || h.name.toLowerCase() === id || (h as any).slug?.toLowerCase() === id
   );
   if (found) {
     return res.json(found);
@@ -531,7 +621,11 @@ app.get(['/api/destinations', '/api/places'], (req, res) => {
 
   if (city) {
     const c = (city as string).toLowerCase().trim();
-    results = results.filter((p) => p.city?.toLowerCase().includes(c) || (p as any).city_id?.toLowerCase() === c);
+    results = results.filter((p) =>
+      p.city?.toLowerCase().includes(c) ||
+      (p as any).city_id?.toLowerCase() === c ||
+      c.includes(p.city?.toLowerCase() || '')
+    );
   }
 
   if (category && (category as string).toLowerCase() !== 'all') {
@@ -580,11 +674,18 @@ app.get(['/api/destinations/:id', '/api/places/:id'], (req, res) => {
   const place = placesData.get(id);
 
   if (!place) {
-    // Check if slug or name matches
+    // Check if slug or name matches in placesData
     for (const p of placesData.values()) {
       if (p.id.toLowerCase() === id || p.name.toLowerCase() === id || (p as any).slug === id) {
         return res.json(p);
       }
+    }
+    // Check heritageData
+    const hMatch = heritageData.find(
+      (h) => h.id.toLowerCase() === id || h.name.toLowerCase() === id || (h as any).slug?.toLowerCase() === id
+    );
+    if (hMatch) {
+      return res.json(hMatch);
     }
     return res.status(404).json({ detail: 'Place not found' });
   }
@@ -657,6 +758,268 @@ app.get('/api/hotels/nearby', (req, res) => {
 // Fare Tariffs configuration endpoint
 app.get('/api/fares/tariffs', (req, res) => {
   res.json(faresConfig || { error: 'Fares configuration not loaded' });
+});
+
+// -------------------------------------------------------------
+// Cultural Heritage, Artisans & Local Experience Endpoints
+// -------------------------------------------------------------
+app.get('/api/culture', (req, res) => {
+  const { city, category } = req.query;
+  let results = [...cultureData];
+
+  if (city) {
+    const c = (city as string).toLowerCase().trim();
+    results = results.filter((item) => item.city?.toLowerCase().includes(c) || item.state?.toLowerCase().includes(c));
+  }
+
+  if (category) {
+    const cat = (category as string).toLowerCase().trim();
+    results = results.filter((item) => item.category?.toLowerCase().includes(cat));
+  }
+
+  res.json(results);
+});
+
+app.get('/api/artisans', (req, res) => {
+  const { city, gi_only } = req.query;
+  let results = [...artisansData];
+
+  if (city) {
+    const c = (city as string).toLowerCase().trim();
+    results = results.filter((a) => a.city?.toLowerCase().includes(c) || a.state?.toLowerCase().includes(c));
+  }
+
+  if (gi_only === 'true') {
+    results = results.filter((a) => a.gi_tag_status === true);
+  }
+
+  res.json(results);
+});
+
+app.get('/api/providers', (req, res) => {
+  const { city, category, verification_status } = req.query;
+  let results = [...providersData];
+
+  if (city) {
+    const c = (city as string).toLowerCase().trim();
+    results = results.filter((p) => p.city?.toLowerCase().includes(c) || p.state?.toLowerCase().includes(c));
+  }
+
+  if (category) {
+    const cat = (category as string).toUpperCase().trim();
+    results = results.filter((p) => p.category?.toUpperCase() === cat);
+  }
+
+  if (verification_status) {
+    const v = (verification_status as string).toUpperCase().trim();
+    results = results.filter((p) => p.verification_status?.toUpperCase() === v);
+  }
+
+  res.json(results);
+});
+
+// -------------------------------------------------------------
+// Facilities & Accessibility Endpoints
+// -------------------------------------------------------------
+app.get('/api/facilities', (req, res) => {
+  const { city, type, accessible } = req.query;
+  let results = [...facilitiesData];
+
+  if (city) {
+    const c = (city as string).toLowerCase().trim();
+    results = results.filter((f) => f.city?.toLowerCase().includes(c));
+  }
+
+  if (type) {
+    const t = (type as string).toUpperCase().trim();
+    results = results.filter((f) => f.type?.toUpperCase() === t);
+  }
+
+  if (accessible === 'true') {
+    results = results.filter((f) => f.is_accessible === true);
+  }
+
+  res.json(results);
+});
+
+app.get('/api/facilities/nearby', (req, res) => {
+  const lat = parseFloat(req.query.lat as string) || 18.922;
+  const lng = parseFloat(req.query.lng as string) || 72.8347;
+  const radiusKm = parseFloat(req.query.radius_km as string) || 5;
+
+  const nearby = facilitiesData
+    .map((f) => {
+      const dist = haversineDistanceKm(lat, lng, f.lat, f.lng);
+      return { ...f, distance_km: dist };
+    })
+    .filter((f) => f.distance_km <= radiusKm)
+    .sort((a, b) => a.distance_km - b.distance_km);
+
+  res.json(nearby);
+});
+
+app.get('/api/accessibility', (req, res) => {
+  const { place_id, city, wheelchair } = req.query;
+  let results = [...accessibilityData];
+
+  if (place_id) {
+    const pid = (place_id as string).toLowerCase().trim();
+    results = results.filter((a) => a.place_id.toLowerCase() === pid);
+  }
+
+  if (city) {
+    const c = (city as string).toLowerCase().trim();
+    results = results.filter((a) => a.city?.toLowerCase().includes(c) || a.state?.toLowerCase().includes(c));
+  }
+
+  if (wheelchair) {
+    const w = (wheelchair as string).toUpperCase().trim();
+    results = results.filter((a) => a.wheelchair_access === w);
+  }
+
+  res.json(results);
+});
+
+// -------------------------------------------------------------
+// Heritage Clusters & Commuter Networks Endpoints
+// -------------------------------------------------------------
+app.get('/api/clusters', (req, res) => {
+  const { city } = req.query;
+  let results = [...clustersData];
+
+  if (city) {
+    const c = (city as string).toLowerCase().trim();
+    results = results.filter((cl) => cl.city?.toLowerCase().includes(c) || cl.state?.toLowerCase().includes(c));
+  }
+
+  res.json(results);
+});
+
+app.get('/api/suburban-networks', (req, res) => {
+  const { city } = req.query;
+  let results = [...suburbanNetworksData];
+
+  if (city) {
+    const c = (city as string).toLowerCase().trim();
+    results = results.filter((n) => n.city?.toLowerCase().includes(c));
+  }
+
+  res.json(results);
+});
+
+// -------------------------------------------------------------
+// Destination Health Dashboard & Tourism Gap Map Endpoints
+// -------------------------------------------------------------
+app.get('/api/destination-health', (req, res) => {
+  const { city } = req.query;
+  if (!destinationHealthData) {
+    return res.status(503).json({ error: 'Destination health metrics not loaded' });
+  }
+
+  if (city) {
+    const c = (city as string).toLowerCase().trim();
+    const cityMetrics = destinationHealthData.cities?.filter(
+      (item: any) => item.city_id?.toLowerCase().includes(c) || item.city_name?.toLowerCase().includes(c)
+    );
+    const gapZones = destinationHealthData.gap_map_zones?.filter(
+      (zone: any) => zone.city?.toLowerCase().includes(c)
+    );
+
+    return res.json({
+      provenance_disclaimer: destinationHealthData.provenance_disclaimer,
+      provenance_badge: destinationHealthData.provenance_badge,
+      cities: cityMetrics || [],
+      gap_map_zones: gapZones || [],
+    });
+  }
+
+  res.json(destinationHealthData);
+});
+
+// -------------------------------------------------------------
+// Heritage Condition Reporting Workflow Endpoints
+// -------------------------------------------------------------
+app.get('/api/reports', (req, res) => {
+  const { site_id, city, status } = req.query;
+  let results = [...reportsData];
+
+  if (site_id) {
+    const sid = (site_id as string).toLowerCase().trim();
+    results = results.filter((r) => r.site_id?.toLowerCase() === sid);
+  }
+
+  if (city) {
+    const c = (city as string).toLowerCase().trim();
+    results = results.filter((r) => r.city?.toLowerCase().includes(c));
+  }
+
+  if (status) {
+    const s = (status as string).toUpperCase().trim();
+    results = results.filter((r) => r.status?.toUpperCase() === s);
+  }
+
+  res.json(results);
+});
+
+app.post('/api/reports', (req, res) => {
+  const { site_id, site_name, city, reported_by, user_role, issue_category, severity, description, image_url } = req.body;
+
+  if (!site_id || !description) {
+    return res.status(400).json({ error: 'site_id and description are required fields' });
+  }
+
+  const newReport = {
+    id: `rep-${Date.now()}`,
+    site_id,
+    site_name: site_name || site_id,
+    city: city || 'General',
+    reported_by: reported_by || 'Verified Citizen Reporter',
+    user_role: user_role || 'TRAVELLER',
+    issue_category: issue_category || 'FACILITY_BREAKDOWN',
+    severity: severity || 'MEDIUM',
+    description,
+    status: 'SUBMITTED',
+    image_url: image_url || null,
+    timeline: [
+      {
+        status: 'SUBMITTED',
+        timestamp: new Date().toISOString(),
+        note: 'Report officially submitted through citizen verification portal.',
+        actor: reported_by || 'Citizen Reporter',
+      },
+    ],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  reportsData.unshift(newReport);
+  res.status(201).json(newReport);
+});
+
+app.patch('/api/reports/:id/status', (req, res) => {
+  const { id } = req.params;
+  const { status, note, actor } = req.body;
+
+  const report = reportsData.find((r) => r.id === id);
+  if (!report) {
+    return res.status(404).json({ error: 'Condition report not found' });
+  }
+
+  const validStatuses = ['SUBMITTED', 'UNDER_REVIEW', 'VERIFIED', 'ASSIGNED', 'IN_PROGRESS', 'RESOLVED', 'REJECTED'];
+  if (!validStatuses.includes(status)) {
+    return res.status(400).json({ error: `Invalid status. Must be one of: ${validStatuses.join(', ')}` });
+  }
+
+  report.status = status;
+  report.updated_at = new Date().toISOString();
+  report.timeline.push({
+    status,
+    timestamp: new Date().toISOString(),
+    note: note || `Status updated to ${status}`,
+    actor: actor || 'Authorized Official',
+  });
+
+  res.json(report);
 });
 
 // -------------------------------------------------------------
@@ -1327,19 +1690,23 @@ app.get('/api/weather', (req, res) => {
 // AI Tourism Assistant Chat Endpoint
 // -------------------------------------------------------------
 app.post('/api/ai/chat', async (req, res) => {
-  const { message, conversation_id, place_id, city } = req.body;
+  const { message, conversation_id, place_id, city, history } = req.body;
   const convId = conversation_id || `conv-${Date.now()}`;
   const query = (message || '').toLowerCase().trim();
 
   // Find relevant places to recommend
-  const cityFilter = city?.toLowerCase();
+  const cityFilter = city?.toLowerCase().trim();
   const allPlaces = Array.from(placesData.values());
-  const candidatePlaces = cityFilter
-    ? allPlaces.filter((p) => p.city.toLowerCase() === cityFilter)
+  const candidatePlaces = cityFilter && cityFilter !== 'all india'
+    ? allPlaces.filter((p) => {
+        const c = p.city?.toLowerCase() || '';
+        const cid = ((p as any).city_id || '').toLowerCase();
+        return c.includes(cityFilter) || cityFilter.includes(c) || cid === cityFilter;
+      })
     : allPlaces;
 
   const matched = candidatePlaces
-    .filter((p) => query.includes(p.name.toLowerCase()) || query.includes(p.category.toLowerCase()))
+    .filter((p) => query.includes(p.name.toLowerCase()) || query.includes((p.category || '').toLowerCase()))
     .slice(0, 3);
 
   const suggestedPlaces = (matched.length > 0 ? matched : candidatePlaces.slice(0, 3)).map((p) => ({
@@ -1359,26 +1726,38 @@ app.post('/api/ai/chat', async (req, res) => {
         .map((p) => `- ${p.name} (${p.city}, ${p.category}): ${p.summary}`)
         .join('\n');
 
-      const prompt = `You are YatraVerse's Intelligent Tourism Assistant for Indian destinations.
-The user is asking: "${message}"
-City context: ${city || 'India'}
+      const systemInstruction = `You are YatraVerse's Intelligent Tourism Specialist for Indian destinations, covering 45 UNESCO & ASI verified heritage monuments, multimodal transit networks (suburban rail, metro, bus), visiting tariffs, and daily circuit plans across all 36 States & Union Territories.
+Active city: ${city || 'All India'}
 ${place_id ? `Active place ID: ${place_id}` : ''}
 
-Available destinations in this region:
+Key destinations in this region:
 ${placesContext}
 
-Provide a helpful, culturally rich, and practical travel recommendation. Include travel tips, best visiting times, and multimodal transit advice. Keep the response organized, engaging, and under 250 words.`;
+Provide culturally rich, authentic, and practical travel recommendations. Include transit connections, visiting hours, and local heritage context. Keep answers structured, engaging, and under 250 words.`;
+
+      let contents: any = `System Context: ${systemInstruction}\n\nUser Question: ${message}`;
+      if (Array.isArray(history) && history.length > 0) {
+        contents = [
+          { role: 'user', parts: [{ text: `System Context: ${systemInstruction}` }] },
+          { role: 'model', parts: [{ text: 'Understood. I am ready to guide you through India\'s heritage, monuments, and optimal transit routes.' }] },
+          ...history.map((h: any) => ({
+            role: h.role === 'user' ? 'user' : 'model',
+            parts: [{ text: h.content || h.text || '' }]
+          })),
+          { role: 'user', parts: [{ text: message }] }
+        ];
+      }
 
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: prompt,
+        model: 'gemini-3.8-flash',
+        contents,
       });
 
       return res.json({
         conversation_id: convId,
         reply: response.text || 'Welcome to India! Here are curated recommendations for your journey.',
         suggested_places: suggestedPlaces,
-        sources: ['Ministry of Tourism Verified Data', 'Indian Railways Transit Network', 'Gemini AI Knowledge'],
+        sources: ['Ministry of Tourism Verified Data', 'Indian Railways Transit Network', 'Gemini AI Intelligence'],
       });
     } catch (aiErr) {
       console.warn('[Server] Gemini call failed, falling back to rule-based engine:', aiErr);
@@ -1389,17 +1768,17 @@ Provide a helpful, culturally rich, and practical travel recommendation. Include
   let reply = '';
   if (query.includes('itinerary') || query.includes('plan') || query.includes('day')) {
     reply = `Here is a curated itinerary plan for exploring ${city || 'India'}:\n\n` +
-      `1. **Morning**: Start at ${suggestedPlaces[0]?.name || 'Gateway of India'} to beat the crowds and enjoy ideal morning light.\n` +
+      `1. **Morning**: Start at ${suggestedPlaces[0]?.name || 'the primary heritage complex'} to beat the crowds and enjoy ideal morning light.\n` +
       `2. **Midday**: Explore the heritage architecture, museums, and local art galleries nearby.\n` +
-      `3. **Evening**: Conclude with a seaside promenade stroll or sunset viewpoints.\n\n` +
+      `3. **Evening**: Conclude with a scenic sunset viewpoint or riverfront promenade.\n\n` +
       `*Tip: Use the interactive Itinerary Planner tab to customize duration, pace, and transit modes!*`;
   } else if (query.includes('fare') || query.includes('route') || query.includes('reach') || query.includes('metro') || query.includes('train')) {
     reply = `Travel intelligence for ${city || 'your route'}:\n\n` +
-      `• **Suburban Railway / Metro**: Most cost-effective (₹10 - ₹20). Avoid rush hours (8:30-10:30 AM & 6-8 PM).\n` +
+      `• **Suburban Railway / Metro**: Most cost-effective (₹10 - ₹20). Avoid peak rush hours (8:30-10:30 AM & 6-8 PM).\n` +
       `• **Metered Auto / Taxis**: Ideal for point-to-point connections with transparent fares.\n` +
       `• **Pedestrian Corridors**: Heritage precincts are best experienced on foot with dedicated footpaths and signage.`;
   } else {
-    reply = `Namaste! Welcome to YatraVerse. Exploring ${city || 'India'} is an unforgettable journey through millennia of history, living traditions, and vibrant street life. ` +
+    reply = `Namaste! Welcome to YatraVerse. Exploring ${city || 'India'} is an unforgettable journey through millennia of history, living traditions, and vibrant culture. ` +
       `I recommend visiting **${suggestedPlaces[0]?.name || 'top landmarks'}** and nearby heritage sites. How can I help you customize your visit?`;
   }
 
@@ -1415,57 +1794,116 @@ Provide a helpful, culturally rich, and practical travel recommendation. Include
 // Itinerary Planner Endpoint
 // -------------------------------------------------------------
 app.post('/api/itinerary', (req, res) => {
-  const { city = 'Mumbai', duration_hours = 6, interests = ['heritage'], budget_level = 'moderate' } = req.body;
+  const {
+    city = 'Delhi',
+    duration_hours = 8,
+    interests = ['heritage'],
+    budget_level = 'moderate',
+    pace = 'moderate'
+  } = req.body;
 
-  const cityPlaces = Array.from(placesData.values()).filter(
-    (p) => p.city.toLowerCase() === city.toLowerCase()
+  const reqCityNorm = (city || '').toLowerCase().trim();
+
+  // Find places strictly belonging to this city
+  const cityPlaces = Array.from(placesData.values()).filter((p) => {
+    const pCity = (p.city || '').toLowerCase().trim();
+    const pCityId = ((p as any).city_id || '').toLowerCase().trim();
+    return (
+      pCity === reqCityNorm ||
+      pCityId === reqCityNorm ||
+      pCity.includes(reqCityNorm) ||
+      reqCityNorm.includes(pCity)
+    );
+  });
+
+  // Strict Validation: If no places found for this city, return 404 rather than injecting Mumbai places!
+  if (cityPlaces.length === 0) {
+    return res.status(404).json({
+      error: `No verified heritage destinations found for requested hub '${city}'.`,
+      city,
+      total_places: 0,
+      stops: []
+    });
+  }
+
+  // Pacing parameters
+  const paceConfig = {
+    relaxed: { visitMins: 85, bufferMins: 25, speedKmh: 18, stopDiv: 2.2 },
+    moderate: { visitMins: 60, bufferMins: 18, speedKmh: 22, stopDiv: 1.7 },
+    fast: { visitMins: 45, bufferMins: 12, speedKmh: 28, stopDiv: 1.3 },
+  }[pace as 'relaxed' | 'moderate' | 'fast'] || { visitMins: 60, bufferMins: 18, speedKmh: 22, stopDiv: 1.7 };
+
+  // Calculate target number of stops
+  const maxStops = Math.min(
+    Math.max(2, Math.floor(duration_hours / paceConfig.stopDiv)),
+    cityPlaces.length
   );
+  const selectedPlaces = cityPlaces.slice(0, maxStops);
 
-  const availablePlaces = cityPlaces.length > 0 ? cityPlaces : Array.from(placesData.values()).slice(0, 8);
-
-  const totalMinutes = duration_hours * 60;
-  const numStops = Math.min(Math.max(2, Math.floor(duration_hours / 1.5)), availablePlaces.length);
-  const selectedPlaces = availablePlaces.slice(0, numStops);
+  // Budget transit mode and cost modeling
+  const costPerLeg = budget_level === 'budget' ? 20 : budget_level === 'luxury' ? 320 : 75;
+  const transitMode = budget_level === 'budget'
+    ? 'Suburban Rail / Metro'
+    : budget_level === 'luxury'
+    ? 'AC Cab / Chauffeur'
+    : 'Auto-Rickshaw / Metro';
 
   let cumulativeTravel = 0;
   let cumulativeVisit = 0;
   let totalCost = 0;
 
   const stops = selectedPlaces.map((place, idx) => {
-    const travelTime = idx === 0 ? null : Math.round(15 + idx * 5);
-    const visitTime = Math.min(90, Math.floor((totalMinutes - numStops * 20) / numStops));
-    const dist = idx === 0 ? null : (2.5 + idx * 1.2);
-    const cost = budget_level === 'budget' ? 10 : budget_level === 'premium' ? 250 : 60;
+    let dist: number | null = null;
+    let travelTime: number | null = null;
 
-    if (travelTime) cumulativeTravel += travelTime;
+    if (idx > 0) {
+      const prev = selectedPlaces[idx - 1];
+      const prevLat = prev.coordinates?.lat || (prev as any).latitude || 0;
+      const prevLng = prev.coordinates?.lng || (prev as any).longitude || 0;
+      const curLat = place.coordinates?.lat || (place as any).latitude || 0;
+      const curLng = place.coordinates?.lng || (place as any).longitude || 0;
+
+      dist = haversineDistanceKm(prevLat, prevLng, curLat, curLng);
+      if (!dist || dist < 0.2) dist = 1.6 + idx * 0.7;
+
+      travelTime = Math.round((dist / paceConfig.speedKmh) * 60 + paceConfig.bufferMins);
+      cumulativeTravel += travelTime;
+    }
+
+    const visitTime = paceConfig.visitMins;
     cumulativeVisit += visitTime;
-    totalCost += cost;
+    const legCost = idx === 0 ? 0 : costPerLeg;
+    totalCost += legCost;
 
     return {
       order: idx + 1,
       place_id: place.id,
       name: place.name,
+      city: place.city,
+      city_id: (place as any).city_id,
       category: place.category,
       coordinates: place.coordinates,
-      thumbnail_url: place.thumbnail_url,
+      thumbnail_url: place.thumbnail_url || (place.images && place.images[0]) || '',
       recommended_duration_minutes: visitTime,
       travel_time_from_previous_minutes: travelTime,
-      travel_mode_from_previous: idx === 0 ? null : (dist && dist < 1.5 ? 'Walk' : 'Transit / Taxi'),
-      distance_from_previous_km: dist,
-      estimated_cost: cost,
-      visit_tips: place.visiting_info?.tips?.[0] || 'Allocate time for photography and historical exploration.',
-      has_3d: Boolean(place.model_3d?.has_model),
+      travel_mode_from_previous: idx === 0 ? null : (dist && dist < 1.2 ? 'Walk' : transitMode),
+      distance_from_previous_km: dist ? Math.round(dist * 10) / 10 : null,
+      estimated_cost: legCost,
+      visit_tips: (place as any).visiting_info?.tips?.[0] || place.summary || 'Ideal visiting window with great natural lighting.',
+      has_3d: Boolean((place as any).features?.['3d'] || (place as any).model_3d?.available || (place as any).model_3d?.has_model),
     };
   });
 
   res.json({
     city,
     duration_hours,
+    pace,
+    budget_level,
     total_places: stops.length,
     estimated_total_visiting_minutes: cumulativeVisit,
     estimated_total_travel_minutes: cumulativeTravel,
     stops,
-    summary: `Curated ${duration_hours}-hour ${budget_level} itinerary covering ${stops.length} key landmarks in ${city}.`,
+    summary: `Curated ${duration_hours}-hour ${pace} circuit (${budget_level} tier) exploring ${stops.length} key destinations in ${city}.`,
     estimated_total_cost: totalCost,
   });
 });

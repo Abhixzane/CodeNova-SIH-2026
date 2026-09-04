@@ -55,6 +55,7 @@ export const AdvancedAIAssistant: React.FC<AdvancedAIAssistantProps> = ({
         city: selectedCity,
         place_id: initialPlaceId,
         place_name: initialPlaceName,
+        history: messages.slice(-10),
       });
 
       setMessages((prev) => [
