@@ -149,7 +149,7 @@ export const ItineraryPage: React.FC<ItineraryPageProps> = ({
         <button
           onClick={handleGenerate}
           disabled={loading}
-          className="w-full py-3 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-charcoal font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20"
+          className="w-full py-3 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20"
         >
           {loading ? (
             <>
@@ -188,11 +188,11 @@ export const ItineraryPage: React.FC<ItineraryPageProps> = ({
               <button
                 onClick={handleSave}
                 disabled={saveSuccess}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-charcoal text-xs font-bold transition shadow-md"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold transition shadow-md"
               >
                 {saveSuccess ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-charcoal" />
+                    <Check className="w-3.5 h-3.5 text-white" />
                     <span>Saved to My Trips!</span>
                   </>
                 ) : (
