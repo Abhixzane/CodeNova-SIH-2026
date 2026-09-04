@@ -31,7 +31,7 @@ export const RoutesPage: React.FC<RoutesPageProps> = ({ places, onSelectPlace, o
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+    <div className="max-w-7xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
         <div className="space-y-1">

@@ -97,6 +97,95 @@ const usersStore: Map<string, any> = new Map();
 const favoritesStore: Map<string, string[]> = new Map();
 const tripsStore: Map<string, any[]> = new Map();
 
+// Canonical City Mappings & Scoping Helpers to prevent cross-city contamination
+const CITY_ALIASES: Record<string, string[]> = {
+  mumbai: ['mumbai', 'bombay', 'gharapuri island / mumbai', 'sanjay gandhi national park'],
+  delhi: ['delhi', 'new delhi', 'old delhi', 'delhi (nct)', 'nct'],
+  varanasi: ['varanasi', 'kashi', 'banaras'],
+  agra: ['agra', 'agra district'],
+  jaipur: ['jaipur'],
+  kochi: ['kochi', 'cochin', 'ernakulam'],
+  kolkata: ['kolkata', 'calcutta'],
+  amritsar: ['amritsar'],
+  goa: ['goa', 'panaji', 'old goa', 'velha goa', 'sinquerim', 'candolim'],
+  bengaluru: ['bengaluru', 'bangalore'],
+  hyderabad: ['hyderabad', 'secunderabad'],
+  pune: ['pune'],
+  udaipur: ['udaipur'],
+  hampi: ['hampi', 'vijayanagara', 'hosapete'],
+  madurai: ['madurai'],
+  'chhatrapati sambhajinagar': ['chhatrapati sambhajinagar', 'aurangabad'],
+  'bodh gaya': ['bodh gaya', 'nalanda', 'rajgir'],
+  bhubaneswar: ['bhubaneswar', 'konark', 'puri'],
+  srinagar: ['srinagar'],
+  'port blair': ['port blair', 'andaman'],
+  shimla: ['shimla'],
+  jodhpur: ['jodhpur'],
+  jaisalmer: ['jaisalmer'],
+  gangtok: ['gangtok'],
+};
+
+const CANONICAL_CITY_NAMES: Record<string, string> = {
+  mumbai: 'Mumbai',
+  delhi: 'Delhi',
+  varanasi: 'Varanasi',
+  agra: 'Agra',
+  jaipur: 'Jaipur',
+  kochi: 'Kochi',
+  kolkata: 'Kolkata',
+  amritsar: 'Amritsar',
+  goa: 'Goa',
+  bengaluru: 'Bengaluru',
+  hyderabad: 'Hyderabad',
+  pune: 'Pune',
+  udaipur: 'Udaipur',
+  hampi: 'Hampi',
+  madurai: 'Madurai',
+  'chhatrapati sambhajinagar': 'Chhatrapati Sambhajinagar',
+  'bodh gaya': 'Bodh Gaya',
+  bhubaneswar: 'Bhubaneswar',
+  srinagar: 'Srinagar',
+  'port blair': 'Port Blair',
+  shimla: 'Shimla',
+  jodhpur: 'Jodhpur',
+  jaisalmer: 'Jaisalmer',
+  gangtok: 'Gangtok',
+};
+
+function getCanonicalCityId(cityNameOrId: string): string {
+  const norm = (cityNameOrId || '').toLowerCase().trim();
+  if (!norm) return '';
+  for (const [canonId, aliases] of Object.entries(CITY_ALIASES)) {
+    if (canonId === norm || aliases.some((a) => a === norm || norm.includes(a) || a.includes(norm))) {
+      return canonId;
+    }
+  }
+  return norm.replace(/[^a-z0-9]/g, '-');
+}
+
+function getCanonicalCityName(cityId: string): string {
+  const norm = (cityId || '').toLowerCase().trim();
+  if (CANONICAL_CITY_NAMES[norm]) return CANONICAL_CITY_NAMES[norm];
+  return norm ? norm.charAt(0).toUpperCase() + norm.slice(1) : '';
+}
+
+function isPlaceInCity(place: any, targetCity: string): boolean {
+  if (!place || !targetCity) return false;
+  const targetCanon = getCanonicalCityId(targetCity);
+  if (!targetCanon) return false;
+  const pCity = (place.city || '').toLowerCase().trim();
+  const pCityId = ((place as any).city_id || '').toLowerCase().trim();
+
+  if (pCityId && getCanonicalCityId(pCityId) === targetCanon) return true;
+  if (pCity && getCanonicalCityId(pCity) === targetCanon) return true;
+
+  const aliases = CITY_ALIASES[targetCanon] || [targetCanon];
+  return aliases.some((a) =>
+    (pCity && (pCity === a || pCity.includes(a))) ||
+    (pCityId && (pCityId === a || pCityId.includes(a)))
+  );
+}
+
 // Load datasets
 function loadData() {
   try {
@@ -215,6 +304,21 @@ function loadData() {
           }
         }
       }
+    }
+
+    // Comprehensive City Normalization pass for all places in placesData
+    for (const [id, place] of placesData.entries()) {
+      let cId = ((place as any).city_id || '').toLowerCase().trim();
+      let cName = (place.city || '').trim();
+
+      if (!cId && cName) {
+        cId = getCanonicalCityId(cName);
+      }
+      if (!cName && cId) {
+        cName = getCanonicalCityName(cId);
+      }
+      (place as any).city_id = cId;
+      place.city = cName;
     }
 
     // Load culture & cuisine
@@ -1066,7 +1170,13 @@ app.get('/api/railway-stations', (req, res) => {
     id: s.id,
     name: s.name,
     code: s.code,
+    city: s.city,
+    state: s.state,
+    lat: s.lat,
+    lng: s.lng,
     line: s.lines ? s.lines.join(', ') : 'Suburban Hub',
+    lines: s.lines || [],
+    is_junction: Boolean(s.is_junction),
     distance_km: 1.5,
     walking_time_mins: 18,
     road_time_mins: 8,
@@ -1077,8 +1187,8 @@ app.get('/api/railway-stations', (req, res) => {
 });
 
 app.get('/api/railway-stations/nearby', (req, res) => {
-  const lat = parseFloat(req.query.lat as string) || 18.94;
-  const lng = parseFloat(req.query.lng as string) || 72.8353;
+  const lat = parseFloat(req.query.lat as string) || 28.6129;
+  const lng = parseFloat(req.query.lng as string) || 77.2295;
   const limit = parseInt(req.query.limit as string, 10) || 3;
 
   const nearby = railwayStationsData
@@ -1088,11 +1198,17 @@ app.get('/api/railway-stations/nearby', (req, res) => {
         id: s.id,
         name: s.name,
         code: s.code,
+        city: s.city,
+        state: s.state,
+        lat: s.lat,
+        lng: s.lng,
         line: s.lines ? s.lines.join(', ') : 'Suburban Hub',
+        lines: s.lines || [],
+        is_junction: Boolean(s.is_junction),
         distance_km: dist,
         walking_time_mins: Math.round(dist * 13),
         road_time_mins: Math.round(dist * 4 + 3),
-        transfer_modes: dist < 1.0 ? ['Walk', 'Auto'] : ['Taxi', 'BEST Bus'],
+        transfer_modes: dist < 1.0 ? ['Walk', 'Auto'] : ['Taxi', 'Transit Bus'],
       };
     })
     .sort((a, b) => a.distance_km - b.distance_km)
@@ -1133,70 +1249,91 @@ function generateRoutePath(lat1: number, lon1: number, lat2: number, lon2: numbe
   return points;
 }
 
-function resolveLocation(queryOrId?: string, lat?: number, lng?: number) {
+function resolveLocation(queryOrId?: string, lat?: number, lng?: number, cityContext?: string) {
   if (lat !== undefined && lng !== undefined && !isNaN(lat) && !isNaN(lng)) {
     return { name: queryOrId || 'Custom Location', place_id: null, latitude: lat, longitude: lng };
   }
-  if (!queryOrId) {
-    return { name: 'Gateway of India', place_id: 'gateway-of-india', latitude: 18.922, longitude: 72.8347 };
-  }
-  const q = queryOrId.toLowerCase().trim();
 
-  // 1. Direct place ID or slug match
-  let place = placesData.get(q);
-  if (!place) {
-    for (const p of placesData.values()) {
-      if (p.id.toLowerCase() === q || p.name.toLowerCase() === q || p.name.toLowerCase().includes(q)) {
-        place = p;
-        break;
+  const q = (queryOrId || '').toLowerCase().trim();
+  const cContext = (cityContext || '').toLowerCase().trim();
+
+  // If query is provided, search through placesData
+  if (q) {
+    // 1. Direct place ID or slug match
+    let place = placesData.get(q);
+    if (!place) {
+      for (const p of placesData.values()) {
+        if (p.id.toLowerCase() === q || p.name.toLowerCase() === q || p.name.toLowerCase().includes(q)) {
+          place = p;
+          break;
+        }
       }
     }
-  }
-  if (place) {
-    return {
-      name: place.name,
-      place_id: place.id,
-      latitude: place.coordinates?.lat || 18.922,
-      longitude: place.coordinates?.lng || 72.8347,
-    };
+    if (place) {
+      return {
+        name: place.name,
+        place_id: place.id,
+        latitude: place.coordinates?.lat || 28.6129,
+        longitude: place.coordinates?.lng || 77.2295,
+      };
+    }
+
+    // 2. Heritage match
+    const h = heritageData.find((item) => item.id.toLowerCase() === q || item.name.toLowerCase().includes(q));
+    if (h) {
+      return {
+        name: h.name,
+        place_id: h.id,
+        latitude: h.coordinates?.lat || 28.6129,
+        longitude: h.coordinates?.lng || 77.2295,
+      };
+    }
+
+    // 3. Railway station match
+    const station = railwayStationsData.find(
+      (s) => s.id.toLowerCase() === q || s.code.toLowerCase() === q || s.name.toLowerCase().includes(q)
+    );
+    if (station) {
+      return { name: station.name, place_id: station.id, latitude: station.lat, longitude: station.lng };
+    }
+
+    // 4. City match
+    const city = citiesData.find(
+      (c) => c.id.toLowerCase() === q || c.name.toLowerCase() === q || c.name.toLowerCase().includes(q)
+    );
+    if (city) {
+      return { name: city.name, place_id: city.id, latitude: city.lat, longitude: city.lng };
+    }
+
+    // 5. State match
+    const state = statesData.find(
+      (s) => s.id.toLowerCase() === q || s.name.toLowerCase() === q || s.name.toLowerCase().includes(q)
+    );
+    if (state && state.coordinates) {
+      return { name: state.name, place_id: state.id, latitude: state.coordinates.lat, longitude: state.coordinates.lng };
+    }
   }
 
-  // 2. Heritage match
-  const h = heritageData.find((item) => item.id.toLowerCase() === q || item.name.toLowerCase().includes(q));
-  if (h) {
-    return {
-      name: h.name,
-      place_id: h.id,
-      latitude: h.coordinates?.lat || 18.922,
-      longitude: h.coordinates?.lng || 72.8347,
-    };
+  // Fallback if query not found or not specified: resolve via cityContext
+  if (cContext) {
+    const cityMatch = citiesData.find((c) => c.id.toLowerCase() === cContext || c.name.toLowerCase().includes(cContext));
+    if (cityMatch) {
+      // Find primary landmark in this city
+      const landmark = Array.from(placesData.values()).find((p) => isPlaceInCity(p, cityMatch.name));
+      if (landmark) {
+        return {
+          name: landmark.name,
+          place_id: landmark.id,
+          latitude: landmark.coordinates?.lat || cityMatch.lat,
+          longitude: landmark.coordinates?.lng || cityMatch.lng,
+        };
+      }
+      return { name: cityMatch.name, place_id: cityMatch.id, latitude: cityMatch.lat, longitude: cityMatch.lng };
+    }
   }
 
-  // 3. Railway station match
-  const station = railwayStationsData.find(
-    (s) => s.id.toLowerCase() === q || s.code.toLowerCase() === q || s.name.toLowerCase().includes(q)
-  );
-  if (station) {
-    return { name: station.name, place_id: station.id, latitude: station.lat, longitude: station.lng };
-  }
-
-  // 4. City match
-  const city = citiesData.find(
-    (c) => c.id.toLowerCase() === q || c.name.toLowerCase() === q || c.name.toLowerCase().includes(q)
-  );
-  if (city) {
-    return { name: city.name, place_id: city.id, latitude: city.lat, longitude: city.lng };
-  }
-
-  // 5. State match
-  const state = statesData.find(
-    (s) => s.id.toLowerCase() === q || s.name.toLowerCase() === q || s.name.toLowerCase().includes(q)
-  );
-  if (state && state.coordinates) {
-    return { name: state.name, place_id: state.id, latitude: state.coordinates.lat, longitude: state.coordinates.lng };
-  }
-
-  return { name: queryOrId, place_id: null, latitude: 18.922, longitude: 72.8347 };
+  // Final fallback to Delhi India Gate (National Capital / Center)
+  return { name: queryOrId || 'India Gate', place_id: 'india-gate', latitude: 28.6129, longitude: 77.2295 };
 }
 
 // -------------------------------------------------------------
@@ -1363,10 +1500,11 @@ app.get('/api/routes', (req, res) => {
   const origLng = parseFloat(req.query.orig_lng as string);
   const destLat = parseFloat(req.query.dest_lat as string);
   const destLng = parseFloat(req.query.dest_lng as string);
+  const cityContext = (req.query.city as string) || '';
   const requestedMode = (req.query.mode as string)?.toUpperCase();
 
-  const originLoc = resolveLocation(originStr, origLat, origLng);
-  const destLoc = resolveLocation(destStr, destLat, destLng);
+  const originLoc = resolveLocation(originStr, origLat, origLng, cityContext);
+  const destLoc = resolveLocation(destStr, destLat, destLng, cityContext);
 
   const distKm =
     haversineDistanceKm(originLoc.latitude, originLoc.longitude, destLoc.latitude, destLoc.longitude) || 4.2;
@@ -1645,14 +1783,18 @@ app.get('/api/routes', (req, res) => {
 });
 
 app.get('/api/maps/directions', (req, res) => {
-  const origin = encodeURIComponent((req.query.origin as string) || 'Mumbai');
-  const destination = encodeURIComponent((req.query.destination as string) || 'Gateway of India');
+  const city = (req.query.city as string) || '';
+  const defaultOrigin = city ? `${city} Center` : 'India Gate, Delhi';
+  const defaultDest = city ? `${city} Landmark` : 'Red Fort, Delhi';
+
+  const origin = encodeURIComponent((req.query.origin as string) || defaultOrigin);
+  const destination = encodeURIComponent((req.query.destination as string) || defaultDest);
   const mode = (req.query.mode as string) || 'driving';
 
   const navigationUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=${mode.toLowerCase()}`;
   res.json({
-    origin: req.query.origin || 'Mumbai',
-    destination: req.query.destination || 'Gateway of India',
+    origin: req.query.origin || defaultOrigin,
+    destination: req.query.destination || defaultDest,
     travel_mode: mode,
     url: navigationUrl,
     navigation_url: navigationUrl,
@@ -1757,7 +1899,7 @@ Provide culturally rich, authentic, and practical travel recommendations. Includ
         conversation_id: convId,
         reply: response.text || 'Welcome to India! Here are curated recommendations for your journey.',
         suggested_places: suggestedPlaces,
-        sources: ['Ministry of Tourism Verified Data', 'Indian Railways Transit Network', 'Gemini AI Intelligence'],
+        sources: ['Published ASI & UNESCO Gazette Records', 'Indian Railways Transit Network', 'Gemini AI Intelligence'],
       });
     } catch (aiErr) {
       console.warn('[Server] Gemini call failed, falling back to rule-based engine:', aiErr);
@@ -1793,7 +1935,7 @@ Provide culturally rich, authentic, and practical travel recommendations. Includ
 // -------------------------------------------------------------
 // Itinerary Planner Endpoint
 // -------------------------------------------------------------
-app.post('/api/itinerary', (req, res) => {
+app.post(['/api/itinerary', '/api/itineraries/generate'], (req, res) => {
   const {
     city = 'Delhi',
     duration_hours = 8,
@@ -1802,21 +1944,10 @@ app.post('/api/itinerary', (req, res) => {
     pace = 'moderate'
   } = req.body;
 
-  const reqCityNorm = (city || '').toLowerCase().trim();
+  // Find places strictly belonging to this city using canonical matcher
+  const cityPlaces = Array.from(placesData.values()).filter((p) => isPlaceInCity(p, city));
 
-  // Find places strictly belonging to this city
-  const cityPlaces = Array.from(placesData.values()).filter((p) => {
-    const pCity = (p.city || '').toLowerCase().trim();
-    const pCityId = ((p as any).city_id || '').toLowerCase().trim();
-    return (
-      pCity === reqCityNorm ||
-      pCityId === reqCityNorm ||
-      pCity.includes(reqCityNorm) ||
-      reqCityNorm.includes(pCity)
-    );
-  });
-
-  // Strict Validation: If no places found for this city, return 404 rather than injecting Mumbai places!
+  // Strict Validation: If no places found for this city, return 404 rather than injecting incorrect places!
   if (cityPlaces.length === 0) {
     return res.status(404).json({
       error: `No verified heritage destinations found for requested hub '${city}'.`,
@@ -1894,16 +2025,18 @@ app.post('/api/itinerary', (req, res) => {
     };
   });
 
+  const validatedStops = stops.filter((s) => isPlaceInCity(s, city));
+
   res.json({
     city,
     duration_hours,
     pace,
     budget_level,
-    total_places: stops.length,
+    total_places: validatedStops.length,
     estimated_total_visiting_minutes: cumulativeVisit,
     estimated_total_travel_minutes: cumulativeTravel,
-    stops,
-    summary: `Curated ${duration_hours}-hour ${pace} circuit (${budget_level} tier) exploring ${stops.length} key destinations in ${city}.`,
+    stops: validatedStops,
+    summary: `Curated ${duration_hours}-hour ${pace} circuit (${budget_level} tier) exploring ${validatedStops.length} key destinations in ${city}.`,
     estimated_total_cost: totalCost,
   });
 });

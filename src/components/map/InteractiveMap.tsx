@@ -21,7 +21,10 @@ import {
   Ticket,
   ChevronRight,
   Info,
-  RotateCcw
+  RotateCcw,
+  ChevronDown,
+  ChevronUp,
+  ArrowUpDown
 } from 'lucide-react';
 
 interface InteractiveMapProps {
@@ -83,6 +86,19 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   const [activeRoute, setActiveRoute] = useState<RouteResponse | null>(null);
   const [isCalculatingRoute, setIsCalculatingRoute] = useState(false);
   const [routeError, setRouteError] = useState<string | null>(null);
+  const [isRoutePanelMinimized, setIsRoutePanelMinimized] = useState(false);
+
+  const handleSwapPoints = () => {
+    const tempOrigin = routeOrigin;
+    const tempOriginName = routeOriginName;
+    const tempOriginCoords = routeOriginCoords;
+    setRouteOrigin(routeDestination);
+    setRouteOriginName(routeDestName);
+    setRouteOriginCoords(routeDestCoords);
+    setRouteDestination(tempOrigin);
+    setRouteDestName(tempOriginName);
+    setRouteDestCoords(tempOriginCoords);
+  };
 
   // 1. Fetch all datasets (Heritage 42+, Stations, Places)
   useEffect(() => {
@@ -644,8 +660,8 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
         {/* Leaflet Canvas */}
         <div ref={mapContainerRef} className="w-full h-full z-0" />
 
-        {/* Live Search Bar Overlay (Top Left) */}
-        <div className="absolute top-4 left-4 z-[400] max-w-xs sm:max-w-sm w-full">
+        {/* Live Search Bar Overlay (Responsive Top Left) */}
+        <div className="absolute top-3 left-3 right-3 sm:right-auto sm:left-4 sm:top-4 z-[400] sm:w-72 md:w-80">
           <div className="relative shadow-md rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200">
             <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
             <input
@@ -659,6 +675,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
               <button
                 onClick={() => setSearchQuery('')}
                 className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 p-0.5"
+                aria-label="Clear search query"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -666,162 +683,295 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
           </div>
         </div>
 
-        {/* Interactive In-Map Route Panel (Right Overlay) */}
+        {/* Interactive In-Map Route Panel: Mobile Bottom Sheet / Desktop Floating Side Panel */}
         {isRoutingOpen && (
-          <div className="absolute top-4 right-4 z-[400] w-80 sm:w-96 max-h-[calc(100%-32px)] overflow-y-auto bg-white/95 backdrop-blur-md rounded-3xl border border-slate-200 shadow-2xl p-5 space-y-4">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
-                  <Navigation className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-slate-900">In-Map Route Engine</h4>
-                  <p className="text-[10px] text-slate-500">Calculate distance, fare & real paths</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setIsRoutingOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
+          <div
+            className={`absolute inset-x-0 bottom-0 z-[450] md:inset-auto md:top-4 md:right-4 md:w-96 bg-white/98 md:bg-white/95 backdrop-blur-md rounded-t-3xl md:rounded-3xl border-t md:border border-slate-200 shadow-2xl flex flex-col transition-all duration-300 ${
+              isRoutePanelMinimized
+                ? 'max-h-[60px] overflow-hidden'
+                : 'max-h-[72%] sm:max-h-[75%] md:max-h-[calc(100%-32px)]'
+            }`}
+          >
+            {/* Drag/Swipe Indicator for Mobile */}
+            <div
+              onClick={() => setIsRoutePanelMinimized(!isRoutePanelMinimized)}
+              className="w-full pt-2.5 pb-1 flex justify-center md:hidden cursor-pointer touch-manipulation"
+              title={isRoutePanelMinimized ? "Tap to expand Route Engine" : "Tap to minimize Route Engine"}
+            >
+              <div className="w-10 h-1.5 rounded-full bg-slate-300 hover:bg-slate-400 transition" />
+            </div>
+
+            {/* Header */}
+            <div className="flex items-center justify-between px-4 py-2.5 sm:px-5 sm:py-3 border-b border-slate-100 shrink-0">
+              <div
+                onClick={() => setIsRoutePanelMinimized(!isRoutePanelMinimized)}
+                className="flex items-center gap-2.5 min-w-0 flex-1 cursor-pointer md:cursor-default"
               >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Origin & Destination Inputs */}
-            <div className="space-y-2">
-              <div>
-                <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">
-                  🚩 Origin (Point A)
-                </label>
-                <input
-                  type="text"
-                  value={routeOriginName || routeOrigin}
-                  onChange={(e) => {
-                    setRouteOrigin(e.target.value);
-                    setRouteOriginName(e.target.value);
-                  }}
-                  placeholder="Type or click 'Start Route' on any pin..."
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-none focus:border-emerald-500"
-                />
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold shrink-0">
+                  <Navigation className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 truncate">
+                    In-Map Route Engine
+                  </h4>
+                  <p className="text-[10px] sm:text-xs text-slate-500 truncate">
+                    {isRoutePanelMinimized && activeOption
+                      ? `${activeOption.duration_minutes || activeOption.duration_mins} min • ${activeOption.distance_km} km • ₹${activeOption.estimated_fare ?? 0}`
+                      : 'Calculate distance, fare & real paths'}
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">
-                  🎯 Destination (Point B)
-                </label>
-                <input
-                  type="text"
-                  value={routeDestName || routeDestination}
-                  onChange={(e) => {
-                    setRouteDestination(e.target.value);
-                    setRouteDestName(e.target.value);
-                  }}
-                  placeholder="Type or click 'Route To Here' on any pin..."
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-none focus:border-emerald-500"
-                />
-              </div>
-            </div>
-
-            {/* Mode Selectors */}
-            <div className="grid grid-cols-4 gap-1.5 p-1 bg-slate-100 rounded-xl">
-              {[
-                { mode: 'DRIVE' as TransportMode, label: 'Taxi', icon: Car },
-                { mode: 'TRANSIT' as TransportMode, label: 'Train', icon: Train },
-                { mode: 'WALK' as TransportMode, label: 'Walk', icon: Footprints },
-                { mode: 'BICYCLE' as TransportMode, label: 'Cycle', icon: Bike },
-              ].map((m) => {
-                const Icon = m.icon;
-                const isSelected = selectedMode === m.mode;
-                return (
-                  <button
-                    key={m.mode}
-                    onClick={() => setSelectedMode(m.mode)}
-                    className={`py-1.5 px-2 rounded-lg text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 transition ${
-                      isSelected
-                        ? 'bg-white text-emerald-700 shadow-xs border border-slate-200/80'
-                        : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    <Icon className="w-3.5 h-3.5" />
-                    <span>{m.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex gap-2">
-              <button
-                onClick={handleCalculateRoute}
-                disabled={isCalculatingRoute}
-                className="flex-1 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition shadow-sm flex items-center justify-center gap-1.5 disabled:opacity-50"
-              >
-                <Navigation className="w-3.5 h-3.5" />
-                <span>{isCalculatingRoute ? 'Tracing Route...' : 'Plot Route on Map'}</span>
-              </button>
-
-              {activeRoute && (
+              <div className="flex items-center gap-1 shrink-0 ml-2">
+                {/* Mobile Minimize / Expand Toggle */}
                 <button
-                  onClick={handleClearRoute}
-                  className="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition"
-                  title="Clear Route"
+                  type="button"
+                  onClick={() => setIsRoutePanelMinimized(!isRoutePanelMinimized)}
+                  className="p-1.5 sm:p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition min-w-[36px] min-h-[36px] flex items-center justify-center"
+                  aria-label={isRoutePanelMinimized ? "Expand Route Engine" : "Minimize Route Engine"}
+                  title={isRoutePanelMinimized ? "Expand Route Engine" : "Minimize to view map"}
                 >
-                  <RotateCcw className="w-4 h-4" />
+                  {isRoutePanelMinimized ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                 </button>
-              )}
+
+                {/* Close Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsRoutingOpen(false);
+                    setIsRoutePanelMinimized(false);
+                  }}
+                  className="p-1.5 sm:p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition min-w-[36px] min-h-[36px] flex items-center justify-center"
+                  aria-label="Close Route Engine"
+                  title="Close Route Engine"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
-            {routeError && (
-              <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-[11px] font-medium">
-                {routeError}
-              </div>
-            )}
+            {/* Scrollable Content Body (Hidden when minimized) */}
+            {!isRoutePanelMinimized && (
+              <div className="overflow-y-auto p-4 sm:p-5 space-y-3.5 sm:space-y-4 flex-1">
+                {/* Origin & Destination Inputs with Swap */}
+                <div className="space-y-2.5">
+                  <div className="relative">
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1">
+                        <span>🚩</span> Origin (Point A)
+                      </label>
+                      {(routeOrigin || routeOriginName) && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setRouteOrigin('');
+                            setRouteOriginName('');
+                          }}
+                          className="text-[10px] text-slate-400 hover:text-rose-600 font-semibold"
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                    <input
+                      type="text"
+                      value={routeOriginName || routeOrigin}
+                      onChange={(e) => {
+                        setRouteOrigin(e.target.value);
+                        setRouteOriginName(e.target.value);
+                      }}
+                      placeholder="Search origin or click pin on map..."
+                      className="w-full min-h-[44px] px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:bg-white transition"
+                    />
+                  </div>
 
-            {/* Active Route Summary */}
-            {activeOption && (
-              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                <div className="grid grid-cols-3 gap-2 text-center">
-                  <div className="p-2 rounded-xl bg-white border border-slate-200">
-                    <div className="text-[9px] uppercase font-bold text-slate-400">Duration</div>
-                    <div className="text-sm font-black text-slate-900 font-mono">
-                      {activeOption.duration_minutes || activeOption.duration_mins} min
-                    </div>
+                  {/* Swap Origin & Destination Button */}
+                  <div className="flex justify-center -my-1">
+                    <button
+                      type="button"
+                      onClick={handleSwapPoints}
+                      className="p-1.5 rounded-full bg-slate-100 hover:bg-emerald-50 text-slate-500 hover:text-emerald-700 border border-slate-200 hover:border-emerald-300 transition shadow-2xs flex items-center gap-1 text-[10px] font-bold px-2.5"
+                      title="Swap Origin and Destination"
+                    >
+                      <ArrowUpDown className="w-3 h-3" />
+                      <span>Swap</span>
+                    </button>
                   </div>
-                  <div className="p-2 rounded-xl bg-white border border-slate-200">
-                    <div className="text-[9px] uppercase font-bold text-slate-400">Distance</div>
-                    <div className="text-sm font-black text-slate-900 font-mono">
-                      {activeOption.distance_km} km
+
+                  <div className="relative">
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1">
+                        <span>🎯</span> Destination (Point B)
+                      </label>
+                      {(routeDestination || routeDestName) && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setRouteDestination('');
+                            setRouteDestName('');
+                          }}
+                          className="text-[10px] text-slate-400 hover:text-rose-600 font-semibold"
+                        >
+                          Clear
+                        </button>
+                      )}
                     </div>
-                  </div>
-                  <div className="p-2 rounded-xl bg-white border border-slate-200">
-                    <div className="text-[9px] uppercase font-bold text-slate-400">Fare</div>
-                    <div className="text-sm font-black text-emerald-600 font-mono">
-                      {activeOption.estimated_fare === 0
-                        ? 'Free'
-                        : `₹${activeOption.estimated_fare}`}
-                    </div>
+                    <input
+                      type="text"
+                      value={routeDestName || routeDestination}
+                      onChange={(e) => {
+                        setRouteDestination(e.target.value);
+                        setRouteDestName(e.target.value);
+                      }}
+                      placeholder="Search destination or click pin on map..."
+                      className="w-full min-h-[44px] px-3.5 py-2.5 text-xs sm:text-sm rounded-xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:bg-white transition"
+                    />
                   </div>
                 </div>
 
-                {/* Steps summary */}
-                {activeOption.steps_summary && (
-                  <div className="space-y-1.5 pt-1">
-                    <div className="text-[10px] font-bold uppercase text-slate-400">Turn-by-turn Guidance</div>
-                    <div className="space-y-1">
-                      {activeOption.steps_summary.map((step: string, idx: number) => (
-                        <div key={idx} className="flex items-start gap-1.5 text-[11px] text-slate-700 leading-tight">
-                          <span className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5">
-                            {idx + 1}
-                          </span>
-                          <span>{step}</span>
+                {/* Mode Selectors */}
+                <div>
+                  <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
+                    Transport Mode
+                  </label>
+                  <div className="grid grid-cols-4 gap-1.5 sm:gap-2 p-1.5 bg-slate-100 rounded-2xl border border-slate-200">
+                    {[
+                      { mode: 'DRIVE' as TransportMode, label: 'Taxi', icon: Car },
+                      { mode: 'TRANSIT' as TransportMode, label: 'Train', icon: Train },
+                      { mode: 'WALK' as TransportMode, label: 'Walk', icon: Footprints },
+                      { mode: 'BICYCLE' as TransportMode, label: 'Cycle', icon: Bike },
+                    ].map((m) => {
+                      const Icon = m.icon;
+                      const isSelected = selectedMode === m.mode;
+                      return (
+                        <button
+                          key={m.mode}
+                          type="button"
+                          onClick={() => setSelectedMode(m.mode)}
+                          className={`min-h-[44px] py-2 px-1 rounded-xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1 transition ${
+                            isSelected
+                              ? 'bg-white text-emerald-700 shadow-xs border border-slate-200/90'
+                              : 'text-slate-600 hover:text-slate-900'
+                          }`}
+                        >
+                          <Icon className="w-4 h-4 shrink-0" />
+                          <span>{m.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex items-center gap-2 pt-1">
+                  <button
+                    type="button"
+                    onClick={handleCalculateRoute}
+                    disabled={isCalculatingRoute}
+                    className="flex-1 min-h-[44px] py-2.5 sm:py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold transition shadow-sm flex items-center justify-center gap-2 disabled:opacity-50 touch-manipulation"
+                  >
+                    <Navigation className="w-4 h-4 shrink-0" />
+                    <span>{isCalculatingRoute ? 'Tracing Route...' : 'Plot Route on Map'}</span>
+                  </button>
+
+                  {activeRoute && (
+                    <button
+                      type="button"
+                      onClick={handleClearRoute}
+                      className="min-h-[44px] min-w-[44px] p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition shrink-0"
+                      title="Clear Route and Polyline"
+                      aria-label="Clear Route"
+                    >
+                      <RotateCcw className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+
+                {routeError && (
+                  <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium">
+                    {routeError}
+                  </div>
+                )}
+
+                {/* Active Route Summary Result Cards */}
+                {activeOption && (
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                    <div className="grid grid-cols-3 gap-1.5 sm:gap-2 text-center">
+                      <div className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200">
+                        <div className="text-[9px] sm:text-[10px] uppercase font-bold text-slate-400 tracking-wider">Duration</div>
+                        <div className="text-xs sm:text-sm md:text-base font-black text-slate-900 font-mono mt-0.5">
+                          {activeOption.duration_minutes || activeOption.duration_mins} min
                         </div>
-                      ))}
+                      </div>
+                      <div className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200">
+                        <div className="text-[9px] sm:text-[10px] uppercase font-bold text-slate-400 tracking-wider">Distance</div>
+                        <div className="text-xs sm:text-sm md:text-base font-black text-slate-900 font-mono mt-0.5">
+                          {activeOption.distance_km} km
+                        </div>
+                      </div>
+                      <div className="p-2 sm:p-2.5 rounded-xl bg-white border border-slate-200">
+                        <div className="text-[9px] sm:text-[10px] uppercase font-bold text-slate-400 tracking-wider">Fare</div>
+                        <div className="text-xs sm:text-sm md:text-base font-black text-emerald-600 font-mono mt-0.5">
+                          {activeOption.estimated_fare === 0
+                            ? 'Free'
+                            : activeOption.estimated_fare !== null && activeOption.estimated_fare !== undefined
+                            ? `₹${activeOption.estimated_fare}`
+                            : 'Pass'}
+                        </div>
+                      </div>
                     </div>
+
+                    {/* Quick minimize helper on mobile to inspect polyline */}
+                    <div className="flex items-center justify-between pt-1 md:hidden">
+                      <button
+                        type="button"
+                        onClick={() => setIsRoutePanelMinimized(true)}
+                        className="text-[11px] text-emerald-700 hover:text-emerald-800 font-semibold flex items-center gap-1"
+                      >
+                        <span>Minimize to inspect polyline on map</span>
+                        <ChevronDown className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+
+                    {/* Steps summary */}
+                    {activeOption.steps_summary && activeOption.steps_summary.length > 0 && (
+                      <div className="space-y-1.5 pt-1">
+                        <div className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400">
+                          Turn-by-turn Guidance
+                        </div>
+                        <div className="space-y-1.5 max-h-40 overflow-y-auto pr-1">
+                          {activeOption.steps_summary.map((step: string, idx: number) => (
+                            <div key={idx} className="flex items-start gap-2 text-xs text-slate-700 leading-relaxed bg-white p-2 rounded-xl border border-slate-100">
+                              <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
+                                {idx + 1}
+                              </span>
+                              <span className="flex-1 break-words">{step}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
             )}
           </div>
+        )}
+
+        {/* Mobile Floating Quick Route Button when panel is closed */}
+        {!isRoutingOpen && (
+          <button
+            type="button"
+            onClick={() => {
+              setIsRoutingOpen(true);
+              setIsRoutePanelMinimized(false);
+            }}
+            className="md:hidden absolute bottom-4 right-4 z-[400] flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-emerald-600 text-white font-bold text-xs shadow-xl border border-emerald-500/50 active:scale-95 transition"
+            aria-label="Open In-Map Route Engine"
+          >
+            <Navigation className="w-4 h-4" />
+            <span>Route Engine</span>
+          </button>
         )}
 
         {/* Loading Overlay */}

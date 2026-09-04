@@ -207,7 +207,7 @@ export const DestinationDetailPage: React.FC<DestinationDetailPageProps> = ({
       </div>
 
       {/* Main Dossier Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+      <div className="max-w-7xl mx-auto pt-6 sm:pt-8 space-y-8">
         {/* Navigation Tabs */}
         <div className="flex gap-2 border-b border-stone-200 pb-3 overflow-x-auto scrollbar-none">
           {[

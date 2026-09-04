@@ -240,15 +240,17 @@ export const api = {
   // -------------------------------------------------------------
   // Routes & Maps
   // -------------------------------------------------------------
-  async getRoutes(originOrObj: any, destination?: string, mode?: string): Promise<RouteResponse> {
+  async getRoutes(originOrObj: any, destination?: string, mode?: string, city?: string): Promise<RouteResponse> {
     let orig: string;
     let dest: string;
     let m = mode;
+    let c = city;
 
     if (typeof originOrObj === 'object' && originOrObj !== null) {
       orig = originOrObj.origin;
       dest = originOrObj.destination;
       m = originOrObj.mode;
+      c = originOrObj.city || originOrObj.cityContext || city;
     } else {
       orig = originOrObj;
       dest = destination || 'gateway-of-india';
@@ -256,25 +258,29 @@ export const api = {
 
     const q = new URLSearchParams({ origin: orig, destination: dest });
     if (m) q.set('mode', m);
+    if (c) q.set('city', c);
 
     return await request<RouteResponse>(`/routes?${q.toString()}`);
   },
 
-  async getDirectionsUrl(originOrObj: any, destination?: string, mode: string = 'driving'): Promise<{ url: string } & string> {
+  async getDirectionsUrl(originOrObj: any, destination?: string, mode: string = 'driving', city?: string): Promise<{ url: string } & string> {
     let orig: string;
     let dest: string;
     let m = mode;
+    let c = city;
 
     if (typeof originOrObj === 'object' && originOrObj !== null) {
       orig = originOrObj.origin;
       dest = originOrObj.destination;
       m = originOrObj.mode || 'driving';
+      c = originOrObj.city || originOrObj.cityContext || city;
     } else {
       orig = originOrObj;
       dest = destination || 'gateway-of-india';
     }
 
     const q = new URLSearchParams({ origin: orig, destination: dest, mode: m });
+    if (c) q.set('city', c);
     try {
       const data = await request<{ navigation_url: string }>(`/maps/directions?${q.toString()}`);
       const resStr: any = data.navigation_url;
@@ -288,8 +294,8 @@ export const api = {
     }
   },
 
-  async getGoogleMapsUrl(origin: string, destination: string, mode: string = 'driving'): Promise<string> {
-    const res: any = await this.getDirectionsUrl(origin, destination, mode);
+  async getGoogleMapsUrl(origin: string, destination: string, mode: string = 'driving', city?: string): Promise<string> {
+    const res: any = await this.getDirectionsUrl(origin, destination, mode, city);
     return typeof res === 'string' ? res : (res?.url || '');
   },
 

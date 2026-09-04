@@ -39,7 +39,7 @@ export const MyTripsPage: React.FC<MyTripsPageProps> = ({ onNavigateTab, onSelec
   };
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto px-4 py-6">
+    <div className="space-y-6 max-w-6xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">

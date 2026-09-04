@@ -33,6 +33,7 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
 }) => {
   const { isFavorite, toggleFavorite } = useFavorites();
   const [heritageSites, setHeritageSites] = useState<any[]>([]);
+  const [allStates, setAllStates] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -43,13 +44,21 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
     const fetchHeritage = async () => {
       setLoading(true);
       try {
-        const res = await api.getHeritage({ limit: 100 });
-        if (res.data && res.data.length > 0) {
-          setHeritageSites(res.data);
+        const [res, statesRes] = await Promise.allSettled([
+          api.getHeritage({ limit: 100 }),
+          api.getStates(),
+        ]);
+
+        if (res.status === 'fulfilled' && res.value?.data && res.value.data.length > 0) {
+          setHeritageSites(res.value.data);
         } else {
           // Fallback to places with heritage category
           const placesRes = await api.getPlaces({ limit: 100 });
-          setHeritageSites(placesRes.data);
+          setHeritageSites(placesRes.data || []);
+        }
+
+        if (statesRes.status === 'fulfilled' && Array.isArray(statesRes.value)) {
+          setAllStates(statesRes.value.map((s: any) => s.name || s.id));
         }
       } catch (err) {
         console.error('Failed to load heritage sites:', err);
@@ -93,7 +102,7 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
   }, [heritageSites]);
 
   const categories = useMemo(() => [
-    { id: 'All', label: `All Heritage (${categoryCounts['All'] || heritageSites.length || 45})` },
+    { id: 'All', label: `All Heritage (${categoryCounts['All'] || heritageSites.length})` },
     { id: 'Forts & Palaces', label: `Forts & Palaces (${categoryCounts['Forts & Palaces'] || 0})` },
     { id: 'Temples & Sacred', label: `Temples & Sacred (${categoryCounts['Temples & Sacred'] || 0})` },
     { id: 'Caves & Rock-Cut', label: `Rock-Cut Caves (${categoryCounts['Caves & Rock-Cut'] || 0})` },
@@ -106,8 +115,11 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
     heritageSites.forEach((s) => {
       if (s.state) set.add(s.state);
     });
+    allStates.forEach((st) => {
+      if (st) set.add(st);
+    });
     return ['All', ...Array.from(set).sort()];
-  }, [heritageSites]);
+  }, [heritageSites, allStates]);
 
   const filteredSites = useMemo(() => {
     return heritageSites.filter((site) => {
@@ -159,10 +171,10 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
         <div className="relative z-10 max-w-3xl space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Ministry of Tourism & UNESCO Verified Experiences</span>
+            <span>Catalogued ASI & UNESCO Heritage Records</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
-            {heritageSites.length || 45} Pan-India Heritage Destinations
+            {loading ? 'Verified' : heritageSites.length} Pan-India Heritage Destinations
           </h1>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
             Discover India's living antiquity across 36 States and Union Territories. Inspect detailed architectural movements, verified visiting hours, domestic & foreign entry fees, nearest transit corridors, and interactive 3D virtual reconstructions.
@@ -170,7 +182,7 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
           <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-300 font-medium">
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-              <span>{heritageSites.length || 45} Verified Monuments</span>
+              <span>{loading ? '...' : heritageSites.length} Verified Monuments</span>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-amber-400"></span>
@@ -219,7 +231,7 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
               onChange={(e) => setSelectedState(e.target.value)}
               className="py-2.5 px-3 rounded-lg border border-slate-200 bg-slate-50/50 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600"
             >
-              <option value="All">All States / UTs ({statesList.length - 1})</option>
+              <option value="All">All States / UTs {statesList.length > 1 ? `(${statesList.length - 1})` : ''}</option>
               {statesList.filter(s => s !== 'All').map((st) => (
                 <option key={st} value={st}>
                   {st}
@@ -253,8 +265,14 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
       {/* Results Count Bar */}
       <div className="flex items-center justify-between text-xs text-slate-500 px-1">
         <span>
-          Showing <strong className="text-slate-800">{filteredSites.length}</strong> of{' '}
-          {heritageSites.length} heritage destinations
+          {loading ? (
+            <span className="text-slate-400">Loading catalogued heritage destinations...</span>
+          ) : (
+            <>
+              Showing <strong className="text-slate-800">{filteredSites.length}</strong> of{' '}
+              <strong className="text-slate-800">{heritageSites.length}</strong> heritage destinations
+            </>
+          )}
         </span>
         {selectedState !== 'All' && (
           <span className="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200">

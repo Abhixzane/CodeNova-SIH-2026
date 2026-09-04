@@ -16,7 +16,7 @@ export const MapPage: React.FC<MapPageProps> = ({
   onView3DPlace,
 }) => {
   return (
-    <div className="space-y-4 max-w-7xl mx-auto px-4 py-6">
+    <div className="space-y-4 max-w-7xl mx-auto">
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-3xl bg-white border border-slate-200 shadow-sm">
         <div className="space-y-1">
@@ -24,13 +24,13 @@ export const MapPage: React.FC<MapPageProps> = ({
             <MapIcon className="w-3.5 h-3.5" />
             <span>Real YatraVerse Cartography & Routing</span>
           </div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Interactive Heritage & Transit Map</h1>
+          <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Interactive Heritage & Transit Map</h1>
           <p className="text-xs text-slate-500">
             India-wide geospatial network spanning 45 UNESCO/ASI heritage sites, suburban railway hubs, and multi-modal routing.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 bg-slate-50 p-2.5 rounded-2xl border border-slate-200">
+        <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-600 bg-slate-50 p-2.5 rounded-2xl border border-slate-200">
           <span className="flex items-center gap-1">
             <span className="w-2.5 h-2.5 rounded-full bg-orange-500 inline-block" /> 45 Heritage Sites
           </span>
@@ -51,7 +51,7 @@ export const MapPage: React.FC<MapPageProps> = ({
         selectedCity={selectedCity}
         onSelectCity={onSelectCity}
         onView3DPlace={onView3DPlace}
-        height="640px"
+        height="clamp(480px, 72vh, 660px)"
       />
     </div>
   );

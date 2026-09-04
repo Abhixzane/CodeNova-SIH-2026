@@ -20,7 +20,8 @@ import {
   Utensils,
   ShieldAlert,
   Activity,
-  Flag
+  Flag,
+  X
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -101,15 +102,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Sidebar container */}
       <aside
-        className={`fixed lg:sticky top-0 left-0 h-screen z-40 w-64 bg-white border-r border-slate-200 flex flex-col transition-transform duration-300 shadow-sm ${
+        className={`fixed lg:sticky top-0 left-0 h-screen z-50 lg:z-40 w-64 max-w-[85vw] bg-white border-r border-slate-200 flex flex-col transition-transform duration-300 shadow-xl lg:shadow-sm ${
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
         {/* Brand Header */}
-        <div className="p-4 border-b border-slate-200 bg-white">
+        <div className="p-4 border-b border-slate-200 bg-white flex items-center justify-between gap-2">
           <button
             onClick={() => handleNav('home')}
-            className="flex items-center gap-3 text-left group w-full"
+            className="flex items-center gap-3 text-left group min-w-0 flex-1"
           >
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-transform flex-shrink-0">
               <Compass className="w-5 h-5 text-white" />
@@ -127,6 +128,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 Discover India • Smarter Navigation
               </span>
             </div>
+          </button>
+
+          {/* Close button on mobile */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="lg:hidden p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 min-w-[40px] min-h-[40px] flex items-center justify-center shrink-0 transition"
+            aria-label="Close navigation"
+          >
+            <X className="w-5 h-5" />
           </button>
         </div>
 

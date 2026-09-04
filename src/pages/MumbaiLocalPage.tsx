@@ -146,12 +146,12 @@ export const MumbaiLocalPage: React.FC<MumbaiLocalPageProps> = ({ onNavigateTab 
       </div>
 
       {/* Mode Sub-Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 pb-1 text-sm font-semibold">
+      <div className="flex items-center gap-2 border-b border-slate-200 pb-2 text-xs sm:text-sm font-semibold overflow-x-auto scrollbar-none">
         <button
           onClick={() => setActiveSubTab('planner')}
-          className={`px-4 py-2 rounded-lg transition-all ${
+          className={`px-3.5 sm:px-4 py-2 rounded-xl whitespace-nowrap shrink-0 transition-all ${
             activeSubTab === 'planner'
-              ? 'bg-sky-600 text-white shadow-xs'
+              ? 'bg-sky-600 text-white shadow-xs font-bold'
               : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
           }`}
         >
@@ -159,9 +159,9 @@ export const MumbaiLocalPage: React.FC<MumbaiLocalPageProps> = ({ onNavigateTab 
         </button>
         <button
           onClick={() => setActiveSubTab('explorer')}
-          className={`px-4 py-2 rounded-lg transition-all ${
+          className={`px-3.5 sm:px-4 py-2 rounded-xl whitespace-nowrap shrink-0 transition-all ${
             activeSubTab === 'explorer'
-              ? 'bg-sky-600 text-white shadow-xs'
+              ? 'bg-sky-600 text-white shadow-xs font-bold'
               : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
           }`}
         >
@@ -169,9 +169,9 @@ export const MumbaiLocalPage: React.FC<MumbaiLocalPageProps> = ({ onNavigateTab 
         </button>
         <button
           onClick={() => setActiveSubTab('advisory')}
-          className={`px-4 py-2 rounded-lg transition-all ${
+          className={`px-3.5 sm:px-4 py-2 rounded-xl whitespace-nowrap shrink-0 transition-all ${
             activeSubTab === 'advisory'
-              ? 'bg-sky-600 text-white shadow-xs'
+              ? 'bg-sky-600 text-white shadow-xs font-bold'
               : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
           }`}
         >
