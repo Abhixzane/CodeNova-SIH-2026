@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { AuthProvider } from './contexts/AuthContext';
 import { FavoritesProvider } from './contexts/FavoritesContext';
-import { Sidebar, NavTab } from './components/layout/Sidebar';
+import { NavTab } from './components/layout/Sidebar';
+import { TopNavbar } from './components/layout/TopNavbar';
+import { ContextualSubNav } from './components/layout/ContextualSubNav';
+import { SimpleFooter } from './components/layout/SimpleFooter';
 import { AuthModal } from './components/auth/AuthModal';
 import { OnboardingSurveyModal } from './components/auth/OnboardingSurveyModal';
 import { HomePage } from './pages/HomePage';
@@ -22,17 +25,19 @@ import { CultureCraftPage } from './pages/CultureCraftPage';
 import { FacilitiesAccessibilityPage } from './pages/FacilitiesAccessibilityPage';
 import { DestinationIntelligencePage } from './pages/DestinationIntelligencePage';
 import { HeritageReportingPage } from './pages/HeritageReportingPage';
+import { BrandSplashScreen } from './components/common/BrandSplashScreen';
 import { PlaceSummary } from './types';
 import { api } from './services/api';
-import { Menu, Compass, Search } from 'lucide-react';
+import { useAuth } from './contexts/AuthContext';
 
 const AppContent: React.FC = () => {
+  const { setIsAuthModalOpen } = useAuth();
   const [activeTab, setActiveTab] = useState<NavTab>('home');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedPlaceId, setSelectedPlaceId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string | null>(null);
   const [selectedCity, setSelectedCity] = useState<string>('All India');
   const [places, setPlaces] = useState<PlaceSummary[]>([]);
+  const [initialAIPrompt, setInitialAIPrompt] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const loadAllPlaces = async () => {
@@ -69,6 +74,8 @@ const AppContent: React.FC = () => {
     else if (stateId === 'rajasthan') setSelectedCity('Jaipur');
     else if (stateId === 'kerala') setSelectedCity('Kochi');
     else if (stateId === 'goa') setSelectedCity('Goa');
+    else if (stateId === 'delhi') setSelectedCity('Delhi');
+    else if (stateId === 'agra') setSelectedCity('Agra');
     setActiveTab('dashboard');
     setSelectedPlaceId(null);
     setSearchQuery(null);
@@ -76,173 +83,171 @@ const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50 text-slate-900 selection:bg-emerald-500 selection:text-white font-sans">
-      {/* Sidebar Navigation */}
-      <Sidebar
+    <div className="flex flex-col min-h-screen bg-[#FAF8F5] text-stone-900 selection:bg-amber-800 selection:text-white font-sans">
+      {/* Branded Startup Splash Experience */}
+      <BrandSplashScreen />
+
+      {/* Top Navbar */}
+      <TopNavbar
         activeTab={activeTab}
         setActiveTab={handleNavigateTab}
-        isOpen={isSidebarOpen}
-        setIsOpen={setIsSidebarOpen}
+        selectedCity={selectedCity}
+        onSelectCity={(city) => {
+          setSelectedCity(city);
+        }}
+        onOpenSearch={() => handleSearch('')}
+        onOpenAuthModal={() => setIsAuthModalOpen(true)}
+      />
+
+      {/* Contextual Sub-Nav Bar */}
+      <ContextualSubNav
+        activeTab={activeTab}
+        setActiveTab={handleNavigateTab}
       />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Mobile Header Bar */}
-        <header className="sticky top-0 z-30 flex items-center justify-between px-3 sm:px-4 py-2.5 bg-white/95 backdrop-blur-md border-b border-slate-200 lg:hidden shadow-xs">
-          <div className="flex items-center gap-2.5">
-            <button
-              onClick={() => setIsSidebarOpen(true)}
-              className="min-h-[44px] min-w-[44px] p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-600 hover:text-slate-900 active:bg-slate-200 flex items-center justify-center transition touch-manipulation"
-              aria-label="Open Navigation Menu"
-            >
-              <Menu className="w-5 h-5" />
-            </button>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-xs">
-                <Compass className="w-4 h-4 text-white" />
-              </div>
-              <span className="font-extrabold text-base text-slate-900 tracking-tight">
-                Yatra<span className="text-emerald-600">Verse</span>
-              </span>
-            </div>
-          </div>
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 min-w-0">
+        {selectedPlaceId ? (
+          <DestinationDetailPage
+            placeId={selectedPlaceId}
+            onBack={() => setSelectedPlaceId(null)}
+            onSelectPlace={handleSelectPlace}
+            onOpenAIChat={(pId, pName) => {
+              setActiveTab('ai');
+              setSelectedPlaceId(null);
+            }}
+          />
+        ) : searchQuery !== null ? (
+          <SearchPage
+            initialQuery={searchQuery}
+            onSelectPlace={handleSelectPlace}
+            onBack={() => setSearchQuery(null)}
+          />
+        ) : (
+          <>
+            {activeTab === 'home' && (
+              <HomePage
+                onSearch={handleSearch}
+                onNavigateTab={handleNavigateTab}
+                onSelectPlace={handleSelectPlace}
+                onSelectState={handleSelectState}
+                selectedCity={selectedCity}
+                onSelectCity={setSelectedCity}
+                places={places}
+                onOpenAIChat={(prompt) => {
+                  setInitialAIPrompt(prompt);
+                  setActiveTab('ai');
+                  setSelectedPlaceId(null);
+                  setSearchQuery(null);
+                }}
+              />
+            )}
 
-          <button
-            onClick={() => handleSearch('')}
-            className="min-h-[44px] min-w-[44px] p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-600 hover:text-slate-900 active:bg-slate-200 flex items-center justify-center transition touch-manipulation"
-            aria-label="Search destinations"
-          >
-            <Search className="w-4 h-4" />
-          </button>
-        </header>
+            {activeTab === 'dashboard' && (
+              <CityHubPage
+                onSelectPlace={handleSelectPlace}
+                onNavigateTab={handleNavigateTab}
+                selectedCity={selectedCity}
+                onSelectCity={setSelectedCity}
+              />
+            )}
 
-        {/* Page Content View */}
-        <main className="flex-1 p-3 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto min-w-0">
-          {selectedPlaceId ? (
-            <DestinationDetailPage
-              placeId={selectedPlaceId}
-              onBack={() => setSelectedPlaceId(null)}
-              onSelectPlace={handleSelectPlace}
-            />
-          ) : searchQuery !== null ? (
-            <SearchPage
-              initialQuery={searchQuery}
-              onSelectPlace={handleSelectPlace}
-              onBack={() => setSearchQuery(null)}
-            />
-          ) : (
-            <>
-              {activeTab === 'home' && (
-                <HomePage
-                  onSearch={handleSearch}
-                  onNavigateTab={handleNavigateTab}
-                  onSelectPlace={handleSelectPlace}
-                  onSelectState={handleSelectState}
-                  selectedCity={selectedCity}
-                  onSelectCity={setSelectedCity}
-                  places={places}
-                />
-              )}
+            {activeTab === 'heritage' && (
+              <HeritageSitesPage
+                onSelectPlace={handleSelectPlace}
+                onNavigateTab={handleNavigateTab}
+              />
+            )}
 
-              {activeTab === 'heritage' && (
-                <HeritageSitesPage
-                  onSelectPlace={handleSelectPlace}
-                  onNavigateTab={handleNavigateTab}
-                />
-              )}
+            {activeTab === 'culture-artisans' && (
+              <CultureCraftPage
+                onSelectPlace={handleSelectPlace}
+                selectedCity={selectedCity !== 'All India' ? selectedCity : ''}
+              />
+            )}
 
-              {activeTab === 'culture-artisans' && (
-                <CultureCraftPage
-                  onSelectPlace={handleSelectPlace}
-                  selectedCity={selectedCity !== 'All India' ? selectedCity : ''}
-                />
-              )}
+            {activeTab === 'routes' && (
+              <RoutesPage
+                places={places}
+                onSelectPlace={handleSelectPlace}
+                onNavigateTab={handleNavigateTab}
+              />
+            )}
 
-              {activeTab === 'facilities-accessibility' && (
-                <FacilitiesAccessibilityPage />
-              )}
+            {activeTab === 'mumbai-local' && (
+              <MumbaiLocalPage
+                onNavigateTab={handleNavigateTab}
+              />
+            )}
 
-              {activeTab === 'intelligence' && (
-                <DestinationIntelligencePage />
-              )}
+            {activeTab === 'itinerary' && (
+              <ItineraryPage
+                onSelectPlace={handleSelectPlace}
+                onNavigateTab={handleNavigateTab}
+                selectedCity={selectedCity}
+              />
+            )}
 
-              {activeTab === 'reports' && (
-                <HeritageReportingPage />
-              )}
+            {activeTab === 'map' && (
+              <MapPage
+                onSelectPlace={handleSelectPlace}
+                selectedCity={selectedCity}
+                onSelectCity={setSelectedCity}
+                onView3DPlace={(placeId) => {
+                  setActiveTab('3d');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              />
+            )}
 
-              {activeTab === 'dashboard' && (
-                <CityHubPage
-                  onSelectPlace={handleSelectPlace}
-                  onNavigateTab={handleNavigateTab}
-                  selectedCity={selectedCity}
-                  onSelectCity={setSelectedCity}
-                />
-              )}
+            {activeTab === '3d' && <Heritage3DPage />}
 
-              {activeTab === 'map' && (
-                <MapPage
-                  onSelectPlace={handleSelectPlace}
-                  selectedCity={selectedCity}
-                  onSelectCity={setSelectedCity}
-                  onView3DPlace={(placeId) => {
-                    setActiveTab('3d');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                />
-              )}
+            {activeTab === 'ai' && (
+              <AIAssistantPage
+                onSelectPlace={handleSelectPlace}
+                selectedCity={selectedCity}
+                initialPrompt={initialAIPrompt}
+              />
+            )}
 
-              {activeTab === 'mumbai-local' && (
-                <MumbaiLocalPage
-                  onNavigateTab={handleNavigateTab}
-                />
-              )}
+            {activeTab === 'facilities-accessibility' && (
+              <FacilitiesAccessibilityPage />
+            )}
 
-              {activeTab === 'routes' && (
-                <RoutesPage
-                  places={places}
-                  onSelectPlace={handleSelectPlace}
-                  onNavigateTab={handleNavigateTab}
-                />
-              )}
+            {activeTab === 'reports' && (
+              <HeritageReportingPage />
+            )}
 
-              {activeTab === 'itinerary' && (
-                <ItineraryPage
-                  onSelectPlace={handleSelectPlace}
-                  onNavigateTab={handleNavigateTab}
-                  selectedCity={selectedCity}
-                />
-              )}
+            {activeTab === 'intelligence' && (
+              <DestinationIntelligencePage />
+            )}
 
-              {activeTab === '3d' && <Heritage3DPage />}
+            {activeTab === 'trips' && (
+              <MyTripsPage
+                onNavigateTab={handleNavigateTab}
+                onSelectPlace={handleSelectPlace}
+              />
+            )}
 
-              {activeTab === 'ai' && (
-                <AIAssistantPage
-                  onSelectPlace={handleSelectPlace}
-                  selectedCity={selectedCity}
-                />
-              )}
+            {activeTab === 'favorites' && (
+              <FavoritesPage
+                onSelectPlace={handleSelectPlace}
+                places={places}
+              />
+            )}
 
-              {activeTab === 'trips' && (
-                <MyTripsPage
-                  onNavigateTab={handleNavigateTab}
-                  onSelectPlace={handleSelectPlace}
-                />
-              )}
+            {activeTab === 'profile' && (
+              <ProfilePage onNavigateTab={handleNavigateTab} />
+            )}
+          </>
+        )}
+      </main>
 
-              {activeTab === 'favorites' && (
-                <FavoritesPage
-                  onSelectPlace={handleSelectPlace}
-                  places={places}
-                />
-              )}
-
-              {activeTab === 'profile' && (
-                <ProfilePage onNavigateTab={handleNavigateTab} />
-              )}
-            </>
-          )}
-        </main>
-      </div>
+      {/* Simple Clean Footer */}
+      <SimpleFooter
+        onNavigateTab={handleNavigateTab}
+        onSelectCity={setSelectedCity}
+      />
 
       {/* Global Modals */}
       <AuthModal />

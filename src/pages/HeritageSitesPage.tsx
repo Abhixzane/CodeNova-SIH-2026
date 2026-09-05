@@ -19,6 +19,8 @@ import {
   SlidersHorizontal,
   Info
 } from 'lucide-react';
+import { GuideIllustration } from '../components/cultural-guides/GuideIllustrations';
+import { GuideSpeechBubble } from '../components/cultural-guides/GuideSpeechBubble';
 
 interface HeritageSitesPageProps {
   onSelectPlace: (placeId: string) => void;
@@ -197,6 +199,31 @@ export const HeritageSitesPage: React.FC<HeritageSitesPageProps> = ({
               <span>Transit & Railway Linked</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Virasat Heritage Guide Curatorial Banner with non-blocking GuideSpeechBubble */}
+      <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-50/80 via-white to-stone-50 border border-blue-200 shadow-warm">
+        <GuideIllustration characterId="virasat" size="md" animated={true} popIn={true} popDirection="left" />
+        <div className="flex-1 w-full min-w-0">
+          <GuideSpeechBubble
+            characterId="virasat"
+            contextMode="heritage"
+            speechText="India is home to 45 UNESCO World Heritage Sites spanning Dravidian stone vimanas, Mughal pietra-dura domes, and ancient rock-cut cave sanctuaries. Filter by dynasty or architectural style below to explore."
+            contextTag="Archaeological Curator"
+            orientation="right"
+            nonBlocking={true}
+            quickActions={[
+              {
+                label: 'Show UNESCO Sites',
+                onClick: () => {
+                  setSelectedCategory('All');
+                  setSearchQuery('UNESCO');
+                },
+                primary: true,
+              },
+            ]}
+          />
         </div>
       </div>
 

@@ -21,6 +21,7 @@ import {
 import { api } from '../services/api';
 import { CulturalItem, ArtisanProfile, LocalProvider } from '../types';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
+import { RasikaCultureGuide } from '../components/cultural-guides/RasikaCultureGuide';
 
 interface CultureCraftPageProps {
   onSelectPlace?: (placeId: string) => void;
@@ -179,6 +180,13 @@ export const CultureCraftPage: React.FC<CultureCraftPageProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Rasika Living Culture & Regional Culinary Guide */}
+      <RasikaCultureGuide
+        selectedCity={selectedCity || 'Mumbai'}
+        onExploreCrafts={() => setActiveTab('artisans')}
+        onExploreFood={() => setActiveTab('culture')}
+      />
 
       {/* Filter and Search Bar */}
       <div className="bg-white rounded-xl border border-stone-200 p-4 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">

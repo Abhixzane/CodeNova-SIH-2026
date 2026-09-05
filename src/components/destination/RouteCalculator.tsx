@@ -15,8 +15,11 @@ import {
   ArrowRight,
   ShieldCheck,
   CheckCircle2,
-  MapPin
+  MapPin,
+  ChevronDown,
+  Info
 } from 'lucide-react';
+import { MultimodalRoute3DVisualizer } from './MultimodalRoute3DVisualizer';
 
 interface RouteCalculatorProps {
   destinationId: string;
@@ -55,25 +58,34 @@ export const RouteCalculator: React.FC<RouteCalculatorProps> = ({
         { id: 'igi-airport', label: 'Indira Gandhi Airport (DEL)' },
       ];
     }
-    if (c.includes('kochi') || c.includes('kerala')) {
-      return [
-        { id: 'ernakulam-jn', label: 'Ernakulam Junction (ERS)' },
-        { id: 'cochin-airport', label: 'Cochin International Airport' },
-        { id: 'fort-kochi-jetty', label: 'Fort Kochi Boat Jetty' },
-      ];
-    }
     if (c.includes('agra')) {
       return [
-        { id: 'agra-cantt', label: 'Agra Cantonment (AGC)' },
-        { id: 'agra-fort-station', label: 'Agra Fort Railway Station' },
+        { id: 'agra-cantt', label: 'Agra Cantt Railway Station (AGC)' },
+        { id: 'agra-fort-station', label: 'Agra Fort Station (AF)' },
         { id: 'idgah-bus-stand', label: 'Idgah Bus Stand' },
       ];
     }
+    if (c.includes('varanasi')) {
+      return [
+        { id: 'varanasi-junction', label: 'Varanasi Junction (BSB)' },
+        { id: 'pt-deen-dayal-upadhyaya', label: 'Pt. Deen Dayal Upadhyaya (DDU)' },
+        { id: 'dashashwamedh', label: 'Dashashwamedh Ghat' },
+      ];
+    }
+    if (c.includes('kochi') || c.includes('kerala')) {
+      return [
+        { id: 'ernakulam-jn', label: 'Ernakulam Junction (ERS)' },
+        { id: 'ernakulam-town', label: 'Ernakulam Town (ERN)' },
+        { id: 'fort-kochi-ferry', label: 'Fort Kochi Boat Jetty' },
+        { id: 'cochin-airport', label: 'Cochin Airport (COK)' },
+      ];
+    }
+    // Default / Mumbai
     return [
-      { id: 'csmt', label: 'CSMT Station (Central Hub)' },
-      { id: 'churchgate', label: 'Churchgate (Western Terminal)' },
-      { id: 'dadar', label: 'Dadar Junction (Interchange)' },
-      { id: 'andheri', label: 'Andheri Metro & Rail Hub' },
+      { id: 'csmt', label: 'CSMT Railway Terminus' },
+      { id: 'churchgate', label: 'Churchgate Terminal' },
+      { id: 'dadar', label: 'Dadar Junction Interchange' },
+      { id: 'mumbai-central', label: 'Mumbai Central (MMCT)' },
       { id: 'airport', label: 'Mumbai Airport (BOM)' },
     ];
   };
@@ -86,7 +98,7 @@ export const RouteCalculator: React.FC<RouteCalculatorProps> = ({
   const [routes, setRoutes] = useState<RouteResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [mapsUrl, setMapsUrl] = useState<string | null>(null);
+  const [showRouteDetails, setShowRouteDetails] = useState(false);
 
   const fetchRoute = async (originQuery: string) => {
     setLoading(true);
@@ -94,11 +106,8 @@ export const RouteCalculator: React.FC<RouteCalculatorProps> = ({
     try {
       const data = await api.getRoutes(originQuery, destinationId, selectedMode);
       setRoutes(data);
-
-      const url = await api.getGoogleMapsUrl(originQuery, destinationName, selectedMode);
-      setMapsUrl(url);
     } catch (err: any) {
-      setError('Unable to calculate multi-modal route. Showing estimated geodesic travel metrics.');
+      setError('Unable to calculate multimodal route. Showing verified geodesic metrics.');
     } finally {
       setLoading(false);
     }
@@ -112,200 +121,219 @@ export const RouteCalculator: React.FC<RouteCalculatorProps> = ({
   }, [origin, isCustom, destinationId, selectedMode]);
 
   const activeOption: any = routes?.options?.find((o: any) => o.mode === selectedMode) || routes?.options?.[0];
+  const originLabel = isCustom ? customOrigin : presetOrigins.find((p) => p.id === origin)?.label || origin;
 
   return (
-    <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+    <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#EFE8DF] shadow-warm space-y-6">
+      {/* Journey Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-[#EFE8DF]">
         <div className="flex items-center gap-3">
-          <div className="p-3 rounded-2xl bg-emerald-50 text-emerald-700 border border-emerald-200">
+          <div className="p-3 rounded-2xl bg-amber-100 text-amber-800 border border-amber-200">
             <Compass className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-base font-black text-slate-900">
-              Multi-Modal Route & Fare Intelligence
+            <h3 className="font-serif text-xl font-bold text-stone-900">
+              Journey Planner & Fare Estimator
             </h3>
-            <p className="text-xs text-slate-500">
-              Direct journey comparison to <strong className="text-slate-800">{destinationName}</strong>
+            <p className="text-xs text-stone-500">
+              Direct routing using YatraVerse Multimodal Engine
             </p>
           </div>
         </div>
-        <span className="self-start sm:self-auto text-[11px] font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1.5">
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> Transparent City Tariffs
+
+        <span className="self-start sm:self-auto text-[11px] font-bold px-3 py-1 rounded-full bg-amber-50 text-amber-900 border border-amber-200 flex items-center gap-1.5">
+          <ShieldCheck className="w-3.5 h-3.5 text-amber-700" /> Transparent Regional Tariffs
         </span>
       </div>
 
-      {/* Origin Selection Bar */}
-      <div className="space-y-2">
-        <label className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
-          Select Departure / Origin Point:
-        </label>
-        <div className="flex flex-wrap gap-2">
-          {presetOrigins.map((p) => (
+      {/* Clean FROM -> TO Journey Bar */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Departure Point (FROM) */}
+        <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EFE8DF] space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wider text-stone-500">
+              FROM (Departure):
+            </span>
             <button
-              key={p.id}
-              onClick={() => {
-                setIsCustom(false);
-                setOrigin(p.id);
-              }}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                !isCustom && origin === p.id
-                  ? 'bg-emerald-600 text-white font-bold shadow-sm'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
-              }`}
+              onClick={() => setIsCustom(!isCustom)}
+              className="text-[11px] font-semibold text-amber-800 hover:underline"
             >
-              {p.label}
-            </button>
-          ))}
-          <button
-            onClick={() => setIsCustom(true)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-              isCustom
-                ? 'bg-emerald-600 text-white font-bold'
-                : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
-            }`}
-          >
-            Custom Location...
-          </button>
-        </div>
-
-        {isCustom && (
-          <div className="flex gap-2 pt-1">
-            <input
-              type="text"
-              placeholder="Enter railway station, hotel, or landmark..."
-              value={customOrigin}
-              onChange={(e) => setCustomOrigin(e.target.value)}
-              className="flex-1 px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-emerald-500"
-            />
-            <button
-              onClick={() => customOrigin.trim() && fetchRoute(customOrigin.trim())}
-              className="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold hover:bg-emerald-700 transition"
-            >
-              Calculate
+              {isCustom ? 'Use Presets' : 'Custom Place'}
             </button>
           </div>
-        )}
-      </div>
 
-      {/* Mode Selector Tabs */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-1.5 bg-slate-100 rounded-2xl border border-slate-200">
-        {[
-          { mode: 'DRIVE' as TransportMode, label: 'Taxi / Cab', icon: Car, desc: 'Fastest door-to-door' },
-          { mode: 'TRANSIT' as TransportMode, label: 'Train / Transit', icon: Train, desc: 'Cheapest public fare' },
-          { mode: 'WALK' as TransportMode, label: 'Walking', icon: Footprints, desc: 'Heritage walkways' },
-          { mode: 'BICYCLE' as TransportMode, label: 'Bicycle', icon: Bike, desc: 'Eco-friendly active' },
-        ].map((item) => {
-          const Icon = item.icon;
-          const isSelected = selectedMode === item.mode;
-          return (
-            <button
-              key={item.mode}
-              onClick={() => setSelectedMode(item.mode)}
-              className={`p-3 rounded-xl text-xs font-bold flex flex-col items-center justify-center gap-1 transition-all ${
-                isSelected
-                  ? 'bg-white text-emerald-800 shadow-sm border border-slate-200'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
-              }`}
+          {isCustom ? (
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder="Station, hotel or area..."
+                value={customOrigin}
+                onChange={(e) => setCustomOrigin(e.target.value)}
+                className="flex-1 px-3 py-2 bg-white border border-[#EFE8DF] rounded-xl text-xs text-stone-900 focus:outline-none focus:border-amber-600"
+              />
+              <button
+                onClick={() => customOrigin.trim() && fetchRoute(customOrigin.trim())}
+                className="px-3.5 py-2 bg-amber-800 text-white rounded-xl text-xs font-bold"
+              >
+                Go
+              </button>
+            </div>
+          ) : (
+            <select
+              value={origin}
+              onChange={(e) => setOrigin(e.target.value)}
+              className="w-full px-3 py-2 bg-white border border-[#EFE8DF] rounded-xl text-xs font-semibold text-stone-900 focus:outline-none focus:border-amber-600 cursor-pointer"
             >
-              <div className="flex items-center gap-1.5">
-                <Icon className="w-4 h-4" />
-                <span className="font-bold">{item.label}</span>
-              </div>
-              <span className="text-[10px] font-normal text-slate-500 hidden sm:inline">{item.desc}</span>
-            </button>
-          );
-        })}
+              {presetOrigins.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.label}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
+
+        {/* Destination (TO) */}
+        <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EFE8DF] space-y-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-stone-500 block">
+            TO (Destination):
+          </span>
+          <div className="px-3 py-2 bg-white border border-[#EFE8DF] rounded-xl text-xs font-bold text-stone-900 flex items-center justify-between">
+            <span className="truncate">{destinationName}</span>
+            <span className="text-[10px] text-amber-800 bg-amber-100 px-2 py-0.5 rounded-md font-semibold shrink-0 ml-2">
+              {destinationCity || 'India'}
+            </span>
+          </div>
+        </div>
       </div>
 
-      {/* Results View */}
+      {/* Travel By Mode Selection */}
+      <div className="space-y-2">
+        <label className="text-xs font-bold uppercase tracking-wider text-stone-500 block">
+          Travel By:
+        </label>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          {[
+            { mode: 'TRANSIT' as TransportMode, label: 'Train / Transit', icon: Train, note: 'Public Rail / Bus' },
+            { mode: 'DRIVE' as TransportMode, label: 'Road / Taxi', icon: Car, note: 'Direct Cab / Auto' },
+            { mode: 'WALK' as TransportMode, label: 'Walk', icon: Footprints, note: 'Heritage Walk' },
+            { mode: 'BICYCLE' as TransportMode, label: 'Multi-Modal', icon: Navigation, note: 'Combined Modes' },
+          ].map((item) => {
+            const Icon = item.icon;
+            const isSelected = selectedMode === item.mode;
+            return (
+              <button
+                key={item.mode}
+                onClick={() => setSelectedMode(item.mode)}
+                className={`p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center gap-1 transition ${
+                  isSelected
+                    ? 'bg-amber-800 text-white shadow-xs'
+                    : 'bg-[#FAF8F5] text-stone-700 hover:bg-stone-100 border border-[#EFE8DF]'
+                }`}
+              >
+                <div className="flex items-center gap-1.5">
+                  <Icon className="w-4 h-4" />
+                  <span>{item.label}</span>
+                </div>
+                <span className={`text-[10px] font-normal ${isSelected ? 'text-amber-100' : 'text-stone-500'}`}>
+                  {item.note}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Route Results Metric Cards */}
       {loading ? (
-        <LoadingSpinner message="Calculating coordinates, distances & city tariffs..." />
+        <LoadingSpinner message="Calculating coordinates, distances & verified fares..." />
       ) : activeOption ? (
-        <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-5">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-            <div className="p-3.5 rounded-xl bg-white border border-slate-200">
-              <div className="text-[10px] uppercase font-bold text-slate-400">Estimated Time</div>
-              <div className="text-xl font-black text-slate-900 font-mono mt-0.5">
-                {activeOption.duration_minutes || activeOption.duration_mins} min
+        <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#EFE8DF] space-y-5">
+          {/* Key Metrics: Distance, Estimated time, Estimated fare */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+            <div className="p-4 rounded-xl bg-white border border-[#EFE8DF] shadow-xs">
+              <div className="text-[10px] uppercase font-bold text-stone-400">Distance</div>
+              <div className="text-2xl font-bold text-stone-900 font-mono mt-0.5">
+                {activeOption.distance_km} <span className="text-sm font-sans font-normal text-stone-500">km</span>
               </div>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-white border border-slate-200">
-              <div className="text-[10px] uppercase font-bold text-slate-400">Road Distance</div>
-              <div className="text-xl font-black text-slate-900 font-mono mt-0.5">
-                {activeOption.distance_km} km
+            <div className="p-4 rounded-xl bg-white border border-[#EFE8DF] shadow-xs">
+              <div className="text-[10px] uppercase font-bold text-stone-400">Estimated Time</div>
+              <div className="text-2xl font-bold text-stone-900 font-mono mt-0.5">
+                {activeOption.duration_minutes || activeOption.duration_mins} <span className="text-sm font-sans font-normal text-stone-500">mins</span>
               </div>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-white border border-slate-200">
-              <div className="text-[10px] uppercase font-bold text-slate-400">Estimated Fare</div>
-              <div className="text-xl font-black text-emerald-600 font-mono mt-0.5">
+            <div className="p-4 rounded-xl bg-white border border-[#EFE8DF] shadow-xs">
+              <div className="text-[10px] uppercase font-bold text-stone-400">Estimated Fare</div>
+              <div className="text-2xl font-bold text-amber-800 font-mono mt-0.5">
                 {activeOption.estimated_fare === 0
                   ? 'Free Walk'
                   : activeOption.estimated_fare !== null && activeOption.estimated_fare !== undefined
                   ? `₹${activeOption.estimated_fare}`
-                  : 'Transit Pass'}
+                  : 'Standard Pass'}
               </div>
-            </div>
-
-            <div className="p-3.5 rounded-xl bg-white border border-slate-200 flex flex-col justify-center items-center">
-              <div className="text-[10px] uppercase font-bold text-slate-400 mb-1">Tariff Status</div>
-              <FareBadge status={activeOption.fare_status as any} />
             </div>
           </div>
 
           {activeOption.fare_note && (
-            <div className="p-3 rounded-xl bg-emerald-50/60 border border-emerald-100 text-xs text-slate-700 flex items-start gap-2">
-              <span className="text-emerald-700 font-bold">ℹ️</span>
+            <div className="p-3 rounded-xl bg-white border border-[#EFE8DF] text-xs text-stone-600 flex items-start gap-2">
+              <Info className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
               <span>{activeOption.fare_note}</span>
             </div>
           )}
 
-          {/* Step-by-Step Directions */}
-          {activeOption.steps_summary && activeOption.steps_summary.length > 0 && (
-            <div className="space-y-2 pt-1">
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Turn-by-turn Route Steps:</div>
-              <div className="space-y-2">
+          {/* 3D Multimodal Route Visualizer Sequence */}
+          <MultimodalRoute3DVisualizer
+            originName={isCustom ? (customOrigin || 'Origin') : (presetOrigins.find((p) => p.id === origin)?.label || origin)}
+            destinationName={destinationName}
+            routeOption={activeOption}
+            selectedMode={selectedMode}
+            cityName={destinationCity}
+          />
+
+          {/* Progressive Disclosure: Route Details */}
+          <div className="border-t border-[#EFE8DF] pt-3">
+            <button
+              onClick={() => setShowRouteDetails(!showRouteDetails)}
+              className="text-xs font-semibold text-amber-800 hover:text-amber-900 flex items-center gap-1.5 transition"
+            >
+              <span>{showRouteDetails ? 'Hide Route Details' : 'View Route Details & Steps'}</span>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showRouteDetails ? 'rotate-180' : ''}`} />
+            </button>
+
+            {showRouteDetails && activeOption.steps_summary && activeOption.steps_summary.length > 0 && (
+              <div className="mt-3 space-y-2 animate-fadeIn">
                 {activeOption.steps_summary.map((step: string, idx: number) => (
-                  <div key={idx} className="flex items-start gap-2 text-xs text-slate-700 bg-white p-2.5 rounded-xl border border-slate-200">
-                    <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
+                  <div
+                    key={idx}
+                    className="flex items-start gap-2.5 text-xs text-stone-700 bg-white p-3 rounded-xl border border-[#EFE8DF]"
+                  >
+                    <span className="w-5 h-5 rounded-full bg-amber-100 text-amber-900 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
                       {idx + 1}
                     </span>
-                    <span className="pt-0.5">{step}</span>
+                    <span className="leading-relaxed">{step}</span>
                   </div>
                 ))}
               </div>
-            </div>
-          )}
+            )}
+          </div>
 
           {/* Action Row */}
-          <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
-            {onViewOnMap && (
+          {onViewOnMap && (
+            <div className="flex justify-end pt-2">
               <button
-                onClick={() => onViewOnMap(isCustom ? customOrigin : origin, destinationId)}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition shadow-sm"
+                onClick={() => onViewOnMap(origin, destinationId)}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white hover:bg-stone-50 border border-[#EFE8DF] text-xs font-semibold text-stone-800 shadow-xs transition"
               >
-                <Navigation className="w-4 h-4" />
-                <span>View Route on Interactive Map</span>
+                <Navigation className="w-3.5 h-3.5 text-amber-700" />
+                <span>View Polyline on Interactive Map</span>
               </button>
-            )}
-
-            <a
-              href={mapsUrl || `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destinationName)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition"
-            >
-              <span>External GPS App</span>
-              <ExternalLink className="w-3.5 h-3.5 opacity-70" />
-            </a>
-          </div>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="text-center py-6 text-xs text-slate-500">
-          Select an origin and transport mode to view route calculations.
-        </div>
-      )}
+      ) : null}
     </div>
   );
 };

@@ -44,3 +44,406 @@
   color: #0f172a;
 }
 
+/* YatraVerse Brand Splash Screen Animations */
+@keyframes logoShineSweep {
+  0% {
+    transform: translate(-160%, -50%) rotate(25deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(250%, 50%) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+.shine-beam {
+  background: linear-gradient(
+    105deg,
+    transparent 15%,
+    rgba(254, 240, 138, 0.25) 35%,
+    rgba(255, 255, 255, 0.75) 50%,
+    rgba(245, 158, 11, 0.35) 65%,
+    transparent 85%
+  );
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.4));
+  animation: logoShineSweep 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes splashProgressBar {
+  0% {
+    transform: translateX(-100%);
+    width: 30%;
+  }
+  50% {
+    transform: translateX(100%);
+    width: 70%;
+  }
+  100% {
+    transform: translateX(250%);
+    width: 40%;
+  }
+}
+
+.splash-progress-bar {
+  animation: splashProgressBar 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shine-beam {
+    animation: none;
+    opacity: 0.15;
+    transform: translate(20%, 0) rotate(25deg);
+  }
+
+  .splash-progress-bar {
+    animation: none;
+    width: 100%;
+  }
+}
+
+/* Subtle Indian Architectural / Jaali Motif Overlay */
+.bg-jaali-pattern {
+  background-image: radial-gradient(#d97706 0.65px, transparent 0.65px), radial-gradient(#d97706 0.65px, #FAF8F5 0.65px);
+  background-size: 26px 26px;
+  background-position: 0 0, 13px 13px;
+  background-color: #FAF8F5;
+}
+
+.bg-sandstone-subtle {
+  background-color: #FAF8F5;
+}
+
+.border-sandstone {
+  border-color: #EFE8DF;
+}
+
+.shadow-warm {
+  box-shadow: 0 4px 20px -2px rgba(180, 83, 9, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+}
+
+.shadow-warm-lg {
+  box-shadow: 0 10px 30px -4px rgba(180, 83, 9, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+}
+
+/* ===================================================
+   YatraVerse Cultural Guide Animated Character System
+   =================================================== */
+
+@keyframes guidePopInRight {
+  0% {
+    transform: translate3d(50px, 20px, 0) scale(0.85);
+    opacity: 0;
+  }
+  65% {
+    transform: translate3d(-6px, -3px, 0) scale(1.025);
+    opacity: 1;
+  }
+  85% {
+    transform: translate3d(2px, 1px, 0) scale(0.995);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes guidePopInBottom {
+  0% {
+    transform: translate3d(0, 45px, 0) scale(0.9);
+    opacity: 0;
+  }
+  65% {
+    transform: translate3d(0, -6px, 0) scale(1.02);
+    opacity: 1;
+  }
+  85% {
+    transform: translate3d(0, 2px, 0) scale(0.995);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes guidePopInLeft {
+  0% {
+    transform: translate3d(-50px, 20px, 0) scale(0.85);
+    opacity: 0;
+  }
+  65% {
+    transform: translate3d(6px, -3px, 0) scale(1.025);
+    opacity: 1;
+  }
+  85% {
+    transform: translate3d(-2px, 1px, 0) scale(0.995);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes guideIdleBreath {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(-4px) scaleY(1.01);
+  }
+}
+
+@keyframes guideIdleSway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(0.6deg);
+  }
+  70% {
+    transform: rotate(-0.6deg);
+  }
+}
+
+@keyframes guideAuraRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes guideAuraPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.95;
+  }
+}
+
+@keyframes guideSpeechBubbleIn {
+  0% {
+    transform: scale(0.88) translateY(12px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes guideWavingHand {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(10deg);
+  }
+  40% {
+    transform: rotate(-6deg);
+  }
+  60% {
+    transform: rotate(8deg);
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-guide-pop-right {
+  animation: guidePopInRight 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-guide-pop-bottom {
+  animation: guidePopInBottom 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-guide-pop-left {
+  animation: guidePopInLeft 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-guide-idle {
+  animation: guideIdleBreath 4.5s ease-in-out infinite;
+}
+
+.animate-guide-sway {
+  animation: guideIdleSway 6s ease-in-out infinite;
+}
+
+.animate-guide-aura-rotate {
+  animation: guideAuraRotate 28s linear infinite;
+}
+
+.animate-guide-aura-pulse {
+  animation: guideAuraPulse 3.8s ease-in-out infinite;
+}
+
+.animate-speech-bubble-pop {
+  animation: guideSpeechBubbleIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes guideBubbleIdleFade {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.82;
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes guideSpeechBubbleExit {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.92) translateY(6px);
+    opacity: 0;
+  }
+}
+
+.animate-bubble-idle-fade {
+  animation: guideBubbleIdleFade 4.5s ease-in-out infinite;
+}
+
+.animate-speech-bubble-exit {
+  animation: guideSpeechBubbleExit 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-guide-hand {
+  transform-origin: 75% 45%;
+  animation: guideWavingHand 2s ease-in-out 1.2s 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-guide-pop-right,
+  .animate-guide-pop-bottom,
+  .animate-guide-pop-left,
+  .animate-speech-bubble-pop,
+  .animate-speech-bubble-exit,
+  .animate-bubble-idle-fade {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: opacity 0.2s ease;
+  }
+
+  .animate-guide-idle,
+  .animate-guide-sway,
+  .animate-guide-aura-rotate,
+  .animate-guide-aura-pulse,
+  .animate-guide-hand {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ===================================================
+   2.5D & 3D Immersion Utilities
+   =================================================== */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-800 {
+  perspective: 800px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+
+.translate-z-40 {
+  transform: translateZ(40px);
+}
+
+.translate-z-50 {
+  transform: translateZ(50px);
+}
+
+/* Multi-layer soft 3D elevation shadows in warm heritage tones */
+.shadow-3d-card {
+  box-shadow: 
+    0 10px 25px -5px rgba(180, 83, 9, 0.08),
+    0 8px 10px -6px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(239, 232, 223, 0.8);
+}
+
+.shadow-3d-card-hover {
+  box-shadow: 
+    0 22px 35px -10px rgba(180, 83, 9, 0.14),
+    0 12px 18px -6px rgba(0, 0, 0, 0.06),
+    0 0 0 1.5px rgba(217, 119, 6, 0.35);
+}
+
+.shadow-monument-3d {
+  box-shadow: 
+    0 25px 50px -12px rgba(180, 83, 9, 0.18),
+    0 0 0 1px rgba(239, 232, 223, 0.9);
+}
+
+/* Floating pulse animation for transit nodes */
+@keyframes transitPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 8px rgba(217, 119, 6, 0);
+  }
+}
+
+.animate-transit-pulse {
+  animation: transitPulse 2.4s infinite ease-in-out;
+}
+
+/* Gentle floating float for heritage elements */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0.8deg);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-transit-pulse,
+  .animate-float-slow {
+    animation: none !important;
+  }
+}
+
+
